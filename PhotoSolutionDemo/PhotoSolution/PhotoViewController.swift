@@ -18,9 +18,11 @@ class PhotoViewController: UIViewController {
     
     var delegate:PhotoViewControllerDelegate?
     var backgroundColor: UIColor = UIColor.white
+    var maxAmount = 9
     
     private var albums = [Album]()
     private var currentPhotoList = [Photo]()
+    private var currentSelectedPhotoList = [Photo]()
     private let navigationBarHeight = CGFloat(40)
     private var safeAreaBottomHeight: CGFloat!
     private var safeAreaTopHeight: CGFloat!
@@ -192,6 +194,8 @@ extension PhotoViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = photoCollection!.dequeueReusableCell(withReuseIdentifier: photoCellReuseIdentifier, for: indexPath) as! PhotoCell
         cell.configViewWithData(phone: currentPhotoList[indexPath.row])
+        cell.delegate = self
+        cell.tag = indexPath.row
         return cell
     }
 }
@@ -238,7 +242,11 @@ extension PhotoViewController: UIImagePickerControllerDelegate,UINavigationContr
             doneItem?.isEnabled = true
             delegate?.returnImages([newImage])
         }
-        picker.dismiss(animated: true, completion: nil)
+        picker.dismiss(animated: true) {
+            self.dismiss(animated: false, completion: {
+                
+            })
+        }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -249,6 +257,33 @@ extension PhotoViewController: UIImagePickerControllerDelegate,UINavigationContr
 extension PhotoViewController: AlbumViewControllerDelegate{
     func selectAlbum(_ selectedindex: Int) {
         showPhotoCollection(index: selectedindex)
+    }
+}
+
+extension PhotoViewController: PhotoCellDelegate{
+    func cellClick(_ cell: UICollectionViewCell) {
+        let clickedPhoto = currentPhotoList[cell.tag]
+        if clickedPhoto.selected{
+            clickedPhoto.selected = false
+            photoCollection.reloadItems(at: [IndexPath(item: cell.tag, section: 0)])
+            currentSelectedPhotoList.remove(at: clickedPhoto.selectedOrder - 1)
+            if clickedPhoto.selectedOrder < currentSelectedPhotoList.count + 1{
+                for index in clickedPhoto.selectedOrder-1...currentSelectedPhotoList.count-1 {
+                    currentSelectedPhotoList[index].selectedOrder = index + 1
+                }
+                let indexPaths = currentSelectedPhotoList.map ({ element -> IndexPath in
+                    return IndexPath(item: element.index, section: 0)
+                })
+                photoCollection.reloadItems(at: indexPaths)
+            }
+        }else if currentSelectedPhotoList.count < maxAmount{
+            currentSelectedPhotoList.append(clickedPhoto)
+            clickedPhoto.selected = true
+            clickedPhoto.selectedOrder = currentSelectedPhotoList.count
+            photoCollection.reloadItems(at: [IndexPath(item: cell.tag, section: 0)])
+        }else{
+            print("send alert")
+        }
     }
 }
 

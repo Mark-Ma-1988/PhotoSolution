@@ -33,7 +33,7 @@ class Album{
         let assetsFetchResults:PHFetchResult = PHAsset.fetchAssets(in: collection, options: options)
         var photoList = [Photo]()
         assetsFetchResults.enumerateObjects({ asset, idx, stop in
-            photoList.append(Photo(asset: asset))
+            photoList.append(Photo(asset: asset, index: idx))
         })
         return photoList
     }
@@ -45,7 +45,7 @@ class Album{
     
     func getPosterPhoto(posterSize: CGFloat,callback: @escaping (UIImage) -> Void) {
         let assetsFetchResults:PHFetchResult = PHAsset.fetchAssets(in: collection, options: options)
-        let firstPhoto = Photo(asset: assetsFetchResults.firstObject!)
+        let firstPhoto = Photo(asset: assetsFetchResults.firstObject!, index: 0)
         firstPhoto.getThumbnail(size: posterSize) { image in
             callback(image)
         }

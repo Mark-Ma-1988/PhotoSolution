@@ -13,10 +13,12 @@ class Photo{
     
     private var asset: PHAsset
     var selected = false
-    var selectedOrder: Int?
+    var selectedOrder: Int = 0
+    var index: Int!
     
-    init(asset: PHAsset) {
+    init(asset: PHAsset,index: Int) {
       self.asset = asset
+      self.index = index
     }
     
     func isImage() -> Bool{

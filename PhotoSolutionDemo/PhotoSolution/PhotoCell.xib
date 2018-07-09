@@ -13,7 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PhotoCell" customModule="NG_POC" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PhotoCell" customModule="PhotoSolutionDemo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="148" height="141"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -23,13 +23,24 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CHx-nC-SSa">
                         <rect key="frame" x="0.0" y="0.0" width="148" height="141"/>
                     </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u9u-JY-W54" userLabel="mark view">
-                        <rect key="frame" x="108" y="0.0" width="40" height="40"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tickIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Sab-t9-Upn" userLabel="tickImage">
+                        <rect key="frame" x="122" y="4" width="22" height="22"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="Vs0-0b-eAV"/>
-                            <constraint firstAttribute="width" constant="40" id="onJ-MK-gXz"/>
+                            <constraint firstAttribute="width" constant="22" id="AKs-Kw-TcT"/>
+                            <constraint firstAttribute="height" constant="22" id="s40-8Q-iDJ"/>
                         </constraints>
-                    </view>
+                    </imageView>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfn-Pg-Ch2" userLabel="numberLabel">
+                        <rect key="frame" x="122" y="4" width="22" height="22"/>
+                        <color key="backgroundColor" red="0.29803921570000003" green="0.85098039219999999" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="AFd-zH-R3w"/>
+                            <constraint firstAttribute="width" constant="22" id="jsh-dk-azy"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1x-9r-Lh5" userLabel="Click area">
                         <rect key="frame" x="74" y="0.0" width="74" height="70.5"/>
                     </view>
@@ -38,13 +49,15 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="CHx-nC-SSa" secondAttribute="trailing" id="8D6-Qg-7vj"/>
                 <constraint firstItem="n1x-9r-Lh5" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="8hR-OM-Umr"/>
-                <constraint firstAttribute="trailing" secondItem="u9u-JY-W54" secondAttribute="trailing" id="Arg-ub-at0"/>
+                <constraint firstItem="wfn-Pg-Ch2" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="Cqz-Yk-4pE"/>
+                <constraint firstAttribute="trailing" secondItem="wfn-Pg-Ch2" secondAttribute="trailing" constant="4" id="L1E-zq-33I"/>
                 <constraint firstItem="CHx-nC-SSa" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="N9j-WH-wu4"/>
+                <constraint firstItem="Sab-t9-Upn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="Rfb-OD-KMX"/>
                 <constraint firstAttribute="trailing" secondItem="n1x-9r-Lh5" secondAttribute="trailing" id="TeK-Ws-NLl"/>
+                <constraint firstAttribute="trailing" secondItem="Sab-t9-Upn" secondAttribute="trailing" constant="4" id="bFo-wM-Fyz"/>
                 <constraint firstItem="CHx-nC-SSa" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="gRg-jI-R8M"/>
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="centerY" secondItem="n1x-9r-Lh5" secondAttribute="bottom" id="nu1-AN-AeG"/>
                 <constraint firstAttribute="bottom" secondItem="CHx-nC-SSa" secondAttribute="bottom" id="oja-c5-zJp"/>
-                <constraint firstItem="u9u-JY-W54" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="p8S-oz-5qd"/>
                 <constraint firstItem="n1x-9r-Lh5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="s4m-NV-67T"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -52,9 +65,13 @@
             <connections>
                 <outlet property="clickArea" destination="n1x-9r-Lh5" id="wll-gd-pVR"/>
                 <outlet property="imageView" destination="CHx-nC-SSa" id="glm-Fc-ufs"/>
-                <outlet property="markView" destination="u9u-JY-W54" id="QGt-nF-MOX"/>
+                <outlet property="numberLabel" destination="wfn-Pg-Ch2" id="f17-fe-E4m"/>
+                <outlet property="tickImage" destination="Sab-t9-Upn" id="yEn-t2-eUT"/>
             </connections>
-            <point key="canvasLocation" x="83" y="99.5"/>
+            <point key="canvasLocation" x="73" y="92.5"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="tickIcon.png" width="64" height="64"/>
+    </resources>
 </document>
