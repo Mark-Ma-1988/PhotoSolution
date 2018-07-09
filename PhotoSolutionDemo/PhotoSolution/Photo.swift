@@ -28,7 +28,7 @@ class Photo{
     func getOriginalImage(callback: @escaping (UIImage) -> Void) {
         let manager = PHImageManager.default()
         let option = PHImageRequestOptions()
-        option.isSynchronous = false
+        option.isSynchronous = true
         manager.requestImage(for: asset, targetSize:PHImageManagerMaximumSize, contentMode: .aspectFit, options: option) { (originImage, info) in
             callback(originImage!)
         }

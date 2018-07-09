@@ -25,21 +25,30 @@ class PhotoCell: UICollectionViewCell {
     private let thumbnailSize = CGFloat(200)
     
     func configViewWithData(phone: Photo){
-        phone.getThumbnail(size: thumbnailSize) { image in
+        self.phone = phone
+        self.phone!.getThumbnail(size: thumbnailSize) { image in
             self.imageView.image = image
         }
-        if phone.selected{
-            select(number: phone.selectedOrder)
+        if self.phone!.selected{
+            select(number: self.phone!.selectedOrder, animation: numberLabel.isHidden)
         }else{
             disSelect()
         }
-        self.phone = phone
+        
     }
     
-    func select(number: Int){
-        numberLabel.isHidden = false
+    func select(number: Int, animation: Bool){
         numberLabel.text = "\(number)"
         tickImage.isHidden = true
+        if animation{
+            UIView.animate(withDuration: 0.5, animations: {
+                self.numberLabel.isHidden = false
+            }) { finished in
+                
+            }
+        }else{
+            numberLabel.isHidden = false
+        }
     }
     
     func disSelect(){

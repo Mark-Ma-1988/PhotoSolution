@@ -140,6 +140,7 @@ class PhotoViewController: UIViewController {
     }
     
     func showPhotoCollection(index: Int){
+        self.currentSelectedPhotoList.removeAll()
         self.currentPhotoList = self.albums[index].getPhotos()
         DispatchQueue.main.async{
         self.topNavigationItem.title = self.albums[index].getAlbumName()
@@ -166,13 +167,23 @@ class PhotoViewController: UIViewController {
     }
     
     @objc func cancelClick(){
-        delegate?.pickerCancel()
-        self.dismiss(animated: true, completion: nil)
+        self.delegate?.pickerCancel()
+        self.dismiss(animated: true) {
+            
+        }
     }
     
     @objc func doneClick(){
-        
-        
+        var resultImages = [UIImage]()
+        for photo in currentSelectedPhotoList{
+            photo.getOriginalImage { image in
+                resultImages.append(image)
+            }
+        }
+        self.delegate?.returnImages(resultImages)
+        self.dismiss(animated: true) {
+            
+        }
     }
     
 }
@@ -283,6 +294,13 @@ extension PhotoViewController: PhotoCellDelegate{
             photoCollection.reloadItems(at: [IndexPath(item: cell.tag, section: 0)])
         }else{
             print("send alert")
+        }
+        
+        let doneItem = topNavigationItem.rightBarButtonItem
+        if currentSelectedPhotoList.count > 0{
+            doneItem!.isEnabled = true
+        }else{
+            doneItem!.isEnabled = false
         }
     }
 }
