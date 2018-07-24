@@ -84,12 +84,16 @@ extension ViewController: UICollectionViewDelegate{
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
-        if indexPath.row == currentImages.count{
-            let photoViewController = PhotoViewController()
-            photoViewController.delegate = self
-            photoViewController.maxAmount = maxPhotos - currentImages.count
-            self.present(photoViewController, animated: true, completion: nil)
-        }
+        let storyBoard = UIStoryboard(name: "PhotoStoryboard", bundle: nil)
+        let photoViewController: UINavigationController = storyBoard.instantiateViewController(withIdentifier: "startPoint") as! UINavigationController
+        
+        self.present(photoViewController, animated: true, completion: nil)
+//        if indexPath.row == currentImages.count{
+//            let photoViewController = PhotoViewController()
+//            photoViewController.delegate = self
+//            photoViewController.maxAmount = maxPhotos - currentImages.count
+//            self.present(photoViewController, animated: true, completion: nil)
+//        }
     }
 }
 

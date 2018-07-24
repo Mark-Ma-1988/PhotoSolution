@@ -29,25 +29,17 @@ class AlbumViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = backgroundColor
-        if #available(iOS 11.0, *) {
-            let window = UIApplication.shared.keyWindow
-            safeAreaTopHeight = window!.safeAreaInsets.top
-        }else{
-            safeAreaTopHeight = 0
-        }
-        if safeAreaTopHeight == 0{
-            safeAreaTopHeight = UIApplication.shared.statusBarFrame.height
-        }
         setupTopNavigationBar()
         setupTableView()
+        setupConstraint()
     }
     
     private func setupTopNavigationBar(){
-        topNavigationBar = UINavigationBar(frame: CGRect(x: 0, y: safeAreaTopHeight, width: self.view.frame.width, height: navigationBarHeight))
+        topNavigationBar = UINavigationBar()
+        topNavigationBar.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(topNavigationBar)
         topNavigationBar.barTintColor = backgroundColor
         topNavigationBar.isTranslucent = false
-        self.view.addSubview(topNavigationBar);
-
         let backItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.stop, target: self, action: #selector(backClick))
         topNavigationItem = UINavigationItem(title: customiseTitle);
         topNavigationItem.leftBarButtonItem = backItem
@@ -56,16 +48,31 @@ class AlbumViewController: UIViewController {
     
     private func setupTableView(){
         albumTableView = UITableView()
-        albumTableView.frame = CGRect(x: 0, y: topNavigationBar.frame.maxY, width: self.view.frame.size.width, height: self.view.frame.size.height-navigationBarHeight-safeAreaTopHeight)
+        albumTableView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(albumTableView)
         albumTableView.register(UINib(nibName: "AlbumCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
-        albumTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: albumTableView.frame.width, height: 0.5))
-        albumTableView.tableHeaderView?.backgroundColor = UIColor.lightGray
         albumTableView.tableFooterView = UIView()
         albumTableView.separatorColor = UIColor.lightGray
         albumTableView.bounces = false
         albumTableView.dataSource =  self
         albumTableView.delegate = self
-        self.view.addSubview(albumTableView)
+    }
+    
+    private func setupConstraint(){
+        
+        self.view.addConstraint(NSLayoutConstraint(item: topNavigationBar, attribute: .leading, relatedBy: .equal, toItem: self.view , attribute: .leading, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: topNavigationBar, attribute: .trailing, relatedBy: .equal, toItem: self.view , attribute: .trailing, multiplier: 1, constant: 0))
+        if #available(iOS 11.0, *) {
+            self.view.addConstraint(NSLayoutConstraint(item: topNavigationBar, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .topMargin, multiplier: 1, constant: 0))
+        } else {
+            self.view.addConstraint(NSLayoutConstraint(item: topNavigationBar, attribute: .top, relatedBy: .equal, toItem: UIApplication.shared.keyWindow, attribute: .top, multiplier: 1, constant: UIApplication.shared.statusBarFrame.height))
+        }
+        self.topNavigationBar.addConstraint(NSLayoutConstraint(item: topNavigationBar, attribute: .height, relatedBy: .equal, toItem: nil , attribute: .notAnAttribute, multiplier: 1, constant: navigationBarHeight))
+        
+        self.view.addConstraint(NSLayoutConstraint(item: albumTableView, attribute: .leading, relatedBy: .equal, toItem: self.view , attribute: .leading, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: albumTableView, attribute: .trailing, relatedBy: .equal, toItem: self.view , attribute: .trailing, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: albumTableView, attribute: .top, relatedBy: .equal, toItem: topNavigationBar, attribute: .bottom, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: albumTableView, attribute: .bottom, relatedBy: .equal, toItem: self.view , attribute: .bottom, multiplier: 1, constant: 0))
     }
     
     @objc func backClick(){
@@ -93,7 +100,7 @@ extension AlbumViewController: UITableViewDataSource{
 
 extension AlbumViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       delegate?.selectAlbum(indexPath.row)
-       self.dismiss(animated: true, completion: nil)
+        delegate?.selectAlbum(indexPath.row)
+        self.dismiss(animated: true, completion: nil)
     }
 }

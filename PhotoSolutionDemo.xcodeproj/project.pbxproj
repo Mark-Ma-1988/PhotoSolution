@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		959B7AF720F37B67008CBDB3 /* tickIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 959B7AF620F37B66008CBDB3 /* tickIcon.png */; };
+		95A1DD7C21073E060092E04D /* PhotoStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A1DD7B21073E060092E04D /* PhotoStoryboard.storyboard */; };
+		95A1DD7E210749EA0092E04D /* NVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A1DD7D210749EA0092E04D /* NVC.swift */; };
+		95A1DD8021074A720092E04D /* OneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A1DD7F21074A720092E04D /* OneViewController.swift */; };
 		95E696A620F230F2003BDCBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E696A520F230F2003BDCBE /* AppDelegate.swift */; };
 		95E696A820F230F2003BDCBE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E696A720F230F2003BDCBE /* ViewController.swift */; };
 		95E696AB20F230F2003BDCBE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95E696A920F230F2003BDCBE /* Main.storyboard */; };
@@ -31,6 +34,9 @@
 
 /* Begin PBXFileReference section */
 		959B7AF620F37B66008CBDB3 /* tickIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tickIcon.png; sourceTree = "<group>"; };
+		95A1DD7B21073E060092E04D /* PhotoStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PhotoStoryboard.storyboard; sourceTree = "<group>"; };
+		95A1DD7D210749EA0092E04D /* NVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NVC.swift; sourceTree = "<group>"; };
+		95A1DD7F21074A720092E04D /* OneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneViewController.swift; sourceTree = "<group>"; };
 		95E696A220F230F2003BDCBE /* PhotoSolutionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoSolutionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95E696A520F230F2003BDCBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95E696A720F230F2003BDCBE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +119,9 @@
 				95E696C720F23589003BDCBE /* ImageViewCell.xib */,
 				95E696CE20F23591003BDCBE /* arrowIcon.png */,
 				959B7AF620F37B66008CBDB3 /* tickIcon.png */,
+				95A1DD7B21073E060092E04D /* PhotoStoryboard.storyboard */,
+				95A1DD7D210749EA0092E04D /* NVC.swift */,
+				95A1DD7F21074A720092E04D /* OneViewController.swift */,
 			);
 			path = PhotoSolution;
 			sourceTree = "<group>";
@@ -181,6 +190,7 @@
 				95E696AD20F230F3003BDCBE /* Assets.xcassets in Resources */,
 				959B7AF720F37B67008CBDB3 /* tickIcon.png in Resources */,
 				95E696CD20F23589003BDCBE /* ImageViewCell.xib in Resources */,
+				95A1DD7C21073E060092E04D /* PhotoStoryboard.storyboard in Resources */,
 				95E696D320F2397A003BDCBE /* PickerCell.xib in Resources */,
 				95E696AB20F230F2003BDCBE /* Main.storyboard in Resources */,
 				95E696CF20F23591003BDCBE /* arrowIcon.png in Resources */,
@@ -204,7 +214,9 @@
 				95E696D220F2397A003BDCBE /* PickerCell.swift in Sources */,
 				95E696BD20F23574003BDCBE /* PhotoViewController.swift in Sources */,
 				95E696CC20F23589003BDCBE /* ImageViewCell.swift in Sources */,
+				95A1DD8021074A720092E04D /* OneViewController.swift in Sources */,
 				95E696CA20F23589003BDCBE /* AlbumCell.swift in Sources */,
+				95A1DD7E210749EA0092E04D /* NVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
