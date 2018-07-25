@@ -66,8 +66,6 @@ class PhotoCell: UICollectionViewCell {
         numberLabel.layer.masksToBounds = true
         if let color = markerColor{
             numberLabel.backgroundColor = color
-        }else{
-            numberLabel.backgroundColor = self.contentView.tintColor
         }
     }
     

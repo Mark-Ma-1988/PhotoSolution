@@ -20,10 +20,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xpN-tU-IGV">
-                                <rect key="frame" x="15" y="171" width="345" height="345"/>
+                                <rect key="frame" x="27.5" y="183.5" width="320" height="320"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="xpN-tU-IGV" secondAttribute="height" multiplier="1:1" id="Gd2-sv-oVM"/>
+                                    <constraint firstAttribute="width" constant="320" id="3Ty-56-182"/>
+                                    <constraint firstAttribute="width" secondItem="xpN-tU-IGV" secondAttribute="height" multiplier="1:1" id="c0E-iW-4bp"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wkA-ZU-wR3">
                                     <size key="itemSize" width="50" height="50"/>
@@ -40,9 +41,8 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="xpN-tU-IGV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="PdC-8l-egm"/>
+                            <constraint firstItem="xpN-tU-IGV" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="FCu-Ku-w5F"/>
                             <constraint firstItem="xpN-tU-IGV" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="liT-CU-bM6"/>
-                            <constraint firstItem="xpN-tU-IGV" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-15" id="wal-Lv-5pl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
