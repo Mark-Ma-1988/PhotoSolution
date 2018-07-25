@@ -84,9 +84,24 @@ extension ViewController: UICollectionViewDelegate{
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
-        let photoSolution = PhotoSolution()
-        photoSolution.delegate = self
-        self.present(photoSolution.getPhotoPicker(maxPhotos: maxPhotos - currentImages.count), animated: true, completion: nil)
+        if indexPath.row == currentImages.count{
+            let photoSolution = PhotoSolution()
+            photoSolution.delegate = self
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let takeAction = UIAlertAction(title: "Take a photo", style: .default, handler: { action in
+                self.present(photoSolution.getCamera(), animated: true, completion: nil)
+            })
+            let findAction = UIAlertAction(title: "From my album", style: .default, handler: { action in
+                let remainPhotos = self.maxPhotos - self.currentImages.count
+                self.present(photoSolution.getPhotoPicker(maxPhotos: remainPhotos), animated: true, completion: nil)
+            })
+            let cancleAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            })
+            alertController.addAction(takeAction)
+            alertController.addAction(findAction)
+            alertController.addAction(cancleAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
 }
 

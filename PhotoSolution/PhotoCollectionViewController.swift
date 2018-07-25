@@ -26,10 +26,10 @@ class PhotoCollectionViewController: UIViewController {
     private let photoCellReuseIdentifier = "PhotoCell"
     private let space = CGFloat(2.5)
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         photoNavigationController = self.navigationController as! PhotoNavigationController
+        maxAmount = photoNavigationController.maxPhotos
         bottomNavigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         bottomNavigationBar.shadowImage = UIImage()
         setupCollectionView()
@@ -94,11 +94,19 @@ class PhotoCollectionViewController: UIViewController {
     }
     
     @IBAction func cancelClick(_ sender: UIBarButtonItem) {
+        photoNavigationController.solutionDelegate?.pickerCancel()
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func doneClick(_ sender: UIBarButtonItem) {
-        
+        var resultImages = [UIImage]()
+        for photo in currentSelectedPhotoList{
+            photo.getOriginalImage { image in
+                resultImages.append(image)
+            }
+        }
+        photoNavigationController.solutionDelegate?.returnImages(resultImages)
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

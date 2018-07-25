@@ -11,13 +11,14 @@ import UIKit
 class AlbumTableViewController: UIViewController {
     
     @IBOutlet weak var albumTableView: UITableView!
-    var albums: [Album]!
+    private var albums: [Album]!
     private let reuseIdentifier = "AlbumCellIdentifier"
     private let rowHeight = CGFloat(60)
+    var photoNavigationController: PhotoNavigationController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let photoNavigationController: PhotoNavigationController = self.navigationController as! PhotoNavigationController
+        photoNavigationController = self.navigationController as! PhotoNavigationController
         self.albums = photoNavigationController.albums!
         albumTableView.register(UINib(nibName: "AlbumCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
         albumTableView.tableFooterView = UIView()
@@ -26,6 +27,7 @@ class AlbumTableViewController: UIViewController {
     }
 
     @IBAction func cancelClick(_ sender: UIBarButtonItem) {
+        photoNavigationController.solutionDelegate?.pickerCancel()
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     

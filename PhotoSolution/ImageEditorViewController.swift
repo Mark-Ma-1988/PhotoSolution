@@ -26,28 +26,40 @@ class ImageEditorViewController: UIViewController {
         super.viewDidLoad()
         setupBars()
         setupImageCollectionView()
+        setupFrame()
+        imageCollectionView.reloadData()
+        imageCollectionView.scrollToItem(at: IndexPath(item: currentIndex!, section: 0), at: .left, animated: false)
     }
     
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//            //super.viewWillTransition(to: size, with: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+            //super.viewWillTransition(to: size, with: coordinator)
 //            if UIDevice.current.orientation.isLandscape {
-//                
+//
 //                cellWidth = (UIApplication.shared.keyWindow?.height)!/3
 //            } else {
-//                
+//
 //                cellWidth = (UIApplication.shared.keyWindow?.height)!/3
 //            }
 //            imageCollectionView.reloadData()
-//    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
+        setupFrame()
+//        imageCollectionView.reloadData()
+//        imageCollectionView.scrollToItem(at: IndexPath(item: currentIndex!, section: 0), at: .left, animated: false)
     }
     
-    private func setupBars(){
+    private func setupFrame(){
         let window = UIApplication.shared.keyWindow!
-        screenHeight = window.frame.height
-        screenWidth = window.frame.width
+        if UIDevice.current.orientation.isPortrait {
+            screenHeight = window.frame.height
+            screenWidth = window.frame.width
+        }else{
+            screenHeight = window.frame.width
+            screenWidth = window.frame.height
+        }
+        
+//
+//        print("screenHeight \(screenHeight)")
+//        print("screenWidth \(screenWidth)")
+
         if #available(iOS 11.0, *) {
             safeAreaTopHeight = window.safeAreaInsets.top
         }else{
@@ -57,21 +69,26 @@ class ImageEditorViewController: UIViewController {
             safeAreaTopHeight = UIApplication.shared.statusBarFrame.height
         }
         statusCoverView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: UIApplication.shared.statusBarFrame.height)
+        topNavigationBar.frame = CGRect(x: 0, y: safeAreaTopHeight, width: screenWidth, height: navigationBarHeight)
+        imageCollectionView.frame = self.view.frame
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    private func setupBars(){
         self.view.addSubview(statusCoverView)
         statusCoverView.backgroundColor = UIColor.darkGray
         statusCoverView.alpha = topAlpha
         topNavigationBar.alpha = topAlpha
-        topNavigationBar.frame = CGRect(x: 0, y: safeAreaTopHeight, width: screenWidth, height: navigationBarHeight)
-        
     }
     
     private func setupImageCollectionView(){
-        imageCollectionView.frame = self.view.frame
+        
         let dataCellNib = UINib(nibName: imageCellReuseIdentifier, bundle: nil)
         imageCollectionView.register(dataCellNib, forCellWithReuseIdentifier: imageCellReuseIdentifier)
         imageCollectionView.backgroundColor = UIColor.black
-        imageCollectionView.reloadData()
-        imageCollectionView.scrollToItem(at: IndexPath(item: currentIndex!, section: 0), at: .left, animated: false)
         imageCollectionView.isPagingEnabled = true
     }
     
@@ -91,7 +108,8 @@ extension ImageEditorViewController: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: screenWidth ,height: screenHeight)
+       // return CGSize(width: screenWidth ,height: screenHeight)
+        return self.view.frame.size
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

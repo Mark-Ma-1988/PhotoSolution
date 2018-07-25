@@ -14,6 +14,7 @@
 		95A1DD862107F69D0092E04D /* AlbumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A1DD852107F69D0092E04D /* AlbumTableViewController.swift */; };
 		95A1DD882107F7240092E04D /* ImageEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A1DD872107F7240092E04D /* ImageEditorViewController.swift */; };
 		95A1DD8A21080D350092E04D /* PhotoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A1DD8921080D350092E04D /* PhotoNavigationController.swift */; };
+		95A1DD8C21088F130092E04D /* CameraNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A1DD8B21088F130092E04D /* CameraNavigationController.swift */; };
 		95E696A620F230F2003BDCBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E696A520F230F2003BDCBE /* AppDelegate.swift */; };
 		95E696A820F230F2003BDCBE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E696A720F230F2003BDCBE /* ViewController.swift */; };
 		95E696AB20F230F2003BDCBE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95E696A920F230F2003BDCBE /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 		95A1DD852107F69D0092E04D /* AlbumTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewController.swift; sourceTree = "<group>"; };
 		95A1DD872107F7240092E04D /* ImageEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditorViewController.swift; sourceTree = "<group>"; };
 		95A1DD8921080D350092E04D /* PhotoNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNavigationController.swift; sourceTree = "<group>"; };
+		95A1DD8B21088F130092E04D /* CameraNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraNavigationController.swift; sourceTree = "<group>"; };
 		95E696A220F230F2003BDCBE /* PhotoSolutionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoSolutionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95E696A520F230F2003BDCBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95E696A720F230F2003BDCBE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -126,11 +128,12 @@
 				95E696CE20F23591003BDCBE /* arrowIcon.png */,
 				959B7AF620F37B66008CBDB3 /* tickIcon.png */,
 				95A1DD7B21073E060092E04D /* PhotoStoryboard.storyboard */,
-				95A1DD812107EA530092E04D /* PhotoSolution.swift */,
 				95A1DD832107F66F0092E04D /* PhotoCollectionViewController.swift */,
 				95A1DD852107F69D0092E04D /* AlbumTableViewController.swift */,
 				95A1DD872107F7240092E04D /* ImageEditorViewController.swift */,
 				95A1DD8921080D350092E04D /* PhotoNavigationController.swift */,
+				95A1DD8B21088F130092E04D /* CameraNavigationController.swift */,
+				95A1DD812107EA530092E04D /* PhotoSolution.swift */,
 			);
 			path = PhotoSolution;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95A1DD882107F7240092E04D /* ImageEditorViewController.swift in Sources */,
+				95A1DD8C21088F130092E04D /* CameraNavigationController.swift in Sources */,
 				95E696C020F2357F003BDCBE /* Photo.swift in Sources */,
 				95E696BC20F23574003BDCBE /* AlbumViewController.swift in Sources */,
 				95A1DD842107F66F0092E04D /* PhotoCollectionViewController.swift in Sources */,

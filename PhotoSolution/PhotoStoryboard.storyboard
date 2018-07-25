@@ -182,6 +182,7 @@
                                 </items>
                             </navigationBar>
                         </subviews>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="BFB-Id-vfc"/>
                     </view>
                     <connections>
