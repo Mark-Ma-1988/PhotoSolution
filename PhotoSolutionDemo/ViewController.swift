@@ -91,6 +91,10 @@ extension ViewController: UICollectionViewDelegate{
         if indexPath.row == currentImages.count{
             let photoSolution = PhotoSolution()
             photoSolution.delegate = self
+            photoSolution.customization.markerColor = UIColor.red
+            photoSolution.customization.navigationBarBackgroundColor = UIColor.yellow
+            photoSolution.customization.navigationBarTextColor = UIColor.purple
+            photoSolution.customization.titleForAlbum = "Album"
             let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let takeAction = UIAlertAction(title: "Take a photo", style: .default, handler: { action in
                 self.present(photoSolution.getCamera(), animated: true, completion: nil)

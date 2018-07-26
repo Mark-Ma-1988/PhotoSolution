@@ -19,6 +19,7 @@ class AlbumTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         photoNavigationController = self.navigationController as! PhotoNavigationController
+        self.title = photoNavigationController.customization.titleForAlbum
         self.albums = photoNavigationController.albums!
         albumTableView.register(UINib(nibName: "AlbumCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
         albumTableView.tableFooterView = UIView()

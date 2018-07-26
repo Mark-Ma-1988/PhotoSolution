@@ -10,6 +10,7 @@ import UIKit
 
 class ImageEditorViewController: UIViewController {
     
+    @IBOutlet weak var clickButton: UIBarButtonItem!
     @IBOutlet weak var topNavigationBar: UINavigationBar!
     @IBOutlet weak var imageCollectionView: UICollectionView!
     private let statusCoverView = UIView()
@@ -21,6 +22,7 @@ class ImageEditorViewController: UIViewController {
     private var screenHeight: CGFloat!
     private var screenWidth: CGFloat!
     private let topAlpha = CGFloat(0.8)
+    var customization: PhotoSolutionCustomization!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,9 +81,11 @@ class ImageEditorViewController: UIViewController {
     
     private func setupBars(){
         self.view.addSubview(statusCoverView)
-        statusCoverView.backgroundColor = UIColor.darkGray
+        statusCoverView.backgroundColor = customization.navigationBarBackgroundColor
         statusCoverView.alpha = topAlpha
         topNavigationBar.alpha = topAlpha
+        clickButton.tintColor = customization.navigationBarTextColor
+        topNavigationBar.barTintColor = customization.navigationBarBackgroundColor
     }
     
     private func setupImageCollectionView(){

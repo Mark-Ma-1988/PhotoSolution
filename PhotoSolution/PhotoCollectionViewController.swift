@@ -31,6 +31,10 @@ class PhotoCollectionViewController: UIViewController {
         maxAmount = photoNavigationController.maxPhotos
         bottomNavigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         bottomNavigationBar.shadowImage = UIImage()
+        doneButton.tintColor = photoNavigationController.customization.navigationBarTextColor
+        self.view.backgroundColor = photoNavigationController.customization.navigationBarBackgroundColor
+        bottomNavigationBar.barTintColor = photoNavigationController.customization.navigationBarBackgroundColor
+        
         setupCollectionView()
         if let albums = photoNavigationController.albums{
             self.albums = albums
@@ -114,6 +118,7 @@ class PhotoCollectionViewController: UIViewController {
                 let selectedIndex = sender as! Int
                 imageEditorViewController.currentPhotoList = currentPhotoList
                 imageEditorViewController.currentIndex = selectedIndex
+                imageEditorViewController.customization = photoNavigationController.customization
             }
         }
     }
@@ -135,6 +140,7 @@ extension PhotoCollectionViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = photoCollectionView.dequeueReusableCell(withReuseIdentifier: photoCellReuseIdentifier, for: indexPath) as! PhotoCell
+        cell.numberLabel.backgroundColor = photoNavigationController.customization.markerColor
         cell.configViewWithData(phone: currentPhotoList[indexPath.row])
         cell.delegate = self
         cell.tag = indexPath.row

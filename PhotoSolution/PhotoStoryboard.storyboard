@@ -186,6 +186,7 @@
                         <viewLayoutGuide key="safeArea" id="BFB-Id-vfc"/>
                     </view>
                     <connections>
+                        <outlet property="clickButton" destination="xdE-VV-B2E" id="8vb-j5-Plx"/>
                         <outlet property="imageCollectionView" destination="aAh-Px-aXR" id="hba-8z-JQI"/>
                         <outlet property="topNavigationBar" destination="ozm-XL-Zoe" id="svn-a1-87F"/>
                     </connections>
