@@ -9,7 +9,7 @@
 import UIKit
 
 class CameraNavigationController: UINavigationController {
-
+    
     var cameraViewController: UIImagePickerController?
     var solutionDelegate:PhotoSolutionDelegate?
     private var hasOpen = false
@@ -32,7 +32,7 @@ class CameraNavigationController: UINavigationController {
             self.present(cameraViewController!, animated: false, completion: nil)
         }
     }
-
+    
 }
 
 extension CameraNavigationController: UIImagePickerControllerDelegate,UINavigationControllerDelegate{

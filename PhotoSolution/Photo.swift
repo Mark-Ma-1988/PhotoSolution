@@ -17,8 +17,8 @@ class Photo{
     var index: Int!
     
     init(asset: PHAsset,index: Int) {
-      self.asset = asset
-      self.index = index
+        self.asset = asset
+        self.index = index
     }
     
     func isImage() -> Bool{

@@ -13,7 +13,6 @@ protocol PhotoSolutionDelegate {
     func pickerCancel()
 }
 
-
 class PhotoSolution{
     
     var delegate: PhotoSolutionDelegate?
@@ -31,5 +30,5 @@ class PhotoSolution{
         cameraNavigationController.solutionDelegate = self.delegate
         return cameraNavigationController
     }
-   
+    
 }

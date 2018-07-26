@@ -8,15 +8,27 @@
 
 import UIKit
 
-class PickerCell: UICollectionViewCell {
+protocol PickerCellDelegate {
+    func deleteClick(_ cell: UICollectionViewCell)
+}
 
-    @IBOutlet weak var imageView: UIImageView!
+class PickerCell: UICollectionViewCell {
     
+    @IBOutlet weak var deleteIcon: UIImageView!
+    @IBOutlet weak var imageView: UIImageView!
+    var delegate: PickerCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         imageView.backgroundColor = UIColor.lightGray
-        
+        let tickGesture=UITapGestureRecognizer(target: self, action: #selector(deleteThisCell(_:)))
+        tickGesture.numberOfTapsRequired = 1
+        deleteIcon.isUserInteractionEnabled = true
+        deleteIcon.addGestureRecognizer(tickGesture)
     }
-
+    
+    @objc private func deleteThisCell(_ gesture: UITapGestureRecognizer) {
+        self.delegate?.deleteClick(self)
+    }
+    
 }

@@ -9,12 +9,12 @@
 import UIKit
 
 class AlbumCell: UITableViewCell {
-
+    
     @IBOutlet weak var poster: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     
-    let posterSize = CGFloat(200)
+    private let posterSize = CGFloat(200)
     
     func configViewWithData(album: Album){
         album.getPosterPhoto(posterSize: posterSize) {image in

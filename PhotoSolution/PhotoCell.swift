@@ -13,9 +13,9 @@ protocol PhotoCellDelegate {
 }
 
 class PhotoCell: UICollectionViewCell {
-
-    var phone: Photo?
-    var markerColor: UIColor?
+    
+    private var phone: Photo?
+    private var markerColor: UIColor?
     var delegate: PhotoCellDelegate?
     @IBOutlet weak var tickImage: UIImageView!
     @IBOutlet weak var numberLabel: UILabel!

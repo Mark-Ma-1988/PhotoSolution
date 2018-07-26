@@ -25,7 +25,7 @@ class AlbumTableViewController: UIViewController {
         albumTableView.separatorColor = UIColor.lightGray
         albumTableView.bounces = false
     }
-
+    
     @IBAction func cancelClick(_ sender: UIBarButtonItem) {
         photoNavigationController.solutionDelegate?.pickerCancel()
         self.navigationController?.dismiss(animated: true, completion: nil)
@@ -40,7 +40,7 @@ class AlbumTableViewController: UIViewController {
             }
         }
     }
-
+    
 }
 
 extension AlbumTableViewController: UITableViewDataSource{

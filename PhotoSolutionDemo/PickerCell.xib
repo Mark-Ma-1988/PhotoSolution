@@ -22,17 +22,27 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addIcon" translatesAutoresizingMaskIntoConstraints="NO" id="xo4-Ew-TbR">
                         <rect key="frame" x="0.0" y="0.0" width="136" height="118"/>
                     </imageView>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="deleteIcon" translatesAutoresizingMaskIntoConstraints="NO" id="xGc-uz-JsO" userLabel="delete">
+                        <rect key="frame" x="110" y="2" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="BQk-0D-BHS"/>
+                            <constraint firstAttribute="width" constant="24" id="kRd-JH-Y4C"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="xGc-uz-JsO" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="5sO-XK-a0N"/>
                 <constraint firstItem="xo4-Ew-TbR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="DoY-HY-wAp"/>
                 <constraint firstAttribute="bottom" secondItem="xo4-Ew-TbR" secondAttribute="bottom" id="Etj-5B-rzP"/>
                 <constraint firstAttribute="trailing" secondItem="xo4-Ew-TbR" secondAttribute="trailing" id="P79-ws-hbn"/>
+                <constraint firstAttribute="trailing" secondItem="xGc-uz-JsO" secondAttribute="trailing" constant="2" id="y0E-3M-olY"/>
                 <constraint firstItem="xo4-Ew-TbR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="zvo-xT-jeR"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="136" height="118"/>
             <connections>
+                <outlet property="deleteIcon" destination="xGc-uz-JsO" id="1Zh-9f-ci4"/>
                 <outlet property="imageView" destination="xo4-Ew-TbR" id="NX9-Xl-sEt"/>
             </connections>
             <point key="canvasLocation" x="68" y="86"/>
@@ -40,5 +50,6 @@
     </objects>
     <resources>
         <image name="addIcon" width="128" height="128"/>
+        <image name="deleteIcon" width="128" height="128"/>
     </resources>
 </document>

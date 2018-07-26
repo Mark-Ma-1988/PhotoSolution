@@ -32,18 +32,18 @@ class ImageEditorViewController: UIViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-            //super.viewWillTransition(to: size, with: coordinator)
-//            if UIDevice.current.orientation.isLandscape {
-//
-//                cellWidth = (UIApplication.shared.keyWindow?.height)!/3
-//            } else {
-//
-//                cellWidth = (UIApplication.shared.keyWindow?.height)!/3
-//            }
-//            imageCollectionView.reloadData()
+        //super.viewWillTransition(to: size, with: coordinator)
+        //            if UIDevice.current.orientation.isLandscape {
+        //
+        //                cellWidth = (UIApplication.shared.keyWindow?.height)!/3
+        //            } else {
+        //
+        //                cellWidth = (UIApplication.shared.keyWindow?.height)!/3
+        //            }
+        //            imageCollectionView.reloadData()
         setupFrame()
-//        imageCollectionView.reloadData()
-//        imageCollectionView.scrollToItem(at: IndexPath(item: currentIndex!, section: 0), at: .left, animated: false)
+        //        imageCollectionView.reloadData()
+        //        imageCollectionView.scrollToItem(at: IndexPath(item: currentIndex!, section: 0), at: .left, animated: false)
     }
     
     private func setupFrame(){
@@ -56,10 +56,10 @@ class ImageEditorViewController: UIViewController {
             screenWidth = window.frame.height
         }
         
-//
-//        print("screenHeight \(screenHeight)")
-//        print("screenWidth \(screenWidth)")
-
+        //
+        //        print("screenHeight \(screenHeight)")
+        //        print("screenWidth \(screenWidth)")
+        
         if #available(iOS 11.0, *) {
             safeAreaTopHeight = window.safeAreaInsets.top
         }else{
@@ -108,7 +108,7 @@ extension ImageEditorViewController: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-       // return CGSize(width: screenWidth ,height: screenHeight)
+        // return CGSize(width: screenWidth ,height: screenHeight)
         return self.view.frame.size
     }
     

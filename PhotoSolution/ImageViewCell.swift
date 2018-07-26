@@ -9,15 +9,15 @@
 import UIKit
 
 class ImageViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var imageView: UIImageView!
-    let maxZoom = CGFloat(3)
+    private let maxZoom = CGFloat(3)
     
     func configViewWithData(phone: Photo){
         self.imageView.transform.a = 1
         self.imageView.transform.d = 1
-//        self.imageView.transform.tx = 0
-//        self.imageView.transform.ty = 0
+        //        self.imageView.transform.tx = 0
+        //        self.imageView.transform.ty = 0
         phone.getOriginalImage { image in
             self.imageView.image = image
         }
@@ -29,24 +29,24 @@ class ImageViewCell: UICollectionViewCell {
         let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchView(_:)))
         imageView.addGestureRecognizer(pinchGestureRecognizer)
         
-//        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.panView(_:)))
-//        imageView.addGestureRecognizer(panGestureRecognizer)
+        //        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.panView(_:)))
+        //        imageView.addGestureRecognizer(panGestureRecognizer)
         
         imageView.isUserInteractionEnabled = true
         imageView.isMultipleTouchEnabled = true
-
+        
     }
     
-//    @objc func panView(_ panGestureRecognizer: UIPanGestureRecognizer) {
-//        let view = panGestureRecognizer.view!
-//        if view.transform.a > 1 && view.transform.d > 1{
-//            if panGestureRecognizer.state == .began || panGestureRecognizer.state == .changed {
-//                let translation = panGestureRecognizer.translation(in: view.superview)
-//                view.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
-//                panGestureRecognizer.setTranslation(CGPoint.zero, in: view.superview)
-//            }
-//        }
-//    }
+    //    @objc func panView(_ panGestureRecognizer: UIPanGestureRecognizer) {
+    //        let view = panGestureRecognizer.view!
+    //        if view.transform.a > 1 && view.transform.d > 1{
+    //            if panGestureRecognizer.state == .began || panGestureRecognizer.state == .changed {
+    //                let translation = panGestureRecognizer.translation(in: view.superview)
+    //                view.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
+    //                panGestureRecognizer.setTranslation(CGPoint.zero, in: view.superview)
+    //            }
+    //        }
+    //    }
     
     @objc func pinchView(_ pinchGestureRecognizer: UIPinchGestureRecognizer) {
         let view = pinchGestureRecognizer.view!
@@ -67,7 +67,7 @@ class ImageViewCell: UICollectionViewCell {
                 }) { finished in
                 }
             }
-
+            
         }
     }
 }

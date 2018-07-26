@@ -11,7 +11,7 @@ import UIKit
 class PhotoNavigationController: UINavigationController {
     
     var albums: [Album]?
-    var solutionDelegate:PhotoSolutionDelegate?
+    var solutionDelegate: PhotoSolutionDelegate?
     var maxPhotos: Int!
     
     

@@ -10,18 +10,17 @@ import UIKit
 import Photos
 
 class PhotoCollectionViewController: UIViewController {
-
     
     @IBOutlet weak var bottomNavigationBar: UINavigationBar!
     @IBOutlet weak var photoCollectionView: UICollectionView!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     var selectedAlbumIndex: Int?
-    var photoNavigationController: PhotoNavigationController!
-    var albums: [Album]?
-    var maxAmount = 9
+    private var photoNavigationController: PhotoNavigationController!
+    private var albums: [Album]?
+    private var maxAmount = 9
     private var currentPhotoList = [Photo]()
     private var currentSelectedPhotoList = [Photo]()
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle:.gray)
+    private let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle:.gray)
     private var cellSize: CGFloat!
     private let photoCellReuseIdentifier = "PhotoCell"
     private let space = CGFloat(2.5)
@@ -40,7 +39,7 @@ class PhotoCollectionViewController: UIViewController {
             getPhotos()
         }
     }
-
+    
     private func setupCollectionView(){
         cellSize = (self.view.frame.width-5*space)/4
         let dataCellNib = UINib(nibName: photoCellReuseIdentifier, bundle: nil)

@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var pickedPhotoCollectionView: UICollectionView!
     var cellSize: CGFloat!
     let pickerCellReuseIdentifier = "PickerCell"
@@ -51,10 +51,14 @@ extension ViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = pickedPhotoCollectionView!.dequeueReusableCell(withReuseIdentifier: pickerCellReuseIdentifier, for: indexPath) as! PickerCell
+        cell.delegate = self
+        cell.tag = indexPath.row
         if indexPath.row == currentImages.count{
             cell.imageView.image = UIImage(named: "addIcon")
+            cell.deleteIcon.isHidden = true
         }else{
             cell.imageView.image = currentImages[indexPath.row]
+            cell.deleteIcon.isHidden = false
         }
         return cell
     }
@@ -103,6 +107,15 @@ extension ViewController: UICollectionViewDelegate{
             self.present(alertController, animated: true, completion: nil)
         }
     }
+}
+
+extension ViewController: PickerCellDelegate{
+    
+    func deleteClick(_ cell: UICollectionViewCell) {
+        currentImages.remove(at: cell.tag)
+        pickedPhotoCollectionView.reloadData()
+    }
+    
 }
 
 extension ViewController: PhotoSolutionDelegate{
