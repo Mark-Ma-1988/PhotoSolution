@@ -91,10 +91,17 @@ extension ViewController: UICollectionViewDelegate{
         if indexPath.row == currentImages.count{
             let photoSolution = PhotoSolution()
             photoSolution.delegate = self
-            photoSolution.customization.markerColor = UIColor.red
-            photoSolution.customization.navigationBarBackgroundColor = UIColor.yellow
-            photoSolution.customization.navigationBarTextColor = UIColor.purple
+            photoSolution.customization.markerColor = UIColor.blue
+            photoSolution.customization.navigationBarBackgroundColor = UIColor.darkGray
+            photoSolution.customization.navigationBarTextColor = UIColor.white
             photoSolution.customization.titleForAlbum = "Album"
+            photoSolution.customization.alertTextForPhotoAccess = "Your App Would Like to Access Your Photos"
+            photoSolution.customization.settingButtonTextForPhotoAccess = "Setting"
+            photoSolution.customization.cancelButtonTextForPhotoAccess = "Cancel"
+            photoSolution.customization.alertTextForCameraAccess = "Your App Would Like to Access Your Photos"
+            photoSolution.customization.settingButtonTextForCameraAccess = "Setting"
+            photoSolution.customization.cancelButtonTextForCameraAccess = "Cancel"
+            photoSolution.customization.statusBarColor = .White
             let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let takeAction = UIAlertAction(title: "Take a photo", style: .default, handler: { action in
                 self.present(photoSolution.getCamera(), animated: true, completion: nil)
@@ -123,6 +130,7 @@ extension ViewController: PickerCellDelegate{
 }
 
 extension ViewController: PhotoSolutionDelegate{
+
     func returnImages(_ images: [UIImage]) {
         for image in images {
             if currentImages.count < maxPhotos{

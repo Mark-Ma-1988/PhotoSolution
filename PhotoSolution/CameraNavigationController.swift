@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Photos
 
 class CameraNavigationController: UINavigationController {
     
     var cameraViewController: UIImagePickerController?
     var solutionDelegate:PhotoSolutionDelegate?
+    var customization: PhotoSolutionCustomization!
     private var hasOpen = false
     
     override func viewDidLoad() {
@@ -28,12 +30,32 @@ class CameraNavigationController: UINavigationController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         if !hasOpen{
-            hasOpen = true
-            self.present(cameraViewController!, animated: false, completion: nil)
+            AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
+                if response {
+                    self.hasOpen = true
+                    self.present(self.cameraViewController!, animated: false, completion: nil)
+                } else {
+                    self.goToCameraAccessSetting()
+                }
+            }
         }
     }
     
+    func goToCameraAccessSetting(){
+        let alert = UIAlertController(title: nil, message: self.customization.alertTextForCameraAccess, preferredStyle: .alert)
+        alert.addAction( UIAlertAction(title: self.customization.settingButtonTextForCameraAccess, style: .cancel, handler: { action in
+            UIApplication.shared.openURL(NSURL(string:UIApplicationOpenSettingsURLString)! as URL)
+        }))
+        alert.addAction( UIAlertAction(title: self.customization.cancelButtonTextForCameraAccess, style: .default, handler: { action in
+            self.solutionDelegate?.pickerCancel()
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }
+
+
 
 extension CameraNavigationController: UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     

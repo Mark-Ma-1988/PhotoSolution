@@ -21,7 +21,12 @@ class PhotoNavigationController: UINavigationController {
         self.navigationBar.tintColor = customization.navigationBarTextColor
         let textAttributes = [NSAttributedStringKey.foregroundColor: customization.navigationBarTextColor]
         self.navigationBar.titleTextAttributes = textAttributes
-        self.navigationBar.barStyle = UIBarStyle.blackOpaque
+        switch customization.statusBarColor {
+        case .Black:
+            self.navigationBar.barStyle = UIBarStyle.default
+        case .White:
+            self.navigationBar.barStyle = UIBarStyle.blackOpaque
+        }
         self.performSegue(withIdentifier: "showDefaultPhotos", sender: nil)
     }
     

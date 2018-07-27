@@ -77,11 +77,23 @@ class PhotoCollectionViewController: UIViewController {
                 self.selectedAlbumIndex = maxPhotoAmountIndex
                 self.showPhotoCollection()
             case .denied, .restricted:
-                print("Not allowed")
+                self.goToPhotoAccessSetting()
             case .notDetermined:
-                print("Not determined yet")
+                self.goToPhotoAccessSetting()
             }
         }
+    }
+    
+    func goToPhotoAccessSetting(){
+        let alert = UIAlertController(title: nil, message: photoNavigationController.customization.alertTextForPhotoAccess, preferredStyle: .alert)
+        alert.addAction( UIAlertAction(title: photoNavigationController.customization.settingButtonTextForPhotoAccess, style: .cancel, handler: { action in
+            UIApplication.shared.openURL(NSURL(string:UIApplicationOpenSettingsURLString)! as URL)
+        }))
+        alert.addAction( UIAlertAction(title: photoNavigationController.customization.cancelButtonTextForPhotoAccess, style: .default, handler: { action in
+            self.photoNavigationController.solutionDelegate?.pickerCancel()
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func showPhotoCollection(){

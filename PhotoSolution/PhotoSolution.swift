@@ -17,9 +17,19 @@ struct PhotoSolutionCustomization{
     var markerColor: UIColor = UIColor.blue
     var navigationBarBackgroundColor: UIColor = UIColor.darkGray
     var navigationBarTextColor: UIColor = UIColor.white
-    var alertTextForPhotoAccess: String = "The text to access photo"
-    var alertTextForCameraUsage: String = "The text to use camera"
     var titleForAlbum: String = "Album"
+    var alertTextForPhotoAccess: String = "Your App Would Like to Access Your Photos"
+    var settingButtonTextForPhotoAccess: String = "Setting"
+    var cancelButtonTextForPhotoAccess: String = "Cancel"
+    var alertTextForCameraAccess: String = "Your App Would Like to Access the Camera"
+    var settingButtonTextForCameraAccess: String = "Setting"
+    var cancelButtonTextForCameraAccess: String = "Cancel"
+    var statusBarColor: StatusBarColor = .White
+    
+    enum StatusBarColor {
+        case Black
+        case White
+    }
 }
 
 class PhotoSolution{
@@ -38,6 +48,7 @@ class PhotoSolution{
     
     func getCamera() -> UIViewController{
         let cameraNavigationController = CameraNavigationController()
+        cameraNavigationController.customization = self.customization
         cameraNavigationController.solutionDelegate = self.delegate
         return cameraNavigationController
     }
