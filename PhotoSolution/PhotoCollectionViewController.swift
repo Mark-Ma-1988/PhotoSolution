@@ -153,9 +153,16 @@ extension PhotoCollectionViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = photoCollectionView.dequeueReusableCell(withReuseIdentifier: photoCellReuseIdentifier, for: indexPath) as! PhotoCell
         cell.numberLabel.backgroundColor = photoNavigationController.customization.markerColor
-        cell.configViewWithData(phone: currentPhotoList[indexPath.row])
-        cell.delegate = self
+        cell.configViewWithData(photo: currentPhotoList[indexPath.row])
         cell.tag = indexPath.row
+        cell.delegate = self
+        if currentSelectedPhotoList.count == maxAmount && !currentPhotoList[indexPath.row].selected{
+            cell.coverView.isHidden = false
+            cell.isUserInteractionEnabled = false
+        }else{
+            cell.coverView.isHidden = true
+            cell.isUserInteractionEnabled = true
+        }
         return cell
     }
 }
@@ -195,22 +202,31 @@ extension PhotoCollectionViewController: PhotoCellDelegate{
         let clickedPhoto = currentPhotoList[cell.tag]
         if clickedPhoto.selected{
             clickedPhoto.selected = false
-            photoCollectionView.reloadItems(at: [IndexPath(item: cell.tag, section: 0)])
+            
             currentSelectedPhotoList.remove(at: clickedPhoto.selectedOrder - 1)
             if clickedPhoto.selectedOrder < currentSelectedPhotoList.count + 1{
                 for index in clickedPhoto.selectedOrder-1...currentSelectedPhotoList.count-1 {
                     currentSelectedPhotoList[index].selectedOrder = index + 1
                 }
+            }
+            if currentSelectedPhotoList.count == maxAmount - 1{
+                photoCollectionView.reloadData()
+            }else{
                 let indexPaths = currentSelectedPhotoList.map ({ element -> IndexPath in
                     return IndexPath(item: element.index, section: 0)
                 })
+                photoCollectionView.reloadItems(at: [IndexPath(item: cell.tag, section: 0)])
                 photoCollectionView.reloadItems(at: indexPaths)
             }
         }else if currentSelectedPhotoList.count < maxAmount{
             currentSelectedPhotoList.append(clickedPhoto)
             clickedPhoto.selected = true
             clickedPhoto.selectedOrder = currentSelectedPhotoList.count
-            photoCollectionView.reloadItems(at: [IndexPath(item: cell.tag, section: 0)])
+            if currentSelectedPhotoList.count < maxAmount{
+                photoCollectionView.reloadItems(at: [IndexPath(item: cell.tag, section: 0)])
+            }else{
+                photoCollectionView.reloadData()
+            }
         }else{
             print("send alert")
         }

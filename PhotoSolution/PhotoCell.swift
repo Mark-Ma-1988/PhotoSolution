@@ -14,23 +14,24 @@ protocol PhotoCellDelegate {
 
 class PhotoCell: UICollectionViewCell {
     
-    private var phone: Photo?
+    private var photo: Photo?
     private var markerColor: UIColor?
     var delegate: PhotoCellDelegate?
     @IBOutlet weak var tickImage: UIImageView!
     @IBOutlet weak var numberLabel: UILabel!
     
+    @IBOutlet weak var coverView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet private weak var clickArea: UIView!
     private let thumbnailSize = CGFloat(200)
     
-    func configViewWithData(phone: Photo){
-        self.phone = phone
-        self.phone!.getThumbnail(size: thumbnailSize) { image in
+    func configViewWithData(photo: Photo){
+        self.photo = photo
+        self.photo!.getThumbnail(size: thumbnailSize) { image in
             self.imageView.image = image
         }
-        if self.phone!.selected{
-            select(number: self.phone!.selectedOrder, animation: numberLabel.isHidden)
+        if self.photo!.selected{
+            select(number: self.photo!.selectedOrder, animation: numberLabel.isHidden)
         }else{
             disSelect()
         }

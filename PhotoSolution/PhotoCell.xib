@@ -44,16 +44,24 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1x-9r-Lh5" userLabel="Click area">
                         <rect key="frame" x="74" y="0.0" width="74" height="70.5"/>
                     </view>
+                    <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4wh-pU-5kJ" userLabel="Cover View">
+                        <rect key="frame" x="0.0" y="0.0" width="148" height="141"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="4wh-pU-5kJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="1Ql-yp-k1h"/>
+                <constraint firstAttribute="trailing" secondItem="4wh-pU-5kJ" secondAttribute="trailing" id="2CS-pg-3MJ"/>
                 <constraint firstAttribute="trailing" secondItem="CHx-nC-SSa" secondAttribute="trailing" id="8D6-Qg-7vj"/>
                 <constraint firstItem="n1x-9r-Lh5" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="8hR-OM-Umr"/>
                 <constraint firstItem="wfn-Pg-Ch2" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="Cqz-Yk-4pE"/>
+                <constraint firstItem="4wh-pU-5kJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="DA0-it-MyW"/>
                 <constraint firstAttribute="trailing" secondItem="wfn-Pg-Ch2" secondAttribute="trailing" constant="4" id="L1E-zq-33I"/>
                 <constraint firstItem="CHx-nC-SSa" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="N9j-WH-wu4"/>
                 <constraint firstItem="Sab-t9-Upn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="Rfb-OD-KMX"/>
                 <constraint firstAttribute="trailing" secondItem="n1x-9r-Lh5" secondAttribute="trailing" id="TeK-Ws-NLl"/>
+                <constraint firstAttribute="bottom" secondItem="4wh-pU-5kJ" secondAttribute="bottom" id="Y3x-Aw-VAI"/>
                 <constraint firstAttribute="trailing" secondItem="Sab-t9-Upn" secondAttribute="trailing" constant="4" id="bFo-wM-Fyz"/>
                 <constraint firstItem="CHx-nC-SSa" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="gRg-jI-R8M"/>
                 <constraint firstItem="ZTg-uK-7eu" firstAttribute="centerY" secondItem="n1x-9r-Lh5" secondAttribute="bottom" id="nu1-AN-AeG"/>
@@ -64,6 +72,7 @@
             <size key="customSize" width="148" height="141"/>
             <connections>
                 <outlet property="clickArea" destination="n1x-9r-Lh5" id="wll-gd-pVR"/>
+                <outlet property="coverView" destination="4wh-pU-5kJ" id="jLl-I7-rWh"/>
                 <outlet property="imageView" destination="CHx-nC-SSa" id="glm-Fc-ufs"/>
                 <outlet property="numberLabel" destination="wfn-Pg-Ch2" id="f17-fe-E4m"/>
                 <outlet property="tickImage" destination="Sab-t9-Upn" id="yEn-t2-eUT"/>

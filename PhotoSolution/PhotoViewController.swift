@@ -204,7 +204,7 @@ extension PhotoViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = photoCollection!.dequeueReusableCell(withReuseIdentifier: photoCellReuseIdentifier, for: indexPath) as! PhotoCell
-        cell.configViewWithData(phone: currentPhotoList[indexPath.row])
+        cell.configViewWithData(photo: currentPhotoList[indexPath.row])
         cell.delegate = self
         cell.tag = indexPath.row
         return cell
