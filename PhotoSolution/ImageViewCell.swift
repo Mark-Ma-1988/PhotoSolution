@@ -13,12 +13,12 @@ class ImageViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     private let maxZoom = CGFloat(3)
     
-    func configViewWithData(phone: Photo){
+    func configViewWithData(photo: Photo){
         self.imageView.transform.a = 1
         self.imageView.transform.d = 1
         //        self.imageView.transform.tx = 0
         //        self.imageView.transform.ty = 0
-        phone.getOriginalImage { image in
+        photo.getOriginalImage { image in
             self.imageView.image = image
         }
     }

@@ -118,7 +118,7 @@ extension ImageEditorViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = imageCollectionView!.dequeueReusableCell(withReuseIdentifier: imageCellReuseIdentifier, for: indexPath) as! ImageViewCell
-        cell.configViewWithData(phone: currentPhotoList[indexPath.row])
+        cell.configViewWithData(photo: currentPhotoList[indexPath.row])
         return cell
     }
 }

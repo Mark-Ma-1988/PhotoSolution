@@ -24,6 +24,7 @@ struct PhotoSolutionCustomization{
     var alertTextForCameraAccess: String = "Your App Would Like to Access the Camera"
     var settingButtonTextForCameraAccess: String = "Setting"
     var cancelButtonTextForCameraAccess: String = "Cancel"
+    var returnCompressedImage: Bool = false
     var statusBarColor: StatusBarColor = .White
     
     enum StatusBarColor {

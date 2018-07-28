@@ -27,6 +27,18 @@ class ViewController: UIViewController {
         pickedPhotoCollectionView.backgroundColor = UIColor.white
         pickedPhotoCollectionView.reloadData()
     }
+    
+    func calulateImageFileSize(_ image: UIImage?) {
+        var data: Data? = UIImagePNGRepresentation(image!)
+        var dataLength = Double((data?.count ?? 0)) * 1.0
+        let typeArray = ["bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+        var index: Int = 0
+        while dataLength > 1024 {
+            dataLength /= 1024.0
+            index += 1
+        }
+        print("image = \(dataLength) \(typeArray[index]) ")
+    }
 }
 
 
@@ -101,6 +113,7 @@ extension ViewController: UICollectionViewDelegate{
             photoSolution.customization.alertTextForCameraAccess = "Your App Would Like to Access Your Photos"
             photoSolution.customization.settingButtonTextForCameraAccess = "Setting"
             photoSolution.customization.cancelButtonTextForCameraAccess = "Cancel"
+            photoSolution.customization.returnCompressedImage = true
             photoSolution.customization.statusBarColor = .White
             let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let takeAction = UIAlertAction(title: "Take a photo", style: .default, handler: { action in
@@ -137,6 +150,7 @@ extension ViewController: PhotoSolutionDelegate{
                 currentImages.append(image)
             }
         }
+        calulateImageFileSize(images.first)
         pickedPhotoCollectionView.reloadData()
     }
     

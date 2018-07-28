@@ -25,6 +25,7 @@ class CameraNavigationController: UINavigationController {
         cameraViewController!.delegate = self
         cameraViewController!.sourceType = .camera
         cameraViewController!.allowsEditing = false
+        cameraViewController?.cameraFlashMode = .off
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,12 +61,40 @@ class CameraNavigationController: UINavigationController {
 extension CameraNavigationController: UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        var localId: String = ""
         if let newImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
-            UIImageWriteToSavedPhotosAlbum(newImage, nil, nil, nil)
-            solutionDelegate?.returnImages([newImage])
-            cameraViewController?.dismiss(animated: false, completion: {
-                self.dismiss(animated: true, completion: nil)
-            })
+            PHPhotoLibrary.shared().performChanges({
+                let result = PHAssetChangeRequest.creationRequestForAsset(from: newImage)
+                let assetPlaceholder = result.placeholderForCreatedAsset!
+                localId = assetPlaceholder.localIdentifier
+            }) { (isSuccess: Bool, error: Error?) in
+                if isSuccess {
+                    let assetResult = PHAsset.fetchAssets(
+                        withLocalIdentifiers: [localId], options: nil)
+                    let photo = Photo(asset: assetResult[0], index: 0)
+                    if self.customization.returnCompressedImage{
+                        photo.getCompressedImage(callback: { image in
+                            DispatchQueue.main.async{
+                                self.solutionDelegate?.returnImages([image])
+                                self.cameraViewController?.dismiss(animated: false, completion: {
+                                    self.dismiss(animated: true, completion: nil)
+                                })
+                            }
+                        })
+                    }else{
+                        photo.getOriginalImage(callback: { image in
+                            DispatchQueue.main.async{
+                                self.solutionDelegate?.returnImages([image])
+                                self.cameraViewController?.dismiss(animated: false, completion: {
+                                    self.dismiss(animated: true, completion: nil)
+                                })
+                            }
+                        })
+                    }
+                } else{
+                    print("save fail", error!.localizedDescription)
+                }
+            }
         }
     }
     

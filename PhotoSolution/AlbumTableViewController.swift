@@ -29,7 +29,7 @@ class AlbumTableViewController: UIViewController {
     
     @IBAction func cancelClick(_ sender: UIBarButtonItem) {
         photoNavigationController.solutionDelegate?.pickerCancel()
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        photoNavigationController.dismiss(animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

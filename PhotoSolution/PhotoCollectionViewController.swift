@@ -91,7 +91,7 @@ class PhotoCollectionViewController: UIViewController {
         }))
         alert.addAction( UIAlertAction(title: photoNavigationController.customization.cancelButtonTextForPhotoAccess, style: .default, handler: { action in
             self.photoNavigationController.solutionDelegate?.pickerCancel()
-            self.navigationController?.dismiss(animated: true, completion: nil)
+            self.photoNavigationController.dismiss(animated: true, completion: nil)
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -110,18 +110,24 @@ class PhotoCollectionViewController: UIViewController {
     
     @IBAction func cancelClick(_ sender: UIBarButtonItem) {
         photoNavigationController.solutionDelegate?.pickerCancel()
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        photoNavigationController.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func doneClick(_ sender: UIBarButtonItem) {
         var resultImages = [UIImage]()
         for photo in currentSelectedPhotoList{
-            photo.getOriginalImage { image in
-                resultImages.append(image)
+            if photoNavigationController.customization.returnCompressedImage{
+                photo.getCompressedImage { image in
+                    resultImages.append(image)
+                }
+            }else{
+                photo.getOriginalImage { image in
+                    resultImages.append(image)
+                }
             }
         }
         photoNavigationController.solutionDelegate?.returnImages(resultImages)
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        photoNavigationController.dismiss(animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
