@@ -114,9 +114,13 @@
 		95E696B720F230F9003BDCBE /* PhotoSolution */ = {
 			isa = PBXGroup;
 			children = (
-				95E696BA20F23574003BDCBE /* PhotoViewController.swift */,
-				95E696B920F23574003BDCBE /* AlbumViewController.swift */,
-				95E696B820F23574003BDCBE /* ImageViewController.swift */,
+				95A1DD812107EA530092E04D /* PhotoSolution.swift */,
+				95A1DD7B21073E060092E04D /* PhotoStoryboard.storyboard */,
+				95A1DD8921080D350092E04D /* PhotoNavigationController.swift */,
+				95A1DD832107F66F0092E04D /* PhotoCollectionViewController.swift */,
+				95A1DD852107F69D0092E04D /* AlbumTableViewController.swift */,
+				95A1DD872107F7240092E04D /* ImageEditorViewController.swift */,
+				95A1DD8B21088F130092E04D /* CameraNavigationController.swift */,
 				95E696BE20F2357E003BDCBE /* Photo.swift */,
 				95E696BF20F2357E003BDCBE /* Album.swift */,
 				95E696C220F23589003BDCBE /* PhotoCell.swift */,
@@ -127,13 +131,9 @@
 				95E696C720F23589003BDCBE /* ImageViewCell.xib */,
 				95E696CE20F23591003BDCBE /* arrowIcon.png */,
 				959B7AF620F37B66008CBDB3 /* tickIcon.png */,
-				95A1DD7B21073E060092E04D /* PhotoStoryboard.storyboard */,
-				95A1DD832107F66F0092E04D /* PhotoCollectionViewController.swift */,
-				95A1DD852107F69D0092E04D /* AlbumTableViewController.swift */,
-				95A1DD872107F7240092E04D /* ImageEditorViewController.swift */,
-				95A1DD8921080D350092E04D /* PhotoNavigationController.swift */,
-				95A1DD8B21088F130092E04D /* CameraNavigationController.swift */,
-				95A1DD812107EA530092E04D /* PhotoSolution.swift */,
+				95E696BA20F23574003BDCBE /* PhotoViewController.swift */,
+				95E696B920F23574003BDCBE /* AlbumViewController.swift */,
+				95E696B820F23574003BDCBE /* ImageViewController.swift */,
 			);
 			path = PhotoSolution;
 			sourceTree = "<group>";

@@ -72,7 +72,7 @@ extension CameraNavigationController: UIImagePickerControllerDelegate,UINavigati
                     let assetResult = PHAsset.fetchAssets(
                         withLocalIdentifiers: [localId], options: nil)
                     let photo = Photo(asset: assetResult[0], index: 0)
-                    if self.customization.returnCompressedImage{
+                    if self.customization.returnImageSize == .compressed{
                         photo.getCompressedImage(callback: { image in
                             DispatchQueue.main.async{
                                 self.solutionDelegate?.returnImages([image])

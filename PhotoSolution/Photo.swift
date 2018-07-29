@@ -15,7 +15,7 @@ class Photo{
     var selected = false
     var selectedOrder: Int = 0
     var index: Int!
-    let compressedSize = 800
+    let compressedSize = 1000
     
     init(asset: PHAsset,index: Int) {
         self.asset = asset

@@ -116,7 +116,7 @@ class PhotoCollectionViewController: UIViewController {
     @IBAction func doneClick(_ sender: UIBarButtonItem) {
         var resultImages = [UIImage]()
         for photo in currentSelectedPhotoList{
-            if photoNavigationController.customization.returnCompressedImage{
+            if photoNavigationController.customization.returnImageSize == .compressed{
                 photo.getCompressedImage { image in
                     resultImages.append(image)
                 }
