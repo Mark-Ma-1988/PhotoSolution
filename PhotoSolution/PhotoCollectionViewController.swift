@@ -25,7 +25,7 @@ class PhotoCollectionViewController: UIViewController {
     private let photoCellReuseIdentifier = "PhotoCell"
     private let space = CGFloat(2.5)
     private var lastShowIndex: IndexPath?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         photoNavigationController = self.navigationController as! PhotoNavigationController
@@ -43,15 +43,16 @@ class PhotoCollectionViewController: UIViewController {
         }else{
             getPhotos()
         }
-        
         NotificationCenter.default.addObserver(self, selector:#selector(orientation), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
     @objc func orientation() {
-        if lastShowIndex != nil{
-            photoCollectionView.scrollToItem(at: lastShowIndex!, at: .bottom, animated: false)
-        }else{
-            photoCollectionView.scrollToItem(at: IndexPath(item: self.currentPhotoList.count-1, section: 0), at: .bottom, animated: false)
+        if self.currentPhotoList.count>0{
+            if lastShowIndex != nil{
+                photoCollectionView.scrollToItem(at: lastShowIndex!, at: .bottom, animated: false)
+            }else{
+                photoCollectionView.scrollToItem(at: IndexPath(item: self.currentPhotoList.count-1, section: 0), at: .bottom, animated: false)
+            }
         }
     }
     
