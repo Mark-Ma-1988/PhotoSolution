@@ -24,6 +24,7 @@ class PhotoCollectionViewController: UIViewController {
     private var cellSize: CGFloat!
     private let photoCellReuseIdentifier = "PhotoCell"
     private let space = CGFloat(2.5)
+    private var lastShowIndex: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,16 @@ class PhotoCollectionViewController: UIViewController {
             showPhotoCollection()
         }else{
             getPhotos()
+        }
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(orientation), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+    }
+    
+    @objc func orientation() {
+        if lastShowIndex != nil{
+            self.photoCollectionView.scrollToItem(at: lastShowIndex!, at: .bottom, animated: false)
+        }else{
+            self.photoCollectionView.scrollToItem(at: IndexPath(item: self.currentPhotoList.count-1, section: 0), at: .bottom, animated: false)
         }
     }
     
@@ -198,6 +209,16 @@ extension PhotoCollectionViewController: UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         self.performSegue(withIdentifier: "showPhoto", sender: indexPath.row)
+    }
+    
+}
+
+extension PhotoCollectionViewController: UIScrollViewDelegate{
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView){
+        if let lastTag = photoCollectionView.visibleCells.first?.tag{
+            lastShowIndex = IndexPath(item: lastTag, section: 0)
+        }
     }
     
 }
