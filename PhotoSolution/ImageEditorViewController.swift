@@ -13,30 +13,30 @@ class ImageEditorViewController: UIViewController {
     @IBOutlet weak var statusCoverView: UIView!
     @IBOutlet weak var clickButton: UIBarButtonItem!
     @IBOutlet weak var topNavigationBar: UINavigationBar!
-    @IBOutlet weak var imageCollectionView: UICollectionView!
+    private var imageCollectionView: UICollectionView?
     private let navigationBarHeight = CGFloat(40)
     private var safeAreaTopHeight: CGFloat!
     var currentPhotoList = [Photo]()
     var currentIndex: Int?
     private let imageCellReuseIdentifier = "ImageViewCell"
     var customization: PhotoSolutionCustomization!
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         setupBars()
         setupImageCollectionView()
-        setupFrameAndLoadData()
+        NotificationCenter.default.addObserver(self, selector:#selector(orientation), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
-    private func setupFrameAndLoadData(){
-        imageCollectionView.reloadData()
-        imageCollectionView.layoutIfNeeded()
-        imageCollectionView.scrollToItem(at: IndexPath(item: currentIndex!, section: 0), at: .centeredHorizontally, animated: false)
+    @objc func orientation() {
+        if imageCollectionView != nil{
+            imageCollectionView!.isHidden = true
+            imageCollectionView!.dataSource = nil
+            imageCollectionView!.delegate = nil
+            imageCollectionView = nil
+            setupImageCollectionView()
+        }
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -49,10 +49,29 @@ class ImageEditorViewController: UIViewController {
     }
     
     private func setupImageCollectionView(){
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = self.view.frame.size
+        flowLayout.scrollDirection = .horizontal
+        imageCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: flowLayout)
+        self.view.addSubview(imageCollectionView!)
+        self.view.sendSubview(toBack: imageCollectionView!)
+        imageCollectionView!.translatesAutoresizingMaskIntoConstraints = false
+
+        self.view.addConstraint(NSLayoutConstraint(item: imageCollectionView!, attribute: .leading, relatedBy: .equal, toItem: self.view , attribute: .leading, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: imageCollectionView!, attribute: .trailing, relatedBy: .equal, toItem: self.view , attribute: .trailing, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: imageCollectionView!, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: imageCollectionView!, attribute: .bottom, relatedBy: .equal, toItem: self.view , attribute: .bottom, multiplier: 1, constant: 0))
+        
         let dataCellNib = UINib(nibName: imageCellReuseIdentifier, bundle: nil)
-        imageCollectionView.register(dataCellNib, forCellWithReuseIdentifier: imageCellReuseIdentifier)
-        imageCollectionView.backgroundColor = UIColor.black
-        imageCollectionView.isPagingEnabled = true
+        imageCollectionView!.register(dataCellNib, forCellWithReuseIdentifier: imageCellReuseIdentifier)
+        imageCollectionView!.isScrollEnabled = true
+        imageCollectionView!.backgroundColor = UIColor.black
+        imageCollectionView!.delegate = self
+        imageCollectionView!.dataSource = self
+        imageCollectionView!.isPagingEnabled = true
+        imageCollectionView!.reloadData()
+        imageCollectionView!.layoutIfNeeded()
+        imageCollectionView!.scrollToItem(at: IndexPath(item: currentIndex!, section: 0), at: .centeredHorizontally, animated: false)
     }
     
     @IBAction func closeClick(_ sender: UIBarButtonItem) {
@@ -72,7 +91,7 @@ extension ImageEditorViewController: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return imageCollectionView.frame.size
+        return imageCollectionView!.frame.size
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -113,8 +132,8 @@ extension ImageEditorViewController: UICollectionViewDelegate{
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView){
-        if let lastTag = imageCollectionView.visibleCells.first?.tag{
-            currentIndex = lastTag
+        if let lastTag = imageCollectionView?.visibleCells.first?.tag{
+            currentIndex = imageCollectionView?.visibleCells.first?.tag
         }
     }
     

@@ -151,20 +151,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" indicatorStyle="white" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aAh-Px-aXR">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="T8K-ap-wjC">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                                <connections>
-                                    <outlet property="dataSource" destination="sSj-d0-GMW" id="rdS-RV-5DF"/>
-                                    <outlet property="delegate" destination="sSj-d0-GMW" id="OZo-VW-pzz"/>
-                                </connections>
-                            </collectionView>
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CMl-ev-T2v" userLabel="statusCover">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -192,12 +178,8 @@
                             <constraint firstItem="ozm-XL-Zoe" firstAttribute="trailing" secondItem="JFT-jb-2TA" secondAttribute="trailing" id="DCB-dx-YoG"/>
                             <constraint firstItem="CMl-ev-T2v" firstAttribute="leading" secondItem="JFT-jb-2TA" secondAttribute="leading" id="Hre-6B-j2Z"/>
                             <constraint firstItem="BFB-Id-vfc" firstAttribute="top" secondItem="CMl-ev-T2v" secondAttribute="bottom" id="Hv5-4a-cfw"/>
-                            <constraint firstItem="aAh-Px-aXR" firstAttribute="bottom" secondItem="JFT-jb-2TA" secondAttribute="bottom" id="PQl-nc-Eee"/>
-                            <constraint firstItem="aAh-Px-aXR" firstAttribute="leading" secondItem="JFT-jb-2TA" secondAttribute="leading" id="cOU-d0-bjx"/>
                             <constraint firstItem="ozm-XL-Zoe" firstAttribute="top" secondItem="BFB-Id-vfc" secondAttribute="top" id="i34-oQ-Q3C"/>
-                            <constraint firstItem="aAh-Px-aXR" firstAttribute="trailing" secondItem="JFT-jb-2TA" secondAttribute="trailing" id="iAM-b6-z9h"/>
                             <constraint firstItem="ozm-XL-Zoe" firstAttribute="leading" secondItem="JFT-jb-2TA" secondAttribute="leading" id="kjB-xW-2pZ"/>
-                            <constraint firstItem="aAh-Px-aXR" firstAttribute="top" secondItem="JFT-jb-2TA" secondAttribute="top" id="ksv-Jg-Rhi"/>
                             <constraint firstItem="CMl-ev-T2v" firstAttribute="top" secondItem="JFT-jb-2TA" secondAttribute="top" id="o97-tk-lpo"/>
                             <constraint firstAttribute="trailing" secondItem="CMl-ev-T2v" secondAttribute="trailing" id="yvS-TA-uED"/>
                         </constraints>
@@ -205,7 +187,6 @@
                     </view>
                     <connections>
                         <outlet property="clickButton" destination="xdE-VV-B2E" id="8vb-j5-Plx"/>
-                        <outlet property="imageCollectionView" destination="aAh-Px-aXR" id="hba-8z-JQI"/>
                         <outlet property="statusCoverView" destination="CMl-ev-T2v" id="Hld-d9-fTS"/>
                         <outlet property="topNavigationBar" destination="ozm-XL-Zoe" id="svn-a1-87F"/>
                     </connections>

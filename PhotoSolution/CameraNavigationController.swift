@@ -15,7 +15,7 @@ class CameraNavigationController: UINavigationController {
     var solutionDelegate:PhotoSolutionDelegate?
     var customization: PhotoSolutionCustomization!
     private var hasOpen = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.black
