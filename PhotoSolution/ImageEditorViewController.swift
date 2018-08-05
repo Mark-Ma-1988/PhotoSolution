@@ -23,56 +23,47 @@ class ImageEditorViewController: UIViewController {
     private var screenWidth: CGFloat!
     private let topAlpha = CGFloat(0.8)
     var customization: PhotoSolutionCustomization!
-    
+    private var lastShowIndex: IndexPath?
+    private let window = UIApplication.shared.keyWindow!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBars()
         setupImageCollectionView()
-        setupFrame()
-        imageCollectionView.reloadData()
-        imageCollectionView.scrollToItem(at: IndexPath(item: currentIndex!, section: 0), at: .left, animated: false)
+        NotificationCenter.default.addObserver(self, selector:#selector(orientation), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        lastShowIndex = IndexPath(item: currentIndex!, section: 0)
+        setupFrameAndLoadData()
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        //super.viewWillTransition(to: size, with: coordinator)
-        //            if UIDevice.current.orientation.isLandscape {
-        //
-        //                cellWidth = (UIApplication.shared.keyWindow?.height)!/3
-        //            } else {
-        //
-        //                cellWidth = (UIApplication.shared.keyWindow?.height)!/3
-        //            }
-        //            imageCollectionView.reloadData()
-        setupFrame()
-        //        imageCollectionView.reloadData()
-        //        imageCollectionView.scrollToItem(at: IndexPath(item: currentIndex!, section: 0), at: .left, animated: false)
+    @objc func orientation() {
+        setupFrameAndLoadData()
     }
     
-    private func setupFrame(){
-        let window = UIApplication.shared.keyWindow!
+    private func setupFrameAndLoadData(){
         if UIDevice.current.orientation.isPortrait {
-            screenHeight = window.frame.height
-            screenWidth = window.frame.width
+            if #available(iOS 11.0, *) {
+                safeAreaTopHeight = window.safeAreaInsets.top
+            }else{
+                safeAreaTopHeight = UIApplication.shared.statusBarFrame.height
+            }
+            statusCoverView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: safeAreaTopHeight)
+            topNavigationBar.frame = CGRect(x: 0, y: safeAreaTopHeight, width: screenWidth, height: navigationBarHeight)
+            imageCollectionView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
         }else{
-            screenHeight = window.frame.width
-            screenWidth = window.frame.height
+            if #available(iOS 11.0, *) {
+                safeAreaTopHeight = window.safeAreaInsets.top
+            }else{
+                safeAreaTopHeight = 0
+            }
+            statusCoverView.frame = CGRect(x: 0, y: 0, width: screenHeight, height: safeAreaTopHeight)
+            topNavigationBar.frame = CGRect(x: 0, y: safeAreaTopHeight, width: screenHeight, height: navigationBarHeight)
+            imageCollectionView.frame = CGRect(x: (screenHeight/2-screenWidth/2), y: 0, width: screenHeight, height: screenWidth)
+//            imageCollectionView.frame.size = CGSize(width: screenHeight, height: screenWidth)
+            imageCollectionView.center.x = screenHeight/2
+//            imageCollectionView.frame.origin.y = 0
+            
         }
-        
-        //
-        //        print("screenHeight \(screenHeight)")
-        //        print("screenWidth \(screenWidth)")
-        
-        if #available(iOS 11.0, *) {
-            safeAreaTopHeight = window.safeAreaInsets.top
-        }else{
-            safeAreaTopHeight = 0
-        }
-        if safeAreaTopHeight == 0{
-            safeAreaTopHeight = UIApplication.shared.statusBarFrame.height
-        }
-        statusCoverView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: UIApplication.shared.statusBarFrame.height)
-        topNavigationBar.frame = CGRect(x: 0, y: safeAreaTopHeight, width: screenWidth, height: navigationBarHeight)
-        imageCollectionView.frame = self.view.frame
+        imageCollectionView.reloadData()
+        imageCollectionView.scrollToItem(at: lastShowIndex!, at: .centeredHorizontally, animated: false)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -80,6 +71,9 @@ class ImageEditorViewController: UIViewController {
     }
     
     private func setupBars(){
+        screenHeight = window.frame.height
+        screenWidth = window.frame.width
+        
         self.view.addSubview(statusCoverView)
         statusCoverView.backgroundColor = customization.navigationBarBackgroundColor
         statusCoverView.alpha = topAlpha
@@ -89,7 +83,6 @@ class ImageEditorViewController: UIViewController {
     }
     
     private func setupImageCollectionView(){
-        
         let dataCellNib = UINib(nibName: imageCellReuseIdentifier, bundle: nil)
         imageCollectionView.register(dataCellNib, forCellWithReuseIdentifier: imageCellReuseIdentifier)
         imageCollectionView.backgroundColor = UIColor.black
@@ -103,6 +96,7 @@ class ImageEditorViewController: UIViewController {
 }
 
 extension ImageEditorViewController: UICollectionViewDataSource{
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -112,18 +106,24 @@ extension ImageEditorViewController: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // return CGSize(width: screenWidth ,height: screenHeight)
-        return self.view.frame.size
+        if UIDevice.current.orientation.isPortrait {
+            return CGSize(width: screenWidth, height: screenHeight)
+        }else{
+            return CGSize(width: screenHeight, height: screenWidth)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = imageCollectionView!.dequeueReusableCell(withReuseIdentifier: imageCellReuseIdentifier, for: indexPath) as! ImageViewCell
         cell.configViewWithData(photo: currentPhotoList[indexPath.row])
+        cell.tag = indexPath.row
         return cell
     }
+    
 }
 
 extension ImageEditorViewController: UICollectionViewDelegateFlowLayout{
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -137,15 +137,23 @@ extension ImageEditorViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat{
         return 0
     }
+    
 }
 
 extension ImageEditorViewController: UICollectionViewDelegate{
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath){
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         topNavigationBar.isHidden = !self.topNavigationBar.isHidden
         statusCoverView.isHidden = !self.statusCoverView.isHidden
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView){
+        if let lastTag = imageCollectionView.visibleCells.first?.tag{
+            lastShowIndex = IndexPath(item: lastTag, section: 0)
+        }
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -156,4 +164,5 @@ extension ImageEditorViewController: UICollectionViewDelegate{
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
     }
+ 
 }
