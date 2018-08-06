@@ -23,10 +23,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="136" height="118"/>
                     </imageView>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="deleteIcon" translatesAutoresizingMaskIntoConstraints="NO" id="xGc-uz-JsO" userLabel="delete">
-                        <rect key="frame" x="110" y="2" width="24" height="24"/>
+                        <rect key="frame" x="104" y="2" width="30" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="24" id="BQk-0D-BHS"/>
-                            <constraint firstAttribute="width" constant="24" id="kRd-JH-Y4C"/>
+                            <constraint firstAttribute="height" constant="30" id="BQk-0D-BHS"/>
+                            <constraint firstAttribute="width" constant="30" id="kRd-JH-Y4C"/>
                         </constraints>
                     </imageView>
                 </subviews>

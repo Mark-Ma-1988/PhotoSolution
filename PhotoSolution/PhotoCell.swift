@@ -23,11 +23,10 @@ class PhotoCell: UICollectionViewCell {
     @IBOutlet weak var coverView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet private weak var clickArea: UIView!
-    private let thumbnailSize = CGFloat(200)
     
     func configViewWithData(photo: Photo){
         self.photo = photo
-        self.photo!.getThumbnail(size: thumbnailSize) { image in
+        self.photo!.getThumbnail{ image in
             self.imageView.image = image
         }
         if self.photo!.selected{

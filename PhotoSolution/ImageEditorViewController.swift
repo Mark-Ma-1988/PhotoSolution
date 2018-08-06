@@ -133,7 +133,7 @@ extension ImageEditorViewController: UICollectionViewDelegate{
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView){
         if let lastTag = imageCollectionView?.visibleCells.first?.tag{
-            currentIndex = imageCollectionView?.visibleCells.first?.tag
+            currentIndex = lastTag
         }
     }
     

@@ -15,7 +15,8 @@ class Photo{
     var selected = false
     var selectedOrder: Int = 0
     var index: Int!
-    let compressedSize = 1000
+    private let compressedSize = 800
+    private let thumbnailSize = 160
     
     init(asset: PHAsset,index: Int) {
         self.asset = asset
@@ -45,12 +46,12 @@ class Photo{
         }
     }
     
-    func getThumbnail(size: CGFloat, callback: @escaping (UIImage) -> Void){
+    func getThumbnail(callback: @escaping (UIImage) -> Void){
         let manager = PHImageManager.default()
         let option = PHImageRequestOptions()
         option.isSynchronous = false
         option.deliveryMode = .highQualityFormat
-        manager.requestImage(for: asset, targetSize: CGSize.init(width: size, height: size), contentMode: .aspectFit, options: option) { (thumbnailImage, info) in
+        manager.requestImage(for: asset, targetSize: CGSize.init(width: thumbnailSize, height: thumbnailSize), contentMode: .aspectFit, options: option) { (thumbnailImage, info) in
             callback(thumbnailImage!)
         }
     }
