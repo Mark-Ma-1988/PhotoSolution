@@ -47,6 +47,10 @@ public class PhotoSolution{
     public var delegate: PhotoSolutionDelegate?
     public var customization = PhotoSolutionCustomization()
     
+    public init(){
+        
+    }
+    
     public func getPhotoPicker(maxPhotos: Int) -> UIViewController{
         let storyBoard = UIStoryboard(name: "PhotoStoryboard", bundle: nil)
         let photoNavigationController: PhotoNavigationController = storyBoard.instantiateViewController(withIdentifier: "PhotoNavigationController") as! PhotoNavigationController
