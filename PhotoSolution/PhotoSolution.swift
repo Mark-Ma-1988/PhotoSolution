@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol PhotoSolutionDelegate {
+public protocol PhotoSolutionDelegate {
     
     func returnImages(_ images: [UIImage])
     func pickerCancel()
     
 }
 
-struct PhotoSolutionCustomization{
+public struct PhotoSolutionCustomization{
     
     var markerColor: UIColor = UIColor.blue
     var navigationBarBackgroundColor: UIColor = UIColor.darkGray
