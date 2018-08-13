@@ -42,12 +42,12 @@ struct PhotoSolutionCustomization{
     
 }
 
-class PhotoSolution{
+public class PhotoSolution{
     
-    var delegate: PhotoSolutionDelegate?
-    var customization = PhotoSolutionCustomization()
+    public var delegate: PhotoSolutionDelegate?
+    public var customization = PhotoSolutionCustomization()
     
-    func getPhotoPicker(maxPhotos: Int) -> UIViewController{
+    public func getPhotoPicker(maxPhotos: Int) -> UIViewController{
         let storyBoard = UIStoryboard(name: "PhotoStoryboard", bundle: nil)
         let photoNavigationController: PhotoNavigationController = storyBoard.instantiateViewController(withIdentifier: "PhotoNavigationController") as! PhotoNavigationController
         photoNavigationController.solutionDelegate = self.delegate
@@ -56,7 +56,7 @@ class PhotoSolution{
         return photoNavigationController
     }
     
-    func getCamera() -> UIViewController{
+    public func getCamera() -> UIViewController{
         let cameraNavigationController = CameraNavigationController()
         cameraNavigationController.customization = self.customization
         cameraNavigationController.solutionDelegate = self.delegate
