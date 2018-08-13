@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = "PhotoSolution"
-  spec.version          = "0.64"
+  spec.version          = "0.65"
   spec.summary          = "Pick multiple images from the local photo library."
   build_tag             = spec.version
   spec.homepage         = "https://github.com/Mark-Ma-1988/PhotoSolution"
@@ -14,7 +14,6 @@ Pod::Spec.new do |spec|
   spec.module_name = 'PhotoSolution'
   spec.header_dir = 'PhotoSolution'
   spec.source_files     = 'PhotoSolution/*.{swift}'
-  spec.swift_version = '4.1'
   spec.resources = 'PhotoSolution/*.{png, xib, storyboard}'
   spec.static_framework = true
   spec.requires_arc     = true
