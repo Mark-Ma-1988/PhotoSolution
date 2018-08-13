@@ -17,25 +17,25 @@ public protocol PhotoSolutionDelegate {
 
 public struct PhotoSolutionCustomization{
     
-    var markerColor: UIColor = UIColor.blue
-    var navigationBarBackgroundColor: UIColor = UIColor.darkGray
-    var navigationBarTextColor: UIColor = UIColor.white
-    var titleForAlbum: String = "Album"
-    var alertTextForPhotoAccess: String = "Your App Would Like to Access Your Photos"
-    var settingButtonTextForPhotoAccess: String = "Setting"
-    var cancelButtonTextForPhotoAccess: String = "Cancel"
-    var alertTextForCameraAccess: String = "Your App Would Like to Access the Camera"
-    var settingButtonTextForCameraAccess: String = "Setting"
-    var cancelButtonTextForCameraAccess: String = "Cancel"
-    var returnImageSize: ReturnImageSize = .original
-    var statusBarColor: StatusBarColor = .white
+    public var markerColor: UIColor = UIColor.blue
+    public var navigationBarBackgroundColor: UIColor = UIColor.darkGray
+    public var navigationBarTextColor: UIColor = UIColor.white
+    public var titleForAlbum: String = "Album"
+    public var alertTextForPhotoAccess: String = "Your App Would Like to Access Your Photos"
+    public var settingButtonTextForPhotoAccess: String = "Setting"
+    public var cancelButtonTextForPhotoAccess: String = "Cancel"
+    public var alertTextForCameraAccess: String = "Your App Would Like to Access the Camera"
+    public var settingButtonTextForCameraAccess: String = "Setting"
+    public var cancelButtonTextForCameraAccess: String = "Cancel"
+    public var returnImageSize: ReturnImageSize = .original
+    public var statusBarColor: StatusBarColor = .white
     
-    enum ReturnImageSize {
+    public enum ReturnImageSize {
         case compressed
         case original
     }
     
-    enum StatusBarColor {
+    public enum StatusBarColor {
         case black
         case white
     }
