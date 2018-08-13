@@ -54,7 +54,6 @@ extension ViewController: UICollectionViewDataSource{
         }else{
             return maxPhotos
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -156,4 +155,5 @@ extension ViewController: PhotoSolutionDelegate{
     
     func pickerCancel() {
     }
+    
 }
