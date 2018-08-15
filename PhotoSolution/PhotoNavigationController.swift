@@ -14,6 +14,7 @@ class PhotoNavigationController: UINavigationController {
     var solutionDelegate: PhotoSolutionDelegate?
     var maxPhotos: Int!
     var customization: PhotoSolutionCustomization!
+    var podBundle: Bundle!
     
     override func viewDidLoad() {
         super.viewDidLoad()

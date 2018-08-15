@@ -20,9 +20,11 @@ class ImageEditorViewController: UIViewController {
     var currentIndex: Int?
     private let imageCellReuseIdentifier = "ImageViewCell"
     var customization: PhotoSolutionCustomization!
-
+    var podBundle: Bundle!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.automaticallyAdjustsScrollViewInsets = false
         setupBars()
         setupImageCollectionView()
@@ -62,7 +64,7 @@ class ImageEditorViewController: UIViewController {
         self.view.addConstraint(NSLayoutConstraint(item: imageCollectionView!, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0))
         self.view.addConstraint(NSLayoutConstraint(item: imageCollectionView!, attribute: .bottom, relatedBy: .equal, toItem: self.view , attribute: .bottom, multiplier: 1, constant: 0))
         
-        let dataCellNib = UINib(nibName: imageCellReuseIdentifier, bundle: nil)
+        let dataCellNib = UINib(nibName: imageCellReuseIdentifier, bundle: podBundle)
         imageCollectionView!.register(dataCellNib, forCellWithReuseIdentifier: imageCellReuseIdentifier)
         imageCollectionView!.isScrollEnabled = true
         imageCollectionView!.backgroundColor = UIColor.black

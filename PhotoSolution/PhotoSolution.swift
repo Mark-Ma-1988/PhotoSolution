@@ -46,14 +46,19 @@ public class PhotoSolution{
     
     public var delegate: PhotoSolutionDelegate?
     public var customization = PhotoSolutionCustomization()
-    
+    var podBundle: Bundle!
+
     public init(){
-        
+        let frameworkBundle = Bundle(for: PhotoSolution.self)
+        let url = frameworkBundle.resourceURL!.appendingPathComponent("PhotoSolution.bundle")
+        podBundle = Bundle(url: url)
     }
     
     public func getPhotoPicker(maxPhotos: Int) -> UIViewController{
-        let storyBoard = UIStoryboard(name: "PhotoStoryboard", bundle: nil)
+
+        let storyBoard = UIStoryboard(name: "PhotoStoryboard", bundle: podBundle)
         let photoNavigationController: PhotoNavigationController = storyBoard.instantiateViewController(withIdentifier: "PhotoNavigationController") as! PhotoNavigationController
+        photoNavigationController.podBundle = podBundle
         photoNavigationController.solutionDelegate = self.delegate
         photoNavigationController.customization = self.customization
         photoNavigationController.maxPhotos = maxPhotos

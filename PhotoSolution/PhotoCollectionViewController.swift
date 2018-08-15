@@ -58,7 +58,7 @@ class PhotoCollectionViewController: UIViewController {
     
     private func setupCollectionView(){
         cellSize = (self.view.frame.width-5*space)/4
-        let dataCellNib = UINib(nibName: photoCellReuseIdentifier, bundle: nil)
+        let dataCellNib = UINib(nibName: photoCellReuseIdentifier, bundle: photoNavigationController.podBundle)
         photoCollectionView.register(dataCellNib, forCellWithReuseIdentifier: photoCellReuseIdentifier)
         activityIndicator.center = photoCollectionView.center
         self.view.addSubview(activityIndicator)
@@ -149,6 +149,7 @@ class PhotoCollectionViewController: UIViewController {
                 imageEditorViewController.currentPhotoList = currentPhotoList
                 imageEditorViewController.currentIndex = selectedIndex
                 imageEditorViewController.customization = photoNavigationController.customization
+                imageEditorViewController.podBundle = photoNavigationController.podBundle
             }
         }
     }

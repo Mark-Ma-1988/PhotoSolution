@@ -136,7 +136,7 @@
                         <outlet property="bottomNavigationBar" destination="Nml-T6-tV6" id="vT2-5o-boQ"/>
                         <outlet property="doneButton" destination="hzr-fj-8Cu" id="JSV-h9-94R"/>
                         <outlet property="photoCollectionView" destination="Tgy-H0-qoO" id="W2B-jX-TIM"/>
-                        <segue destination="sSj-d0-GMW" kind="presentation" identifier="showPhoto" id="hic-Lz-Yaw"/>
+                        <segue destination="sSj-d0-GMW" kind="presentation" identifier="showPhoto" animates="NO" id="hic-Lz-Yaw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hz7-kQ-W6i" userLabel="First Responder" sceneMemberID="firstResponder"/>

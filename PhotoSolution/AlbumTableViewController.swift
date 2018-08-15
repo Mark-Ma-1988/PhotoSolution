@@ -21,7 +21,7 @@ class AlbumTableViewController: UIViewController {
         photoNavigationController = self.navigationController as! PhotoNavigationController
         self.title = photoNavigationController.customization.titleForAlbum
         self.albums = photoNavigationController.albums!
-        albumTableView.register(UINib(nibName: "AlbumCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
+        albumTableView.register(UINib(nibName: "AlbumCell", bundle: photoNavigationController.podBundle), forCellReuseIdentifier: reuseIdentifier)
         albumTableView.tableFooterView = UIView()
         albumTableView.separatorColor = UIColor.lightGray
         albumTableView.bounces = false
