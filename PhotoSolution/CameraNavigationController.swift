@@ -15,7 +15,7 @@ class CameraNavigationController: UINavigationController {
     var solutionDelegate:PhotoSolutionDelegate?
     var customization: PhotoSolutionCustomization!
     private var hasOpen = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.black
@@ -33,13 +33,34 @@ class CameraNavigationController: UINavigationController {
         if !hasOpen{
             AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
                 if response {
-                    self.hasOpen = true
-                    self.present(self.cameraViewController!, animated: false, completion: nil)
+                    PHPhotoLibrary.requestAuthorization { status in
+                        switch status {
+                        case .authorized:
+                            self.hasOpen = true
+                            self.present(self.cameraViewController!, animated: false, completion: nil)
+                        case .denied, .restricted:
+                            self.goToPhotoAccessSetting()
+                        case .notDetermined:
+                            self.goToPhotoAccessSetting()
+                        }
+                    }
                 } else {
                     self.goToCameraAccessSetting()
                 }
             }
         }
+    }
+    
+    func goToPhotoAccessSetting(){
+        let alert = UIAlertController(title: nil, message: customization.alertTextForPhotoAccess, preferredStyle: .alert)
+        alert.addAction( UIAlertAction(title: customization.settingButtonTextForPhotoAccess, style: .cancel, handler: { action in
+            UIApplication.shared.openURL(NSURL(string:UIApplicationOpenSettingsURLString)! as URL)
+        }))
+        alert.addAction( UIAlertAction(title: customization.cancelButtonTextForPhotoAccess, style: .default, handler: { action in
+            self.solutionDelegate?.pickerCancel()
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func goToCameraAccessSetting(){
