@@ -8,11 +8,10 @@
 
 import UIKit
 
-@objc
 public protocol PhotoSolutionDelegate {
     
-    @objc func returnImages(_ images: [UIImage])
-    @objc func pickerCancel()
+   func returnImages(_ images: [UIImage])
+   func pickerCancel()
     
 }
 
@@ -45,7 +44,7 @@ public struct PhotoSolutionCustomization{
 
 public class PhotoSolution: NSObject{
     
-    @objc public var delegate: PhotoSolutionDelegate?
+    public var delegate: PhotoSolutionDelegate?
     public var customization = PhotoSolutionCustomization()
     var podBundle: Bundle!
 
@@ -55,8 +54,7 @@ public class PhotoSolution: NSObject{
         podBundle = Bundle(url: url)
     }
     
-    @objc
-    open func getPhotoPicker(maxPhotos: Int) -> UIViewController{
+    public func getPhotoPicker(maxPhotos: Int) -> UIViewController{
 
         let storyBoard = UIStoryboard(name: "PhotoStoryboard", bundle: podBundle)
         let photoNavigationController: PhotoNavigationController = storyBoard.instantiateViewController(withIdentifier: "PhotoNavigationController") as! PhotoNavigationController
@@ -67,8 +65,7 @@ public class PhotoSolution: NSObject{
         return photoNavigationController
     }
     
-    @objc
-    open func getCamera() -> UIViewController{
+    public func getCamera() -> UIViewController{
         let cameraNavigationController = CameraNavigationController()
         cameraNavigationController.customization = self.customization
         cameraNavigationController.solutionDelegate = self.delegate
