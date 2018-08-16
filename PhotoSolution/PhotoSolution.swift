@@ -56,7 +56,7 @@ public class PhotoSolution: NSObject{
     }
     
     @objc
-    public func getPhotoPicker(maxPhotos: Int) -> UIViewController{
+    open func getPhotoPicker(maxPhotos: Int) -> UIViewController{
 
         let storyBoard = UIStoryboard(name: "PhotoStoryboard", bundle: podBundle)
         let photoNavigationController: PhotoNavigationController = storyBoard.instantiateViewController(withIdentifier: "PhotoNavigationController") as! PhotoNavigationController
@@ -68,7 +68,7 @@ public class PhotoSolution: NSObject{
     }
     
     @objc
-    public func getCamera() -> UIViewController{
+    open func getCamera() -> UIViewController{
         let cameraNavigationController = CameraNavigationController()
         cameraNavigationController.customization = self.customization
         cameraNavigationController.solutionDelegate = self.delegate
