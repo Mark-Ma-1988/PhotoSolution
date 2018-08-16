@@ -8,6 +8,7 @@
 
 import UIKit
 
+@objc
 public protocol PhotoSolutionDelegate {
     
    func returnImages(_ images: [UIImage])
@@ -42,9 +43,10 @@ public struct PhotoSolutionCustomization{
     
 }
 
+@objc
 public class PhotoSolution: NSObject{
     
-    public var delegate: PhotoSolutionDelegate?
+    @objc public var delegate: PhotoSolutionDelegate?
     public var customization = PhotoSolutionCustomization()
     var podBundle: Bundle!
 
