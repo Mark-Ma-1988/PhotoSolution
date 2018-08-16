@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = "PhotoSolution"
-  spec.version          = "0.78"
+  spec.version          = "0.79"
   spec.summary          = "Pick multiple images from the local photo library."
   build_tag             = spec.version
   spec.homepage         = "https://github.com/Mark-Ma-1988/PhotoSolution"
