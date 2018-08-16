@@ -16,7 +16,8 @@ public protocol PhotoSolutionDelegate {
     
 }
 
-public struct PhotoSolutionCustomization{
+@objc
+public class PhotoSolutionCustomization: NSObject{
     
     public var markerColor: UIColor = UIColor.blue
     public var navigationBarBackgroundColor: UIColor = UIColor.darkGray
@@ -47,7 +48,7 @@ public struct PhotoSolutionCustomization{
 public class PhotoSolution: NSObject{
     
     @objc public var delegate: PhotoSolutionDelegate?
-    public var customization = PhotoSolutionCustomization()
+    @objc public var customization = PhotoSolutionCustomization()
     var podBundle: Bundle!
 
     public override init(){
