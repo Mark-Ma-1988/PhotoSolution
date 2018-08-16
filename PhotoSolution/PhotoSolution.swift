@@ -19,25 +19,25 @@ public protocol PhotoSolutionDelegate {
 @objc
 public class PhotoSolutionCustomization: NSObject{
     
-    public var markerColor: UIColor = UIColor.blue
-    public var navigationBarBackgroundColor: UIColor = UIColor.darkGray
-    public var navigationBarTextColor: UIColor = UIColor.white
-    public var titleForAlbum: String = "Album"
-    public var alertTextForPhotoAccess: String = "Your App Would Like to Access Your Photos"
-    public var settingButtonTextForPhotoAccess: String = "Setting"
-    public var cancelButtonTextForPhotoAccess: String = "Cancel"
-    public var alertTextForCameraAccess: String = "Your App Would Like to Access the Camera"
-    public var settingButtonTextForCameraAccess: String = "Setting"
-    public var cancelButtonTextForCameraAccess: String = "Cancel"
-    public var returnImageSize: ReturnImageSize = .original
-    public var statusBarColor: StatusBarColor = .white
+    @objc public var markerColor: UIColor = UIColor.blue
+    @objc public var navigationBarBackgroundColor: UIColor = UIColor.darkGray
+    @objc public var navigationBarTextColor: UIColor = UIColor.white
+    @objc public var titleForAlbum: String = "Album"
+    @objc public var alertTextForPhotoAccess: String = "Your App Would Like to Access Your Photos"
+    @objc public var settingButtonTextForPhotoAccess: String = "Setting"
+    @objc public var cancelButtonTextForPhotoAccess: String = "Cancel"
+    @objc public var alertTextForCameraAccess: String = "Your App Would Like to Access the Camera"
+    @objc public var settingButtonTextForCameraAccess: String = "Setting"
+    @objc public var cancelButtonTextForCameraAccess: String = "Cancel"
+    @objc public var returnImageSize: ReturnImageSize = .original
+    @objc public var statusBarColor: StatusBarColor = .white
     
-    public enum ReturnImageSize {
+    @objc public enum ReturnImageSize: Int {
         case compressed
         case original
     }
     
-    public enum StatusBarColor {
+    @objc public enum StatusBarColor: Int {
         case black
         case white
     }
