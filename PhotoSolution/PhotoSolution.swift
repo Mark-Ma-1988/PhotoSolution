@@ -42,13 +42,13 @@ public struct PhotoSolutionCustomization{
     
 }
 
-public class PhotoSolution{
+public class PhotoSolution: NSObject{
     
     public var delegate: PhotoSolutionDelegate?
     public var customization = PhotoSolutionCustomization()
     var podBundle: Bundle!
 
-    public init(){
+    public override init(){
         let frameworkBundle = Bundle(for: PhotoSolution.self)
         let url = frameworkBundle.resourceURL!.appendingPathComponent("PhotoSolution.bundle")
         podBundle = Bundle(url: url)
