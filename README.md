@@ -35,6 +35,15 @@ pod 'PhotoSolution'
 - Privacy - Photo Library Additions Usage Description
 - Privacy - Camera Usage Description
 
+## Basic Usage
+### Objective-C
+###  Swift
+
+## Customization
+### Objective-C
+###  Swift
+
+
 ## Author
 
 [Mark Ma](https://www.linkedin.com/in/xingchen-mark-ma-72a74678/)
