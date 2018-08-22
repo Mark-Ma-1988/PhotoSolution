@@ -30,14 +30,66 @@ and then add:
 pod 'PhotoSolution'
 ```
 
-## Related Permission (Info.plist)
+## Related Permissions (Info.plist)
 - Privacy - Photo Library Usage Description
 - Privacy - Photo Library Additions Usage Description
 - Privacy - Camera Usage Description
 
 ## Basic Usage
+
 ### Objective-C
+
+```objective-c
+@import PhotoSolution;
+
+@interface YourViewController () <PhotoSolutionDelegate>
+
+PhotoSolution* solution = [[PhotoSolution alloc] init];
+solution.delegate = self;
+
+//take photo
+[self presentViewController: [solution getCamera] animated:YES completion:nil];
+
+//pick photos from local
+[self presentViewController: [solution getPhotoPickerWithMaxPhotos:9] animated:YES completion:nil];
+
+//implement delegate method
+-(void)returnImages:(NSArray *)images{
+   // deal with the return images
+}
+
+-(void)pickerCancel{
+   // when user cancel
+}
+```
+
 ###  Swift
+```swift
+import PhotoSolution
+
+let photoSolution = PhotoSolution()
+photoSolution.delegate = self
+
+//take photo
+self.present(photoSolution.getCamera(), animated: true, completion: nil)
+
+//pick photos from local
+let remainPhotos = 9
+self.present(photoSolution.getPhotoPicker(maxPhotos: remainPhotos), animated: true, completion: nil)
+
+//implement delegate method
+extension YourViewController: PhotoSolutionDelegate{
+func returnImages(_ images: [UIImage]) {
+   // deal with the return images
+}
+
+func pickerCancel() {
+    // when user cancel
+}
+}
+
+```
+
 
 ## Customization
 ### Objective-C

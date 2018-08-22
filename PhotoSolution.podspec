@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   spec.name             = "PhotoSolution"
-  spec.version          = "0.87"
-  spec.summary          = "Pick multiple images from the local photo library."
+  spec.version          = "0.9"
+  spec.summary          = "PhotoSolution is an all-in-one photo solution for your iOS app, the UI is similar to WeChat"
   build_tag             = spec.version
   spec.homepage         = "https://github.com/Mark-Ma-1988/PhotoSolution"
   spec.license          = 'MIT'
@@ -15,6 +15,7 @@ Pod::Spec.new do |spec|
   spec.source_files     = 'PhotoSolution/*.{swift}'
   spec.swift_version = '4.1'
   spec.requires_arc = true
+  spec.social_media_url = 'https://www.linkedin.com/in/xingchen-mark-ma-72a74678/'
   spec.resource_bundles = {
                             'PhotoSolution' => ['PhotoSolution/*.{xib,png,storyboard}']
                           }
