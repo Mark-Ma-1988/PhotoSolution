@@ -22,6 +22,11 @@ PhotoSolution is an all-in-one photo solution for your iOS app, the UI is simila
 it, simply add the following line to your Podfile:
 
 ```ruby
+use_frameworks!
+```
+and then add:
+
+```ruby
 pod 'PhotoSolution'
 ```
 
