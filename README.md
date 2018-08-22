@@ -29,7 +29,7 @@ and then add:
 pod 'PhotoSolution'
 ```
 
-## Related Permissions (Info.plist)
+## Related Permissions (Your need add them in Info.plist)
 - Privacy - Photo Library Usage Description
 - Privacy - Photo Library Additions Usage Description
 - Privacy - Camera Usage Description
