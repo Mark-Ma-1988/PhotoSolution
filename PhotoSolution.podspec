@@ -15,7 +15,6 @@ Pod::Spec.new do |spec|
   spec.source_files     = 'PhotoSolution/*.{swift}'
   spec.swift_version = '4.1'
   spec.requires_arc = true
-  spec.social_media_url = 'https://www.linkedin.com/in/xingchen-mark-ma-72a74678/'
   spec.resource_bundles = {
                             'PhotoSolution' => ['PhotoSolution/*.{xib,png,storyboard}']
                           }

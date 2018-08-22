@@ -126,7 +126,7 @@ photoSolution.customization.statusBarColor = .white
 
 ## Author
 
-[Mark Ma](https://www.linkedin.com/in/xingchen-mark-ma-72a74678/)
+[Mark Ma](https://www.linkedin.com/in/xingchen-mark-ma-72a74678/), mobile developer in both iOS and Android.
 
 ## License
 MIT
