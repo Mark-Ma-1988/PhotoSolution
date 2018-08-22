@@ -27,6 +27,10 @@ use_frameworks!
 pod 'PhotoSolution'
 ```
 
+## Author
+
+[Mark Ma](https://www.linkedin.com/in/xingchen-mark-ma-72a74678/)
+
 ## License
 MIT
 
