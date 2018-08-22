@@ -129,7 +129,7 @@ photoSolution.customization.statusBarColor = .white
 
 ## Author
 
-[Mark Ma](https://www.linkedin.com/in/xingchen-mark-ma-72a74678/), solution architect focused on mobile application, including server side backend ( restful API, database, AWS deployment ) and client side app ( iOS && Android ).
+[Mark Ma](https://www.linkedin.com/in/xingchen-mark-ma-72a74678/), a software developer focused on mobile application solution, including server side backend development ( restful API, database, AWS deployment ) and client side app development ( iOS && Android ).
 
 ## License
 MIT
