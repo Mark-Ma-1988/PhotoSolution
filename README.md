@@ -29,7 +29,7 @@ and then add:
 pod 'PhotoSolution'
 ```
 
-## Related Permissions (Your need add them in Info.plist)
+## Related Permissions (Your need to add them in Info.plist)
 - Privacy - Photo Library Usage Description
 - Privacy - Photo Library Additions Usage Description
 - Privacy - Camera Usage Description
@@ -39,12 +39,15 @@ pod 'PhotoSolution'
 ### Objective-C
 
 ```objective-c
+//import it
 @import PhotoSolution;
 
+//define delegate
 @interface YourViewController () <PhotoSolutionDelegate>
 
+//initilize
 PhotoSolution* photoSolution = [[PhotoSolution alloc] init];
-photoSolution = self;
+photoSolution.delegate = self;
 
 //take photo
 [self presentViewController: [photoSolution getCamera] animated:YES completion:nil];
@@ -58,14 +61,16 @@ photoSolution = self;
 }
 
 -(void)pickerCancel{
-   // when user cancel
+   // when user cancel picking photo
 }
 ```
 
 ###  Swift
 ```swift
+//import it
 import PhotoSolution
 
+//initilize
 let photoSolution = PhotoSolution()
 photoSolution.delegate = self
 
