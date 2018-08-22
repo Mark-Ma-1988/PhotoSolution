@@ -52,7 +52,7 @@ photoSolution.delegate = self;
 //take photo
 [self presentViewController: [photoSolution getCamera] animated:YES completion:nil];
 
-//pick photos from local
+//pick photos from local library and define maximum picking amount, like 9
 [self presentViewController: [photoSolution getPhotoPickerWithMaxPhotos:9] animated:YES completion:nil];
 
 //implement delegate method
@@ -77,9 +77,8 @@ photoSolution.delegate = self
 //take photo
 self.present(photoSolution.getCamera(), animated: true, completion: nil)
 
-//pick photos from local
-let remainPhotos = 9
-self.present(photoSolution.getPhotoPicker(maxPhotos: remainPhotos), animated: true, completion: nil)
+//pick photos from local library and define maximum picking amount, like 9
+self.present(photoSolution.getPhotoPicker(maxPhotos: 9), animated: true, completion: nil)
 
 //implement delegate method
 extension YourViewController: PhotoSolutionDelegate{
