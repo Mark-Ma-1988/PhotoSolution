@@ -44,14 +44,14 @@ pod 'PhotoSolution'
 
 @interface YourViewController () <PhotoSolutionDelegate>
 
-PhotoSolution* solution = [[PhotoSolution alloc] init];
-solution.delegate = self;
+PhotoSolution* photoSolution = [[PhotoSolution alloc] init];
+photoSolution = self;
 
 //take photo
-[self presentViewController: [solution getCamera] animated:YES completion:nil];
+[self presentViewController: [photoSolution getCamera] animated:YES completion:nil];
 
 //pick photos from local
-[self presentViewController: [solution getPhotoPickerWithMaxPhotos:9] animated:YES completion:nil];
+[self presentViewController: [photoSolution getPhotoPickerWithMaxPhotos:9] animated:YES completion:nil];
 
 //implement delegate method
 -(void)returnImages:(NSArray *)images{
@@ -87,13 +87,41 @@ func pickerCancel() {
     // when user cancel
 }
 }
-
 ```
 
-
 ## Customization
+
 ### Objective-C
+```objective-c
+photoSolution.customization.markerColor = [UIColor colorWithRed:0.14 green:0.72 blue:0.30 alpha:1.0];
+photoSolution.customization.navigationBarBackgroundColor = UIColor.darkGrayColor;
+photoSolution.customization.navigationBarTextColor = UIColor.whiteColor;
+photoSolution.customization.titleForAlbum = @"Album";
+photoSolution.customization.alertTextForPhotoAccess = @"Your App Would Like to Access Your Photos";
+photoSolution.customization.settingButtonTextForPhotoAccess = @"Setting";
+photoSolution.customization.cancelButtonTextForPhotoAccess = @"Cancel";
+photoSolution.customization.alertTextForCameraAccess = @"Your App Would Like to Access Your Photos";
+photoSolution.customization.settingButtonTextForCameraAccess = @"Setting";
+photoSolution.customization.cancelButtonTextForCameraAccess = @"Cancel";
+photoSolution.customization.returnImageSize = ReturnImageSizeCompressed;
+photoSolution.customization.statusBarColor = StatusBarColorWhite;
+```
+
 ###  Swift
+```swift
+photoSolution.customization.markerColor = UIColor(red:0.14, green:0.72, blue:0.30, alpha:1.0)
+photoSolution.customization.navigationBarBackgroundColor = UIColor.darkGray
+photoSolution.customization.navigationBarTextColor = UIColor.white
+photoSolution.customization.titleForAlbum = "Album"
+photoSolution.customization.alertTextForPhotoAccess = "Your App Would Like to Access Your Photos"
+photoSolution.customization.settingButtonTextForPhotoAccess = "Setting"
+photoSolution.customization.cancelButtonTextForPhotoAccess = "Cancel"
+photoSolution.customization.alertTextForCameraAccess = "Your App Would Like to Access Your Photos"
+photoSolution.customization.settingButtonTextForCameraAccess = "Setting"
+photoSolution.customization.cancelButtonTextForCameraAccess = "Cancel"
+photoSolution.customization.returnImageSize = .compressed
+photoSolution.customization.statusBarColor = .white
+```
 
 
 ## Author
