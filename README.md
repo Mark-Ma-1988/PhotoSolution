@@ -1,5 +1,4 @@
 # PhotoSolution
-PhotoSolution is an all-in-one photo solution for your iOS app, the UI is similar to WeChat.
 <img src="https://github.com/Mark-Ma-1988/PhotoSolution/blob/master/screenshots/image.png" alt="PhotoSolution"/>
 
 [![Version](https://img.shields.io/cocoapods/v/ImagePicker.svg?style=flat)](http://cocoadocs.org/docsets/ImagePicker)
@@ -42,11 +41,7 @@ pod 'PhotoSolution'
 ```objective-c
 @import PhotoSolution;
 
-...
-
 @interface YourViewController () <PhotoSolutionDelegate>
-
-...
 
 PhotoSolution* photoSolution = [[PhotoSolution alloc] init];
 photoSolution = self;
@@ -70,9 +65,6 @@ photoSolution = self;
 ###  Swift
 ```swift
 import PhotoSolution
-
-...
-
 
 let photoSolution = PhotoSolution()
 photoSolution.delegate = self
@@ -133,7 +125,7 @@ photoSolution.customization.statusBarColor = .white
 
 ## Author
 
-[Mark Ma](https://www.linkedin.com/in/xingchen-mark-ma-72a74678/), solution architect focused on mobile application, including server side backend (restful API, database, AWS deployment) and client side app (iOS && Android).
+[Mark Ma](https://www.linkedin.com/in/xingchen-mark-ma-72a74678/), solution architect focused on mobile application, including server side backend ( restful API, database, AWS deployment ) and client side app ( iOS && Android ).
 
 ## License
 MIT
