@@ -42,7 +42,11 @@ pod 'PhotoSolution'
 ```objective-c
 @import PhotoSolution;
 
+...
+
 @interface YourViewController () <PhotoSolutionDelegate>
+
+...
 
 PhotoSolution* photoSolution = [[PhotoSolution alloc] init];
 photoSolution = self;
@@ -66,6 +70,9 @@ photoSolution = self;
 ###  Swift
 ```swift
 import PhotoSolution
+
+...
+
 
 let photoSolution = PhotoSolution()
 photoSolution.delegate = self
@@ -126,7 +133,7 @@ photoSolution.customization.statusBarColor = .white
 
 ## Author
 
-[Mark Ma](https://www.linkedin.com/in/xingchen-mark-ma-72a74678/), mobile developer in both iOS and Android.
+[Mark Ma](https://www.linkedin.com/in/xingchen-mark-ma-72a74678/), solution architect focused on mobile application, including server side backend (restful API, database, AWS deployment) and client side app (iOS && Android).
 
 ## License
 MIT
