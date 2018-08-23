@@ -11,7 +11,7 @@
 - Pick multiple images (you can set maximum amount) from the local photo library
 - Support both Objective-C and Swift
 - Browse all the albums
-- View, expend and edit an image in its original size
+- View, expand and edit an image in its original size
 - Compress images
 - Comtomize some UI properties, like color and title.
 
