@@ -29,7 +29,7 @@ and then add:
 pod 'PhotoSolution'
 ```
 
-## Related Permissions (Your need to add them in Info.plist)
+## Related Permissions (Your need to add them in Info.plist firstly)
 - Privacy - Photo Library Usage Description
 - Privacy - Photo Library Additions Usage Description
 - Privacy - Camera Usage Description
@@ -92,7 +92,7 @@ func pickerCancel() {
 }
 ```
 
-## Customization
+## Customization (optional)
 
 ### Objective-C
 ```objective-c
@@ -129,7 +129,7 @@ photoSolution.customization.statusBarColor = .white
 
 ## Author
 
-[Mark Ma](https://www.linkedin.com/in/xingchen-mark-ma-72a74678/), a software developer focused on mobile application solution, including server side backend development ( restful API, database, AWS deployment ) and client side app development ( iOS && Android ).
+[Mark Ma](https://www.linkedin.com/in/xingchen-mark-ma-72a74678/), a software developer focused on mobile application solution, including server side backend development (restful API, database, AWS deployment) and client side app development (iOS && Android).
 
 ## License
 MIT
