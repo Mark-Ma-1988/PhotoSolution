@@ -14,6 +14,7 @@
 - View, expand and edit an image in its original size
 - Compress images
 - Comtomize some UI properties, like color and title.
+- AutoLayout, support both portrait and landscape for all the different screen sizes. 
 
 ## Installation
 
