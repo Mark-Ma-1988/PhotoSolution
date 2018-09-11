@@ -114,7 +114,7 @@ extension ViewController: UICollectionViewDelegate{
             photoSolution.customization.cancelButtonTextForCameraAccess = "Cancel"
             photoSolution.customization.returnImageSize = .compressed
             photoSolution.customization.statusBarColor = .white
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             let takeAction = UIAlertAction(title: "Take a photo", style: .default, handler: { action in
                 self.present(photoSolution.getCamera(), animated: true, completion: nil)
             })
