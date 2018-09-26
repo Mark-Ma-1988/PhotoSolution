@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = "PhotoSolution"
-  spec.version          = "1.0.0"
+  spec.version          = "1.0.1"
   spec.summary          = "PhotoSolution is an all-in-one photo solution for your iOS app, the UI is similar to WeChat"
   build_tag             = spec.version
   spec.homepage         = "https://github.com/Mark-Ma-1988/PhotoSolution"
@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
   spec.platform         = :ios, '9.0'
   spec.module_name = 'PhotoSolution'
   spec.source_files     = 'PhotoSolution/*.{swift}'
-  spec.swift_version = '4.1'
+  spec.swift_version = '4.2'
   spec.requires_arc = true
   spec.resource_bundles = {
                             'PhotoSolution' => ['PhotoSolution/*.{xib,png,storyboard}']

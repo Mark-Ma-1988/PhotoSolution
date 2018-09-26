@@ -57,7 +57,11 @@ class PhotoCollectionViewController: UIViewController {
     }
     
     private func setupCollectionView(){
-        cellSize = (self.view.frame.width-5*space)/4
+        if UIDevice.current.userInterfaceIdiom == .pad{
+            cellSize = (self.view.frame.width-7*space)/6
+        }else{
+            cellSize = (self.view.frame.width-5*space)/4
+        }
         let dataCellNib = UINib(nibName: photoCellReuseIdentifier, bundle: photoNavigationController.podBundle)
         photoCollectionView.register(dataCellNib, forCellWithReuseIdentifier: photoCellReuseIdentifier)
         activityIndicator.center = photoCollectionView.center
