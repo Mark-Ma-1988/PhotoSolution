@@ -13,13 +13,18 @@ class AlbumTableViewController: UIViewController {
     @IBOutlet weak var albumTableView: UITableView!
     private var albums: [Album]!
     private let reuseIdentifier = "AlbumCellIdentifier"
-    private let rowHeight = CGFloat(60)
+    var rowHeight: CGFloat!
     var photoNavigationController: PhotoNavigationController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         photoNavigationController = self.navigationController as? PhotoNavigationController
         self.title = photoNavigationController.customization.titleForAlbum
+        if UIDevice.current.userInterfaceIdiom == .pad{
+            rowHeight = 120
+        }else{
+            rowHeight = 70
+        }
         self.albums = photoNavigationController.albums!
         albumTableView.register(UINib(nibName: "AlbumCell", bundle: photoNavigationController.podBundle), forCellReuseIdentifier: reuseIdentifier)
         albumTableView.tableFooterView = UIView()
