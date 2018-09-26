@@ -28,7 +28,7 @@ class PhotoCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        photoNavigationController = self.navigationController as! PhotoNavigationController
+        photoNavigationController = self.navigationController as? PhotoNavigationController
         maxAmount = photoNavigationController.maxPhotos
         bottomNavigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         bottomNavigationBar.shadowImage = UIImage()
