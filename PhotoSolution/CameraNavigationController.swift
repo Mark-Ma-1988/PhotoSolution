@@ -54,7 +54,7 @@ class CameraNavigationController: UINavigationController {
     func goToPhotoAccessSetting(){
         let alert = UIAlertController(title: nil, message: customization.alertTextForPhotoAccess, preferredStyle: .alert)
         alert.addAction( UIAlertAction(title: customization.settingButtonTextForPhotoAccess, style: .cancel, handler: { action in
-            UIApplication.shared.openURL(NSURL(string:UIApplicationOpenSettingsURLString)! as URL)
+            UIApplication.shared.openURL(NSURL(string:UIApplication.openSettingsURLString)! as URL)
         }))
         alert.addAction( UIAlertAction(title: customization.cancelButtonTextForPhotoAccess, style: .default, handler: { action in
             self.solutionDelegate?.pickerCancel()
@@ -66,7 +66,7 @@ class CameraNavigationController: UINavigationController {
     func goToCameraAccessSetting(){
         let alert = UIAlertController(title: nil, message: self.customization.alertTextForCameraAccess, preferredStyle: .alert)
         alert.addAction( UIAlertAction(title: self.customization.settingButtonTextForCameraAccess, style: .cancel, handler: { action in
-            UIApplication.shared.openURL(NSURL(string:UIApplicationOpenSettingsURLString)! as URL)
+            UIApplication.shared.openURL(NSURL(string:UIApplication.openSettingsURLString)! as URL)
         }))
         alert.addAction( UIAlertAction(title: self.customization.cancelButtonTextForCameraAccess, style: .default, handler: { action in
             self.solutionDelegate?.pickerCancel()
@@ -81,9 +81,12 @@ class CameraNavigationController: UINavigationController {
 
 extension CameraNavigationController: UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         var localId: String = ""
-        if let newImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
+        if let newImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage{
             PHPhotoLibrary.shared().performChanges({
                 let result = PHAssetChangeRequest.creationRequestForAsset(from: newImage)
                 let assetPlaceholder = result.placeholderForCreatedAsset!
@@ -126,4 +129,14 @@ extension CameraNavigationController: UIImagePickerControllerDelegate,UINavigati
         })
     }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

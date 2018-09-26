@@ -28,7 +28,7 @@ class ImageEditorViewController: UIViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         setupBars()
         setupImageCollectionView()
-        NotificationCenter.default.addObserver(self, selector:#selector(orientation), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(orientation), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     @objc func orientation() {
@@ -56,7 +56,7 @@ class ImageEditorViewController: UIViewController {
         flowLayout.scrollDirection = .horizontal
         imageCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: flowLayout)
         self.view.addSubview(imageCollectionView!)
-        self.view.sendSubview(toBack: imageCollectionView!)
+        self.view.sendSubviewToBack(imageCollectionView!)
         imageCollectionView!.translatesAutoresizingMaskIntoConstraints = false
 
         self.view.addConstraint(NSLayoutConstraint(item: imageCollectionView!, attribute: .leading, relatedBy: .equal, toItem: self.view , attribute: .leading, multiplier: 1, constant: 0))

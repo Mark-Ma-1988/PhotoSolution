@@ -20,7 +20,7 @@ class PhotoCollectionViewController: UIViewController {
     private var maxAmount = 9
     private var currentPhotoList = [Photo]()
     private var currentSelectedPhotoList = [Photo]()
-    private let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle:.gray)
+    private let activityIndicator = UIActivityIndicatorView(style:.gray)
     private var cellSize: CGFloat!
     private let photoCellReuseIdentifier = "PhotoCell"
     private let space = CGFloat(2.5)
@@ -43,7 +43,7 @@ class PhotoCollectionViewController: UIViewController {
         }else{
             getPhotos()
         }
-        NotificationCenter.default.addObserver(self, selector:#selector(orientation), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(orientation), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     @objc func orientation() {
@@ -99,7 +99,7 @@ class PhotoCollectionViewController: UIViewController {
     func goToPhotoAccessSetting(){
         let alert = UIAlertController(title: nil, message: photoNavigationController.customization.alertTextForPhotoAccess, preferredStyle: .alert)
         alert.addAction( UIAlertAction(title: photoNavigationController.customization.settingButtonTextForPhotoAccess, style: .cancel, handler: { action in
-            UIApplication.shared.openURL(NSURL(string:UIApplicationOpenSettingsURLString)! as URL)
+            UIApplication.shared.openURL(NSURL(string:UIApplication.openSettingsURLString)! as URL)
         }))
         alert.addAction( UIAlertAction(title: photoNavigationController.customization.cancelButtonTextForPhotoAccess, style: .default, handler: { action in
             self.photoNavigationController.solutionDelegate?.pickerCancel()

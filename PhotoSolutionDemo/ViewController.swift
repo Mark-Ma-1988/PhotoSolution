@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     }
     
     func calulateImageFileSize(_ image: UIImage?) {
-        var data: Data? = UIImagePNGRepresentation(image!)
+        var data: Data? = image!.pngData()
         var dataLength = Double((data?.count ?? 0)) * 1.0
         let typeArray = ["bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
         var index: Int = 0

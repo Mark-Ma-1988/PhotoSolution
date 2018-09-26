@@ -20,7 +20,7 @@ class PhotoNavigationController: UINavigationController {
         super.viewDidLoad()
         self.navigationBar.barTintColor = customization.navigationBarBackgroundColor
         self.navigationBar.tintColor = customization.navigationBarTextColor
-        let textAttributes = [NSAttributedStringKey.foregroundColor: customization.navigationBarTextColor]
+        let textAttributes = [NSAttributedString.Key.foregroundColor: customization.navigationBarTextColor]
         self.navigationBar.titleTextAttributes = textAttributes
         switch customization.statusBarColor {
         case .black:
