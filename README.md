@@ -7,7 +7,7 @@
 ![Swift](https://img.shields.io/badge/%20in-swift%204.2-orange.svg)
 
 ## Features
-- Take photo andPick multiple images (you can set maximum amount) from the local photo library
+- Take photo and pick multiple images (you can set maximum amount) from the local photo library
 - Support both Objective-C and Swift
 - Browse all the albums
 - View, expand and edit an image in its original size
