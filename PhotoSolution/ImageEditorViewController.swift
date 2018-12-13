@@ -55,11 +55,11 @@ class ImageEditorViewController: UIViewController {
         imageCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: flowLayout)
         self.view.addSubview(imageCollectionView!)
         self.view.sendSubviewToBack(imageCollectionView!)
-        imageCollectionView!.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addConstraint(NSLayoutConstraint(item: imageCollectionView!, attribute: .leading, relatedBy: .equal, toItem: self.view , attribute: .leading, multiplier: 1, constant: 0))
-        self.view.addConstraint(NSLayoutConstraint(item: imageCollectionView!, attribute: .trailing, relatedBy: .equal, toItem: self.view , attribute: .trailing, multiplier: 1, constant: 0))
-        self.view.addConstraint(NSLayoutConstraint(item: imageCollectionView!, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0))
-        self.view.addConstraint(NSLayoutConstraint(item: imageCollectionView!, attribute: .bottom, relatedBy: .equal, toItem: self.view , attribute: .bottom, multiplier: 1, constant: 0))
+        //imageCollectionView!.translatesAutoresizingMaskIntoConstraints = false
+//        self.view.addConstraint(NSLayoutConstraint(item: imageCollectionView!, attribute: .leading, relatedBy: .equal, toItem: self.view , attribute: .leading, multiplier: 1, constant: 0))
+//        self.view.addConstraint(NSLayoutConstraint(item: imageCollectionView!, attribute: .trailing, relatedBy: .equal, toItem: self.view , attribute: .trailing, multiplier: 1, constant: 0))
+//        self.view.addConstraint(NSLayoutConstraint(item: imageCollectionView!, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0))
+//        self.view.addConstraint(NSLayoutConstraint(item: imageCollectionView!, attribute: .bottom, relatedBy: .equal, toItem: self.view , attribute: .bottom, multiplier: 1, constant: 0))
         
         let dataCellNib = UINib(nibName: imageCellReuseIdentifier, bundle: podBundle)
         imageCollectionView!.register(dataCellNib, forCellWithReuseIdentifier: imageCellReuseIdentifier)
@@ -69,7 +69,7 @@ class ImageEditorViewController: UIViewController {
         imageCollectionView!.dataSource = self
         imageCollectionView!.isPagingEnabled = true
         imageCollectionView!.reloadData()
-        imageCollectionView!.layoutIfNeeded()
+        //imageCollectionView!.layoutIfNeeded()
         imageCollectionView!.scrollToItem(at: IndexPath(item: currentIndex!, section: 0), at: .centeredHorizontally, animated: false)
     }
     
