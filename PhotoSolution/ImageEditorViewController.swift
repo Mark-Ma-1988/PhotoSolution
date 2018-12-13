@@ -15,7 +15,6 @@ class ImageEditorViewController: UIViewController {
     @IBOutlet weak var topNavigationBar: UINavigationBar!
     private var imageCollectionView: UICollectionView?
     private let navigationBarHeight = CGFloat(40)
-    private var safeAreaTopHeight: CGFloat!
     var currentPhotoList = [Photo]()
     var currentIndex: Int?
     private let imageCellReuseIdentifier = "ImageViewCell"
