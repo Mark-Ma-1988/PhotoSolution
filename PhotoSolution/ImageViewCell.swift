@@ -18,8 +18,12 @@ class ImageViewCell: UICollectionViewCell {
         self.imageView.transform.d = 1
         //        self.imageView.transform.tx = 0
         //        self.imageView.transform.ty = 0
-        photo.getOriginalImage { image in
-            self.imageView.image = image
+        DispatchQueue.global().async {
+            photo.getOriginalImage { image in
+                DispatchQueue.main.async{
+                    self.imageView.image = image
+                }
+            }
         }
     }
     
