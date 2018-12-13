@@ -71,10 +71,16 @@ public class PhotoSolution: NSObject{
     
     @objc
     public func getCamera() -> UIViewController{
-        let cameraNavigationController = CameraNavigationController()
-        cameraNavigationController.customization = self.customization
-        cameraNavigationController.solutionDelegate = self.delegate
-        return cameraNavigationController
+        
+        let cameraViewController = CameraViewController(nibName: "CameraViewController", bundle: podBundle)
+        cameraViewController.customization = self.customization
+        cameraViewController.solutionDelegate = self.delegate
+        return cameraViewController
+        //
+//        let cameraNavigationController = CameraNavigationController()
+//        cameraNavigationController.customization = self.customization
+//        cameraNavigationController.solutionDelegate = self.delegate
+//        return cameraNavigationController
     }
     
 }

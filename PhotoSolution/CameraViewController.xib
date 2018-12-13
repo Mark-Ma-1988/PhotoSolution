@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CameraViewController" customModule="PhotoSolutionDemo" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4r3-hn-ik4">
+                    <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <items>
+                        <navigationItem id="RJJ-Fs-hxr">
+                            <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Nqg-wm-tSg">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="closeButtonClick:" destination="-1" id="gyB-0K-Tc4"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem key="rightBarButtonItem" image="switchIcon.png" id="VwX-DJ-CHv">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="rotateButtonClick:" destination="-1" id="SYv-du-Vr2"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEi-Lh-kMd" userLabel="CameraArea">
+                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Um6-KH-fqD">
+                    <rect key="frame" x="150" y="547" width="75" height="75"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="75" id="FBG-Uh-HcM"/>
+                        <constraint firstAttribute="height" constant="75" id="JCn-zJ-h62"/>
+                    </constraints>
+                    <state key="normal" image="cameraIcon.png"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="sEi-Lh-kMd" firstAttribute="top" secondItem="4r3-hn-ik4" secondAttribute="bottom" id="4ar-20-r1Y"/>
+                <constraint firstItem="4r3-hn-ik4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="77d-76-YGb"/>
+                <constraint firstItem="Um6-KH-fqD" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="9SZ-Hj-q0D"/>
+                <constraint firstItem="sEi-Lh-kMd" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="FKo-xR-BZT"/>
+                <constraint firstItem="sEi-Lh-kMd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="OSy-2w-82u"/>
+                <constraint firstItem="4r3-hn-ik4" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="YTK-wz-Y4x"/>
+                <constraint firstItem="sEi-Lh-kMd" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Zmf-9Y-I1b"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Um6-KH-fqD" secondAttribute="bottom" constant="45" id="b1S-Am-7Lh"/>
+                <constraint firstItem="4r3-hn-ik4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="lDd-ZP-uHF"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="96.799999999999997" y="48.125937031484263"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="cameraIcon.png" width="80" height="80"/>
+        <image name="switchIcon.png" width="32" height="32"/>
+    </resources>
+</document>

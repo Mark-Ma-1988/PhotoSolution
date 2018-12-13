@@ -154,6 +154,7 @@ extension ViewController: PhotoSolutionDelegate{
     }
     
     func pickerCancel() {
+        print("User close it!")
     }
     
 }
