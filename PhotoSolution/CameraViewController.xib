@@ -12,6 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CameraViewController" customModule="PhotoSolutionDemo" customModuleProvider="target">
             <connections>
+                <outlet property="cameraButton" destination="Um6-KH-fqD" id="gWK-iq-Fao"/>
+                <outlet property="rotateButton" destination="VwX-DJ-CHv" id="fBn-Rg-qJS"/>
+                <outlet property="topNativationBar" destination="4r3-hn-ik4" id="zQt-hr-n3m"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -51,6 +54,9 @@
                         <constraint firstAttribute="height" constant="75" id="JCn-zJ-h62"/>
                     </constraints>
                     <state key="normal" image="cameraIcon.png"/>
+                    <connections>
+                        <action selector="cameraClick:" destination="-1" eventType="touchUpInside" id="thO-X1-pSY"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

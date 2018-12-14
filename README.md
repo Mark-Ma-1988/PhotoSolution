@@ -1,10 +1,10 @@
 # PhotoSolution
 <img src="https://github.com/Mark-Ma-1988/PhotoSolution/blob/master/screenshots/image.png" alt="PhotoSolution"/>
-
-[![Version](https://img.shields.io/cocoapods/v/ImagePicker.svg?style=flat)](http://cocoadocs.org/docsets/ImagePicker)
-[![License](https://img.shields.io/cocoapods/l/ImagePicker.svg?style=flat)](http://cocoadocs.org/docsets/ImagePicker)
-[![Platform](https://img.shields.io/cocoapods/p/ImagePicker.svg?style=flat)](http://cocoadocs.org/docsets/ImagePicker)
-![Swift](https://img.shields.io/badge/%20in-swift%204.2-orange.svg)
+<!---->
+<!--[![Version](https://img.shields.io/cocoapods/v/ImagePicker.svg?style=flat)](http://cocoadocs.org/docsets/ImagePicker)-->
+<!--[![License](https://img.shields.io/cocoapods/l/ImagePicker.svg?style=flat)](http://cocoadocs.org/docsets/ImagePicker)-->
+<!--[![Platform](https://img.shields.io/cocoapods/p/ImagePicker.svg?style=flat)](http://cocoadocs.org/docsets/ImagePicker)-->
+<!--![Swift](https://img.shields.io/badge/%20in-swift%204.2-orange.svg)-->
 
 ## Features
 - Take photo and pick multiple images (you can set maximum amount) from the local photo library
