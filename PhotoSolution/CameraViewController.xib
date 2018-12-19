@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CameraViewController" customModule="PhotoSolutionDemo" customModuleProvider="target">
             <connections>
+                <outlet property="cameraArea" destination="sEi-Lh-kMd" id="NeE-eM-9sJ"/>
                 <outlet property="cameraButton" destination="Um6-KH-fqD" id="gWK-iq-Fao"/>
                 <outlet property="rotateButton" destination="VwX-DJ-CHv" id="fBn-Rg-qJS"/>
                 <outlet property="topNativationBar" destination="4r3-hn-ik4" id="zQt-hr-n3m"/>
