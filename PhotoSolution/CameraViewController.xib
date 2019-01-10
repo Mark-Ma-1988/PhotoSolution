@@ -13,9 +13,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CameraViewController" customModule="PhotoSolutionDemo" customModuleProvider="target">
             <connections>
                 <outlet property="cameraArea" destination="sEi-Lh-kMd" id="NeE-eM-9sJ"/>
-                <outlet property="cameraButton" destination="Um6-KH-fqD" id="gWK-iq-Fao"/>
-                <outlet property="rotateButton" destination="VwX-DJ-CHv" id="fBn-Rg-qJS"/>
-                <outlet property="topNativationBar" destination="4r3-hn-ik4" id="zQt-hr-n3m"/>
+                <outlet property="cancelCameraButton" destination="CgX-bq-Hge" id="PCb-Sq-x7N"/>
+                <outlet property="rotateCameraButton" destination="Ej5-91-jfo" id="FmE-w8-vXJ"/>
+                <outlet property="takePhotoButton" destination="eF6-9q-op3" id="aA9-HX-i7F"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,60 +24,48 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4r3-hn-ik4">
-                    <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                    <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <items>
-                        <navigationItem id="RJJ-Fs-hxr">
-                            <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Nqg-wm-tSg">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <action selector="closeButtonClick:" destination="-1" id="gyB-0K-Tc4"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem key="rightBarButtonItem" image="switchIcon.png" id="VwX-DJ-CHv">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <action selector="rotateButtonClick:" destination="-1" id="SYv-du-Vr2"/>
-                                </connections>
-                            </barButtonItem>
-                        </navigationItem>
-                    </items>
-                </navigationBar>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEi-Lh-kMd" userLabel="CameraArea">
-                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Um6-KH-fqD">
-                    <rect key="frame" x="150" y="547" width="75" height="75"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CgX-bq-Hge">
+                    <rect key="frame" x="55" y="537" width="30" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="75" id="FBG-Uh-HcM"/>
-                        <constraint firstAttribute="height" constant="75" id="JCn-zJ-h62"/>
+                        <constraint firstAttribute="width" constant="30" id="SEo-DB-NOf"/>
+                        <constraint firstAttribute="height" constant="30" id="rdH-zI-7qO"/>
                     </constraints>
-                    <state key="normal" image="cameraIcon.png"/>
-                    <connections>
-                        <action selector="cameraClick:" destination="-1" eventType="touchUpInside" id="thO-X1-pSY"/>
-                    </connections>
-                </button>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ej5-91-jfo">
+                    <rect key="frame" x="310" y="45" width="40" height="40"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="V6g-3r-Hur"/>
+                        <constraint firstAttribute="height" constant="40" id="XZc-zX-uFZ"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eF6-9q-op3">
+                    <rect key="frame" x="152.5" y="517" width="70" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="XWD-bX-YKy"/>
+                        <constraint firstAttribute="width" constant="70" id="iPg-FS-8em"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="sEi-Lh-kMd" firstAttribute="top" secondItem="4r3-hn-ik4" secondAttribute="bottom" id="4ar-20-r1Y"/>
-                <constraint firstItem="4r3-hn-ik4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="77d-76-YGb"/>
-                <constraint firstItem="Um6-KH-fqD" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="9SZ-Hj-q0D"/>
+                <constraint firstItem="CgX-bq-Hge" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="55" id="3fa-AE-Qsn"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ej5-91-jfo" secondAttribute="trailing" constant="25" id="5lX-xd-kIb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="eF6-9q-op3" secondAttribute="bottom" constant="80" id="6be-sS-6WB"/>
                 <constraint firstItem="sEi-Lh-kMd" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="FKo-xR-BZT"/>
+                <constraint firstItem="CgX-bq-Hge" firstAttribute="centerY" secondItem="eF6-9q-op3" secondAttribute="centerY" id="Gdl-hB-2iH"/>
                 <constraint firstItem="sEi-Lh-kMd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="OSy-2w-82u"/>
-                <constraint firstItem="4r3-hn-ik4" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="YTK-wz-Y4x"/>
                 <constraint firstItem="sEi-Lh-kMd" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Zmf-9Y-I1b"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Um6-KH-fqD" secondAttribute="bottom" constant="45" id="b1S-Am-7Lh"/>
-                <constraint firstItem="4r3-hn-ik4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="lDd-ZP-uHF"/>
+                <constraint firstItem="Ej5-91-jfo" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="25" id="jS0-GK-5iC"/>
+                <constraint firstItem="eF6-9q-op3" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="nvb-tH-pLQ"/>
+                <constraint firstItem="sEi-Lh-kMd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="qKL-Y5-xFY"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="96.799999999999997" y="48.125937031484263"/>
         </view>
     </objects>
-    <resources>
-        <image name="cameraIcon.png" width="80" height="80"/>
-        <image name="switchIcon.png" width="32" height="32"/>
-    </resources>
 </document>

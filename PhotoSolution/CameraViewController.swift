@@ -14,10 +14,14 @@ class CameraViewController: UIViewController {
     
     var solutionDelegate:PhotoSolutionDelegate?
     var customization: PhotoSolutionCustomization!
+    var podBundle: Bundle!
+    var inCameraView: Bool!
+    var imageEditView: ImageEditView!
+   
+    @IBOutlet weak var rotateCameraButton: UIImageView!
+    @IBOutlet weak var cancelCameraButton: UIImageView!
+    @IBOutlet weak var takePhotoButton: UIImageView!
     
-    @IBOutlet weak var topNativationBar: UINavigationBar!
-    @IBOutlet weak var cameraButton: UIButton!
-    @IBOutlet weak var rotateButton: UIBarButtonItem!
     @IBOutlet weak var cameraArea: UIView!
     
     var captureSession: AVCaptureSession!
@@ -90,8 +94,63 @@ class CameraViewController: UIViewController {
         self.cameraArea.layer.addSublayer(self.previewLayer!)
     }
     
+    func setupUI(){
+        rotateCameraButton.image = UIImage(named: "switchIcon")
+        takePhotoButton.image = UIImage(named: "cameraIcon")
+        cancelCameraButton.image = UIImage(named: "cancelIcon")
+        
+        let tapRotateCameraButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(rotateCameraButtonTapped(tapGestureRecognizer:)))
+        rotateCameraButton.isUserInteractionEnabled = true
+        rotateCameraButton.addGestureRecognizer(tapRotateCameraButtonRecognizer)
+        
+        let tapCancelCameraButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(cancelCameraButtonTapped(tapGestureRecognizer:)))
+        cancelCameraButton.isUserInteractionEnabled = true
+        cancelCameraButton.addGestureRecognizer(tapCancelCameraButtonRecognizer)
+        
+        let tapTakePhotoButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapTakePhotoButtonRecognizer(tapGestureRecognizer:)))
+        takePhotoButton.isUserInteractionEnabled = true
+        takePhotoButton.addGestureRecognizer(tapTakePhotoButtonRecognizer)
+        
+        let frameworkBundle = Bundle(for: PhotoSolution.self)
+        let url = frameworkBundle.resourceURL!.appendingPathComponent("PhotoSolution.bundle")
+        podBundle = Bundle(url: url)
+        imageEditView = UINib(nibName: "ImageEditView", bundle: self.podBundle).instantiate(withOwner: nil, options: nil)[0] as? ImageEditView
+    }
+    
+    @objc func rotateCameraButtonTapped(tapGestureRecognizer: UITapGestureRecognizer){
+        if(currentCaptureDevice == frontCamera){
+            setupInput(isBackCamera: true)
+        }else{
+            setupInput(isBackCamera: false)
+        }
+    }
+    
+    @objc func cancelCameraButtonTapped(tapGestureRecognizer: UITapGestureRecognizer){
+        self.solutionDelegate?.pickerCancel()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func tapTakePhotoButtonRecognizer(tapGestureRecognizer: UITapGestureRecognizer){
+        self.stillImageOutput.captureStillImageAsynchronously(from: self.stillImageOutput.connection(with: AVMediaType.video)!) { (buffer, error) in
+            //self.cameraButton.isEnabled = true
+            if buffer == nil {
+                return
+            }else{
+                let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer!)
+                let image = UIImage(data: imageData!)
+                self.imageEditView.frame = self.cameraArea.frame
+                self.imageEditView.setupImage(edittingImage: image!, fromCamera: true)
+                self.imageEditView.delegate = self
+                self.view.addSubview(self.imageEditView)
+                self.inCameraView = false
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        inCameraView = true
+        setupUI()
         setupFrontAndBackCamera()
         setupSessionAndOutput()
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
@@ -151,51 +210,17 @@ class CameraViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func closeButtonClick(_ sender: UIBarButtonItem) {
-        self.solutionDelegate?.pickerCancel()
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func rotateButtonClick(_ sender: UIBarButtonItem) {
-        if(currentCaptureDevice == frontCamera){
-            setupInput(isBackCamera: true)
-        }else{
-            setupInput(isBackCamera: false)
-        }
-    }
-    
-    @IBAction func cameraClick(_ sender: UIButton) {
-        self.cameraButton.isEnabled = false
-        self.stillImageOutput.captureStillImageAsynchronously(from: self.stillImageOutput.connection(with: AVMediaType.video)!) { (buffer, error) in
-            if buffer == nil {
-                return
-            }else{
-                let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer!)
-                let image = UIImage(data: imageData!)
-//                [self.session stopRunning];
-//                [self.view addSubview:self.cameraImageView];
-//                let imgData = data_image?.jpegData(compressionQuality: 0.01)
-//                let imageForSave = UIImage(data: imgData!)
-                //
-                PHPhotoLibrary.shared().performChanges({
-                    PHAssetChangeRequest.creationRequestForAsset(from: image!)
-                }) { (isSuccess: Bool, error: Error?) in
-                    if isSuccess {
-                        DispatchQueue.main.async{
-                            self.cameraButton.isEnabled = true
-                        }
-                    } else{
-                        print("save fail", error!.localizedDescription)
-                    }
-                }
-                
-                
-            }
-        }
-    }
-    
     override var prefersStatusBarHidden: Bool {
         return true
     }
     
+}
+
+extension CameraViewController: ImageEditViewDelegate{
+    
+    func imageCompleted(_ editedImage: UIImage) {
+        self.solutionDelegate?.returnImages([editedImage])
+        self.dismiss(animated: true, completion: nil)
+    }
+        
 }
