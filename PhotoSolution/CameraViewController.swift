@@ -17,7 +17,7 @@ class CameraViewController: UIViewController {
     var podBundle: Bundle!
     var inCameraView: Bool!
     var imageEditView: ImageEditView!
-   
+    
     @IBOutlet weak var rotateCameraButton: UIImageView!
     @IBOutlet weak var cancelCameraButton: UIImageView!
     @IBOutlet weak var takePhotoButton: UIImageView!
@@ -46,7 +46,7 @@ class CameraViewController: UIViewController {
     
     func setupSessionAndOutput(){
         captureSession = AVCaptureSession()
-        captureSession.sessionPreset = AVCaptureSession.Preset.photo
+        captureSession.sessionPreset = AVCaptureSession.Preset.high
         stillImageOutput = AVCaptureStillImageOutput()
         //stillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
         if captureSession.canAddOutput(stillImageOutput) {
@@ -84,13 +84,12 @@ class CameraViewController: UIViewController {
     }
     
     func setupPreviewLayer(){
-        self.cameraArea.backgroundColor = UIColor.red
         self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
-        self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        self.cameraArea.layer.masksToBounds = true
-        self.previewLayer?.frame = self.cameraArea.bounds
-        self.previewLayer?.position = CGPoint(x: self.cameraArea.bounds.midX, y: self.cameraArea.bounds.midY)
-        // [previewLayer setBackgroundColor:[[UIColor blackColor] CGColor]];
+        self.cameraArea.layoutIfNeeded()
+        self.view.layoutIfNeeded()
+        self.previewLayer?.frame = self.cameraArea.frame
+        self.previewLayer?.position = CGPoint(x: self.cameraArea.frame.midX, y: self.cameraArea.frame.midY+33)
+        self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspect
         self.cameraArea.layer.addSublayer(self.previewLayer!)
     }
     
@@ -214,6 +213,21 @@ class CameraViewController: UIViewController {
         return true
     }
     
+    override open var shouldAutorotate: Bool {
+        return false
+    }
+//
+//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+//        if UIDevice.current.userInterfaceIdiom == .phone {
+//            return .portrait
+//        } else {
+//            return .portrait
+//        }
+//    }
+    
+   
+    
+    
 }
 
 extension CameraViewController: ImageEditViewDelegate{
@@ -222,5 +236,5 @@ extension CameraViewController: ImageEditViewDelegate{
         self.solutionDelegate?.returnImages([editedImage])
         self.dismiss(animated: true, completion: nil)
     }
-        
+    
 }

@@ -26,6 +26,8 @@ class ImageEditView: UIView {
     var delegate: ImageEditViewDelegate?
     
     func setupImage(edittingImage: UIImage, fromCamera: Bool){
+        print("image size: \(edittingImage.size.height) \(edittingImage.size.width) ")
+        editButton.isHidden = true
         currentImage = edittingImage
         imageView.image = currentImage
         if fromCamera{
