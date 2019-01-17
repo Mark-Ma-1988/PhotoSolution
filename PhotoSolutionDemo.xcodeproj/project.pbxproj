@@ -23,8 +23,10 @@
 		95D7C69021CB20D40086D533 /* ImageEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D7C68F21CB20D40086D533 /* ImageEditView.swift */; };
 		95D7C69721CB3AA70086D533 /* ImageEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D7C69621CB3AA70086D533 /* ImageEditView.xib */; };
 		95D7C69F21CB60090086D533 /* cancelIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D7C69E21CB60090086D533 /* cancelIcon.png */; };
-		95D7C6A321CB61FF0086D533 /* cameraIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D7C6A221CB61FF0086D533 /* cameraIcon.png */; };
 		95D7C6A521CB627A0086D533 /* switchIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D7C6A421CB627A0086D533 /* switchIcon.png */; };
+		95D8DCD921F03FDF00A656E2 /* cameraIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D8DCD821F03FDE00A656E2 /* cameraIcon.png */; };
+		95D8DCDC21F042EA00A656E2 /* flashOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D8DCDA21F042EA00A656E2 /* flashOff.png */; };
+		95D8DCDD21F042EA00A656E2 /* flashOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D8DCDB21F042EA00A656E2 /* flashOn.png */; };
 		95E696A620F230F2003BDCBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E696A520F230F2003BDCBE /* AppDelegate.swift */; };
 		95E696A820F230F2003BDCBE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E696A720F230F2003BDCBE /* ViewController.swift */; };
 		95E696AB20F230F2003BDCBE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95E696A920F230F2003BDCBE /* Main.storyboard */; };
@@ -60,8 +62,10 @@
 		95D7C68F21CB20D40086D533 /* ImageEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditView.swift; sourceTree = "<group>"; };
 		95D7C69621CB3AA70086D533 /* ImageEditView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageEditView.xib; sourceTree = "<group>"; };
 		95D7C69E21CB60090086D533 /* cancelIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancelIcon.png; sourceTree = "<group>"; };
-		95D7C6A221CB61FF0086D533 /* cameraIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cameraIcon.png; sourceTree = "<group>"; };
 		95D7C6A421CB627A0086D533 /* switchIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switchIcon.png; sourceTree = "<group>"; };
+		95D8DCD821F03FDE00A656E2 /* cameraIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cameraIcon.png; sourceTree = "<group>"; };
+		95D8DCDA21F042EA00A656E2 /* flashOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flashOff.png; sourceTree = "<group>"; };
+		95D8DCDB21F042EA00A656E2 /* flashOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flashOn.png; sourceTree = "<group>"; };
 		95E696A220F230F2003BDCBE /* PhotoSolutionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoSolutionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95E696A520F230F2003BDCBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95E696A720F230F2003BDCBE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -148,8 +152,10 @@
 				95E696C620F23589003BDCBE /* ImageViewCell.swift */,
 				95E696C720F23589003BDCBE /* ImageViewCell.xib */,
 				95D7C6A421CB627A0086D533 /* switchIcon.png */,
-				95D7C6A221CB61FF0086D533 /* cameraIcon.png */,
 				95A6C72421E7166200009240 /* editIcon.png */,
+				95D8DCDA21F042EA00A656E2 /* flashOff.png */,
+				95D8DCDB21F042EA00A656E2 /* flashOn.png */,
+				95D8DCD821F03FDE00A656E2 /* cameraIcon.png */,
 				95D7C69E21CB60090086D533 /* cancelIcon.png */,
 				95A6C72621E7177500009240 /* saveIcon.png */,
 				95A6C72221E715EC00009240 /* backIcon.png */,
@@ -218,16 +224,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95D8DCDC21F042EA00A656E2 /* flashOff.png in Resources */,
+				95D8DCDD21F042EA00A656E2 /* flashOn.png in Resources */,
 				95A6C72521E7166200009240 /* editIcon.png in Resources */,
 				95D7C69F21CB60090086D533 /* cancelIcon.png in Resources */,
 				95E696C920F23589003BDCBE /* PhotoCell.xib in Resources */,
 				95E696B020F230F3003BDCBE /* LaunchScreen.storyboard in Resources */,
-				95D7C6A321CB61FF0086D533 /* cameraIcon.png in Resources */,
 				95E696CB20F23589003BDCBE /* AlbumCell.xib in Resources */,
 				95E696AD20F230F3003BDCBE /* Assets.xcassets in Resources */,
 				959B7AF720F37B67008CBDB3 /* tickIcon.png in Resources */,
 				955E0C8621C1EB1E009FF57B /* CameraViewController.xib in Resources */,
 				95E696CD20F23589003BDCBE /* ImageViewCell.xib in Resources */,
+				95D8DCD921F03FDF00A656E2 /* cameraIcon.png in Resources */,
 				95A6C72321E715EC00009240 /* backIcon.png in Resources */,
 				95A1DD7C21073E060092E04D /* PhotoStoryboard.storyboard in Resources */,
 				95E696D320F2397A003BDCBE /* PickerCell.xib in Resources */,

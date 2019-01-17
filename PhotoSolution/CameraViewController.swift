@@ -23,6 +23,8 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var rotateCameraButton: UIImageView!
     @IBOutlet weak var cancelCameraButton: UIImageView!
     @IBOutlet weak var takePhotoButton: UIImageView!
+    @IBOutlet weak var flashLightButton: UIImageView!
+    
     
     var captureSession: AVCaptureSession!
     var currentCaptureDevice: AVCaptureDevice!
@@ -30,6 +32,8 @@ class CameraViewController: UIViewController {
     var backCamera: AVCaptureDevice!
     var stillImageOutput: AVCaptureStillImageOutput!
     var previewLayer: AVCaptureVideoPreviewLayer!
+    
+    let focusView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
     
     func setupFrontAndBackCamera(){
         if let devices = AVCaptureDevice.devices(for: AVMediaType.video) as [AVCaptureDevice]? {
@@ -91,6 +95,7 @@ class CameraViewController: UIViewController {
             }
             try self.captureSession.addInput(AVCaptureDeviceInput(device: self.currentCaptureDevice))
             self.captureSession.commitConfiguration()
+            self.setupFlashMode(isOn: false)
         } catch {
             print("Error")
         }
@@ -100,6 +105,7 @@ class CameraViewController: UIViewController {
         rotateCameraButton.image = UIImage(named: "switchIcon")
         takePhotoButton.image = UIImage(named: "cameraIcon")
         cancelCameraButton.image = UIImage(named: "cancelIcon")
+        flashLightButton.image = UIImage(named: "flashOff")
         
         let tapRotateCameraButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(rotateCameraButtonTapped(tapGestureRecognizer:)))
         rotateCameraButton.isUserInteractionEnabled = true
@@ -109,9 +115,13 @@ class CameraViewController: UIViewController {
         cancelCameraButton.isUserInteractionEnabled = true
         cancelCameraButton.addGestureRecognizer(tapCancelCameraButtonRecognizer)
         
-        let tapTakePhotoButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapTakePhotoButtonRecognizer(tapGestureRecognizer:)))
+        let tapTakePhotoButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapTakePhotoButtonTapped(tapGestureRecognizer:)))
         takePhotoButton.isUserInteractionEnabled = true
         takePhotoButton.addGestureRecognizer(tapTakePhotoButtonRecognizer)
+        
+        let tapFlashLightButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapFlashLightButtonTapped(tapGestureRecognizer:)))
+        flashLightButton.isUserInteractionEnabled = true
+        flashLightButton.addGestureRecognizer(tapFlashLightButtonRecognizer)
         
         let frameworkBundle = Bundle(for: PhotoSolution.self)
         let url = frameworkBundle.resourceURL!.appendingPathComponent("PhotoSolution.bundle")
@@ -132,7 +142,7 @@ class CameraViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc func tapTakePhotoButtonRecognizer(tapGestureRecognizer: UITapGestureRecognizer){
+    @objc func tapTakePhotoButtonTapped(tapGestureRecognizer: UITapGestureRecognizer){
         self.stillImageOutput.captureStillImageAsynchronously(from: self.stillImageOutput.connection(with: AVMediaType.video)!) { (buffer, error) in
             //self.cameraButton.isEnabled = true
             if buffer == nil {
@@ -146,6 +156,32 @@ class CameraViewController: UIViewController {
                 self.view.addSubview(self.imageEditView)
                 self.inCameraView = false
             }
+        }
+    }
+    
+    @objc func tapFlashLightButtonTapped(tapGestureRecognizer: UITapGestureRecognizer){
+        setupFlashMode(isOn: currentCaptureDevice.flashMode != .on)
+    }
+    
+    func setupFlashMode(isOn: Bool){
+        do {
+            try currentCaptureDevice.lockForConfiguration()
+            if isOn{
+                currentCaptureDevice.flashMode = .on
+            }else{
+                currentCaptureDevice.flashMode = .off
+            }
+            currentCaptureDevice.unlockForConfiguration()
+            
+            DispatchQueue.main.async{
+                if isOn{
+                    self.flashLightButton.image = UIImage(named: "flashOn")
+                }else{
+                    self.flashLightButton.image = UIImage(named: "flashOff")
+                }
+            }
+        } catch {
+            print("Error in FlashLight")
         }
     }
     
@@ -189,7 +225,58 @@ class CameraViewController: UIViewController {
         self.previewLayer?.position = CGPoint(x: self.cameraArea.bounds.midX, y: self.cameraArea.bounds.midY)
         self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspect
         self.cameraArea.layer.addSublayer(self.previewLayer!)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.focusGesture(_:)))
+        self.cameraArea.addGestureRecognizer(tapGesture)
+        focus(at: CGPoint(x: self.cameraArea.bounds.midX, y: self.cameraArea.bounds.midY))
+        
+        focusView.layer.borderWidth = 1.0
+        focusView.layer.borderColor = UIColor.yellow.cgColor
+        focusView.backgroundColor = UIColor.clear
+        self.cameraArea.addSubview(focusView)
+        focusView.isHidden = true
     }
+    
+    @objc func focusGesture(_ gesture: UITapGestureRecognizer?) {
+        let point: CGPoint? = gesture?.location(in: gesture?.view)
+        focus(at: point!)
+    }
+    
+    func focus(at point: CGPoint) {
+        let size: CGSize = cameraArea.bounds.size
+        let focusPoint = CGPoint(x: point.y / size.height, y: 1 - point.x / size.width)
+        do {
+            try currentCaptureDevice.lockForConfiguration()
+            if currentCaptureDevice.isFocusModeSupported(.autoFocus) {
+                currentCaptureDevice.focusPointOfInterest = focusPoint
+                currentCaptureDevice.focusMode = .autoFocus
+            }
+            if currentCaptureDevice.isExposureModeSupported(.autoExpose) {
+                currentCaptureDevice.exposurePointOfInterest = focusPoint
+                currentCaptureDevice.exposureMode = .autoExpose
+            }
+            currentCaptureDevice.unlockForConfiguration()
+            DispatchQueue.main.async{
+                self.focusView.center = point
+                self.focusView.isHidden = false
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.focusView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                }) { finished in
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.focusView.transform = CGAffineTransform.identity
+                    }) { finished in
+                        self.focusView.isHidden = true
+                    }
+                }
+            }
+        } catch {
+            print("Error in Focus")
+        }
+        
+        
+        
+    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -247,7 +334,7 @@ class CameraViewController: UIViewController {
             }else if UIDevice.current.orientation == .landscapeRight{
                 self.rotateCameraButton.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2));
             }else{
-                self.rotateCameraButton.transform = CGAffineTransform(rotationAngle: 0);
+                self.rotateCameraButton.transform = CGAffineTransform.identity;
             }
         })
     }
