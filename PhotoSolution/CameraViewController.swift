@@ -100,7 +100,7 @@ class CameraViewController: UIViewController {
         }
     }
     
-
+    
     
     func setupUI(){
         rotateCameraButton.image = UIImage(named: "switchIcon")
@@ -231,11 +231,30 @@ class CameraViewController: UIViewController {
         self.cameraArea.addGestureRecognizer(tapGesture)
         focus(at: CGPoint(x: self.cameraArea.bounds.midX, y: self.cameraArea.bounds.midY))
         
+        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchView(_:)))
+        self.cameraArea.addGestureRecognizer(pinchGestureRecognizer)
+        self.cameraArea.isUserInteractionEnabled = true
+        self.cameraArea.isMultipleTouchEnabled = true
+        
         focusView.layer.borderWidth = 1.0
         focusView.layer.borderColor = UIColor.yellow.cgColor
         focusView.backgroundColor = UIColor.clear
         self.cameraArea.addSubview(focusView)
         focusView.isHidden = true
+    }
+    
+    @objc func pinchView(_ pinchGestureRecognizer: UIPinchGestureRecognizer) {
+        let pinchVelocityDividerFactor: CGFloat = 20
+        if pinchGestureRecognizer.state == .changed {
+            do{
+                try currentCaptureDevice.lockForConfiguration()
+                let desiredZoomFactor: CGFloat = currentCaptureDevice.videoZoomFactor + CGFloat(atan2f(Float(pinchGestureRecognizer.velocity), Float(pinchVelocityDividerFactor)))
+                currentCaptureDevice.videoZoomFactor = max(1.0, min(desiredZoomFactor, currentCaptureDevice.activeFormat.videoMaxZoomFactor))
+                currentCaptureDevice.unlockForConfiguration()
+            }catch {
+                print("Error in Focus")
+            }
+        }
     }
     
     @objc func focusGesture(_ gesture: UITapGestureRecognizer?) {
@@ -273,11 +292,7 @@ class CameraViewController: UIViewController {
         } catch {
             print("Error in Focus")
         }
-        
-        
-        
     }
-    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
