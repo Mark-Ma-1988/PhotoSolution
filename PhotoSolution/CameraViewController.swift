@@ -58,7 +58,6 @@ class CameraViewController: UIViewController {
         }else{
             //Todo
         }
-        
         if let connection = self.stillImageOutput.connection(with: AVMediaType.video) {
             if (self.currentCaptureDevice?.activeFormat.isVideoStabilizationModeSupported(.auto))! {
                 connection.preferredVideoStabilizationMode = .auto
@@ -100,6 +99,8 @@ class CameraViewController: UIViewController {
             print("Error")
         }
     }
+    
+
     
     func setupUI(){
         rotateCameraButton.image = UIImage(named: "switchIcon")
@@ -249,11 +250,11 @@ class CameraViewController: UIViewController {
             try currentCaptureDevice.lockForConfiguration()
             if currentCaptureDevice.isFocusModeSupported(.autoFocus) {
                 currentCaptureDevice.focusPointOfInterest = focusPoint
-                currentCaptureDevice.focusMode = .autoFocus
+                currentCaptureDevice.focusMode = .continuousAutoFocus
             }
             if currentCaptureDevice.isExposureModeSupported(.autoExpose) {
                 currentCaptureDevice.exposurePointOfInterest = focusPoint
-                currentCaptureDevice.exposureMode = .autoExpose
+                currentCaptureDevice.exposureMode = .continuousAutoExposure
             }
             currentCaptureDevice.unlockForConfiguration()
             DispatchQueue.main.async{
