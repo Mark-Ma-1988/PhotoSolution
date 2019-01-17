@@ -64,6 +64,19 @@ class CameraViewController: UIViewController {
     }
     
     func setupInput(isBackCamera: Bool){
+        if(previewLayer != nil){
+            let animation: CATransition = CATransition()
+            animation.duration = 0.5
+            animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            animation.type = CATransitionType(rawValue: "oglFlip")
+            if(isBackCamera){
+                animation.subtype = CATransitionSubtype.fromLeft
+            }else{
+                animation.subtype = CATransitionSubtype.fromRight
+            }
+            previewLayer.add(animation, forKey: nil)
+        }
+        
         do {
             self.captureSession.beginConfiguration()
             if let inputs = captureSession.inputs as? [AVCaptureDeviceInput] {
