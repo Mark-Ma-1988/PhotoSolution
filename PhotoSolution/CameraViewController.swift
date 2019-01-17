@@ -18,11 +18,11 @@ class CameraViewController: UIViewController {
     var inCameraView: Bool!
     var imageEditView: ImageEditView!
     
+    var cameraArea: UIView!
+    
     @IBOutlet weak var rotateCameraButton: UIImageView!
     @IBOutlet weak var cancelCameraButton: UIImageView!
     @IBOutlet weak var takePhotoButton: UIImageView!
-    
-    @IBOutlet weak var cameraArea: UIView!
     
     var captureSession: AVCaptureSession!
     var currentCaptureDevice: AVCaptureDevice!
@@ -81,16 +81,6 @@ class CameraViewController: UIViewController {
         } catch {
             print("Error")
         }
-    }
-    
-    func setupPreviewLayer(){
-        self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
-        self.cameraArea.layoutIfNeeded()
-        self.view.layoutIfNeeded()
-        self.previewLayer?.frame = self.cameraArea.frame
-        self.previewLayer?.position = CGPoint(x: self.cameraArea.frame.midX, y: self.cameraArea.frame.midY+33)
-        self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspect
-        self.cameraArea.layer.addSublayer(self.previewLayer!)
     }
     
     func setupUI(){
@@ -168,11 +158,31 @@ class CameraViewController: UIViewController {
                 self.goToCameraAccessSetting()
             }
         }
-        setupPreviewLayer()
+        NotificationCenter.default.addObserver(self, selector:#selector(didChangeOrientation), name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    func setupPreviewLayer() {
+        var topSafeAreaPadding: CGFloat = 0
+        var bottomSafeAreaPadding: CGFloat = 0
+        if #available(iOS 11.0, *) {
+            topSafeAreaPadding = UIApplication.shared.keyWindow!.safeAreaInsets.top
+            bottomSafeAreaPadding = UIApplication.shared.keyWindow!.safeAreaInsets.bottom
+        }
+        cameraArea = UIView.init(frame:CGRect.init(x: 0, y: topSafeAreaPadding, width: self.view.frame.width, height: self.view.frame.height-topSafeAreaPadding-bottomSafeAreaPadding))
+        self.view.addSubview(cameraArea)
+        self.view.sendSubviewToBack(cameraArea)
+        self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
+        self.previewLayer?.bounds = self.cameraArea.bounds
+        self.previewLayer?.position = CGPoint(x: self.cameraArea.bounds.midX, y: self.cameraArea.bounds.midY)
+        self.previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspect
+        self.cameraArea.layer.addSublayer(self.previewLayer!)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if previewLayer == nil{
+            setupPreviewLayer()
+        }
         if (captureSession.isRunning == false) {
             captureSession.startRunning()
         }
@@ -216,17 +226,18 @@ class CameraViewController: UIViewController {
     override open var shouldAutorotate: Bool {
         return false
     }
-//
-//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-//        if UIDevice.current.userInterfaceIdiom == .phone {
-//            return .portrait
-//        } else {
-//            return .portrait
-//        }
-//    }
     
-   
-    
+    @objc func didChangeOrientation() {
+        UIView.animate(withDuration: 0.3, animations: {
+            if UIDevice.current.orientation == .landscapeLeft{
+                self.rotateCameraButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2));
+            }else if UIDevice.current.orientation == .landscapeRight{
+                self.rotateCameraButton.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2));
+            }else{
+                self.rotateCameraButton.transform = CGAffineTransform(rotationAngle: 0);
+            }
+        })
+    }
     
 }
 

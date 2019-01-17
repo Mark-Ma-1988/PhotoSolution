@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CameraViewController" customModule="PhotoSolutionDemo" customModuleProvider="target">
             <connections>
-                <outlet property="cameraArea" destination="sEi-Lh-kMd" id="NeE-eM-9sJ"/>
                 <outlet property="cancelCameraButton" destination="CgX-bq-Hge" id="PCb-Sq-x7N"/>
                 <outlet property="rotateCameraButton" destination="Ej5-91-jfo" id="FmE-w8-vXJ"/>
                 <outlet property="takePhotoButton" destination="eF6-9q-op3" id="aA9-HX-i7F"/>
@@ -24,10 +23,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEi-Lh-kMd" userLabel="CameraArea">
-                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CgX-bq-Hge">
                     <rect key="frame" x="55" y="537" width="30" height="30"/>
                     <constraints>
@@ -56,13 +51,9 @@
                 <constraint firstItem="CgX-bq-Hge" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="55" id="3fa-AE-Qsn"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ej5-91-jfo" secondAttribute="trailing" constant="25" id="5lX-xd-kIb"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="eF6-9q-op3" secondAttribute="bottom" constant="80" id="6be-sS-6WB"/>
-                <constraint firstItem="sEi-Lh-kMd" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="FKo-xR-BZT"/>
                 <constraint firstItem="CgX-bq-Hge" firstAttribute="centerY" secondItem="eF6-9q-op3" secondAttribute="centerY" id="Gdl-hB-2iH"/>
-                <constraint firstItem="sEi-Lh-kMd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="OSy-2w-82u"/>
-                <constraint firstItem="sEi-Lh-kMd" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Zmf-9Y-I1b"/>
                 <constraint firstItem="Ej5-91-jfo" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="60" id="jS0-GK-5iC"/>
                 <constraint firstItem="eF6-9q-op3" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="nvb-tH-pLQ"/>
-                <constraint firstItem="sEi-Lh-kMd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="qKL-Y5-xFY"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="96.799999999999997" y="48.125937031484263"/>
