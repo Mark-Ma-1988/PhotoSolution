@@ -26,7 +26,6 @@ class ImageEditView: UIView {
     var delegate: ImageEditViewDelegate?
     
     func setupImage(edittingImage: UIImage, fromCamera: Bool){
-        print("image size: \(edittingImage.size.height) \(edittingImage.size.width) ")
         editButton.isHidden = true
         currentImage = edittingImage
         imageView.image = currentImage
@@ -77,7 +76,6 @@ class ImageEditView: UIView {
         saveGesture.numberOfTapsRequired = 1
         saveButton.isUserInteractionEnabled = true
         saveButton.addGestureRecognizer(saveGesture)
-        
     }
     
     @objc private func editAction(_ gesture: UITapGestureRecognizer) {

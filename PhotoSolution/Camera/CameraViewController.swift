@@ -25,7 +25,6 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var takePhotoButton: UIImageView!
     @IBOutlet weak var flashLightButton: UIImageView!
     
-    
     var captureSession: AVCaptureSession!
     var currentCaptureDevice: AVCaptureDevice!
     var frontCamera: AVCaptureDevice!
@@ -34,6 +33,56 @@ class CameraViewController: UIViewController {
     var previewLayer: AVCaptureVideoPreviewLayer!
     
     let focusView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    override open var shouldAutorotate: Bool {
+        return false
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        inCameraView = true
+        setupUI()
+        setupFrontAndBackCamera()
+        setupSessionAndOutput()
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
+            if response {
+                PHPhotoLibrary.requestAuthorization { status in
+                    switch status {
+                    case .authorized:
+                        self.setupInput(isBackCamera: true)
+                    case .denied, .restricted:
+                        self.goToPhotoAccessSetting()
+                    case .notDetermined:
+                        self.goToPhotoAccessSetting()
+                    }
+                }
+            } else {
+                self.goToCameraAccessSetting()
+            }
+        }
+        NotificationCenter.default.addObserver(self, selector:#selector(didChangeOrientation), name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if previewLayer == nil{
+            setupPreviewLayer()
+        }
+        if (captureSession.isRunning == false) {
+            captureSession.startRunning()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if (captureSession.isRunning == true) {
+            captureSession.stopRunning()
+        }
+    }
     
     func setupFrontAndBackCamera(){
         if let devices = AVCaptureDevice.devices(for: AVMediaType.video) as [AVCaptureDevice]? {
@@ -63,7 +112,6 @@ class CameraViewController: UIViewController {
                 connection.preferredVideoStabilizationMode = .auto
             }
         }
-        
     }
     
     func setupInput(isBackCamera: Bool){
@@ -79,7 +127,6 @@ class CameraViewController: UIViewController {
             }
             previewLayer.add(animation, forKey: nil)
         }
-        
         do {
             self.captureSession.beginConfiguration()
             if let inputs = captureSession.inputs as? [AVCaptureDeviceInput] {
@@ -99,8 +146,6 @@ class CameraViewController: UIViewController {
             print("Error")
         }
     }
-    
-    
     
     func setupUI(){
         rotateCameraButton.image = UIImage(named: "switchIcon")
@@ -143,14 +188,51 @@ class CameraViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func imageRotatedByDegrees(oldImage: UIImage, deg degrees: CGFloat) -> UIImage {
+        //Calculate the size of the rotated view's containing box for our drawing space
+        let rotatedViewBox: UIView = UIView(frame: CGRect(x: 0, y: 0, width: oldImage.size.width, height: oldImage.size.height))
+        let t: CGAffineTransform = CGAffineTransform(rotationAngle: degrees * CGFloat.pi / 180)
+        rotatedViewBox.transform = t
+        let rotatedSize: CGSize = rotatedViewBox.frame.size
+        //Create the bitmap context
+        UIGraphicsBeginImageContext(rotatedSize)
+        let bitmap: CGContext = UIGraphicsGetCurrentContext()!
+        //Move the origin to the middle of the image so we will rotate and scale around the center.
+        bitmap.translateBy(x: rotatedSize.width / 2, y: rotatedSize.height / 2)
+        //Rotate the image context
+        bitmap.rotate(by: (degrees * CGFloat.pi / 180))
+        //Now, draw the rotated/scaled image into the context
+        bitmap.scaleBy(x: 1.0, y: -1.0)
+        bitmap.draw(oldImage.cgImage!, in: CGRect(x: -oldImage.size.width / 2, y: -oldImage.size.height / 2, width: oldImage.size.width, height: oldImage.size.height))
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+    
     @objc func tapTakePhotoButtonTapped(tapGestureRecognizer: UITapGestureRecognizer){
         self.stillImageOutput.captureStillImageAsynchronously(from: self.stillImageOutput.connection(with: AVMediaType.video)!) { (buffer, error) in
-            //self.cameraButton.isEnabled = true
             if buffer == nil {
                 return
             }else{
-                let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer!)
-                let image = UIImage(data: imageData!)
+                let originalImageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer!)
+                let originalImage = UIImage(data: originalImageData!)
+                
+//
+                //originalImage = originalImage!.imageRotated(byRadians: CGFloat(-Double.pi / 2.0))
+                
+                //
+//                let compressedImageData = originalImage!.jpegData(compressionQuality: 0.01)
+//                let compressedImage = UIImage(data: compressedImageData!)
+                //
+                var image = originalImage
+                
+                if UIDevice.current.orientation == .landscapeLeft{
+                    image = image!.rotate(radians: -.pi/2)
+                }else if UIDevice.current.orientation == .landscapeRight{
+                    image = image!.rotate(radians: .pi/2)
+                }
+                
+                //
                 self.imageEditView.frame = self.cameraArea.frame
                 self.imageEditView.setupImage(edittingImage: image!, fromCamera: true)
                 self.imageEditView.delegate = self
@@ -173,7 +255,6 @@ class CameraViewController: UIViewController {
                 currentCaptureDevice.flashMode = .off
             }
             currentCaptureDevice.unlockForConfiguration()
-            
             DispatchQueue.main.async{
                 if isOn{
                     self.flashLightButton.image = UIImage(named: "flashOn")
@@ -184,31 +265,6 @@ class CameraViewController: UIViewController {
         } catch {
             print("Error in FlashLight")
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        inCameraView = true
-        setupUI()
-        setupFrontAndBackCamera()
-        setupSessionAndOutput()
-        AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
-            if response {
-                PHPhotoLibrary.requestAuthorization { status in
-                    switch status {
-                    case .authorized:
-                        self.setupInput(isBackCamera: true)
-                    case .denied, .restricted:
-                        self.goToPhotoAccessSetting()
-                    case .notDetermined:
-                        self.goToPhotoAccessSetting()
-                    }
-                }
-            } else {
-                self.goToCameraAccessSetting()
-            }
-        }
-        NotificationCenter.default.addObserver(self, selector:#selector(didChangeOrientation), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     func setupPreviewLayer() {
@@ -294,23 +350,6 @@ class CameraViewController: UIViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if previewLayer == nil{
-            setupPreviewLayer()
-        }
-        if (captureSession.isRunning == false) {
-            captureSession.startRunning()
-        }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        if (captureSession.isRunning == true) {
-            captureSession.stopRunning()
-        }
-    }
-    
     func goToPhotoAccessSetting(){
         let alert = UIAlertController(title: nil, message: customization.alertTextForPhotoAccess, preferredStyle: .alert)
         alert.addAction( UIAlertAction(title: customization.settingButtonTextForPhotoAccess, style: .cancel, handler: { action in
@@ -334,23 +373,18 @@ class CameraViewController: UIViewController {
         }))
         self.present(alert, animated: true, completion: nil)
     }
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
-    override open var shouldAutorotate: Bool {
-        return false
-    }
-    
+
     @objc func didChangeOrientation() {
         UIView.animate(withDuration: 0.3, animations: {
             if UIDevice.current.orientation == .landscapeLeft{
-                self.rotateCameraButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2));
+                self.rotateCameraButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
+                self.flashLightButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
             }else if UIDevice.current.orientation == .landscapeRight{
-                self.rotateCameraButton.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2));
+                self.rotateCameraButton.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2))
+                self.flashLightButton.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2))
             }else{
-                self.rotateCameraButton.transform = CGAffineTransform.identity;
+                self.rotateCameraButton.transform = CGAffineTransform.identity
+                self.flashLightButton.transform = CGAffineTransform.identity
             }
         })
     }

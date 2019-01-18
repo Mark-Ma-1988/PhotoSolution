@@ -16,7 +16,6 @@
 		95A1DD862107F69D0092E04D /* AlbumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A1DD852107F69D0092E04D /* AlbumTableViewController.swift */; };
 		95A1DD882107F7240092E04D /* ImageEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A1DD872107F7240092E04D /* ImageEditorViewController.swift */; };
 		95A1DD8A21080D350092E04D /* PhotoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A1DD8921080D350092E04D /* PhotoNavigationController.swift */; };
-		95A1DD8C21088F130092E04D /* CameraNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A1DD8B21088F130092E04D /* CameraNavigationController.swift */; };
 		95A6C72321E715EC00009240 /* backIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A6C72221E715EC00009240 /* backIcon.png */; };
 		95A6C72521E7166200009240 /* editIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A6C72421E7166200009240 /* editIcon.png */; };
 		95A6C72721E7177500009240 /* saveIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A6C72621E7177500009240 /* saveIcon.png */; };
@@ -27,6 +26,7 @@
 		95D8DCD921F03FDF00A656E2 /* cameraIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D8DCD821F03FDE00A656E2 /* cameraIcon.png */; };
 		95D8DCDC21F042EA00A656E2 /* flashOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D8DCDA21F042EA00A656E2 /* flashOff.png */; };
 		95D8DCDD21F042EA00A656E2 /* flashOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D8DCDB21F042EA00A656E2 /* flashOn.png */; };
+		95D8DCE221F14E1600A656E2 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D8DCE121F14E1600A656E2 /* UIImage+Extension.swift */; };
 		95E696A620F230F2003BDCBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E696A520F230F2003BDCBE /* AppDelegate.swift */; };
 		95E696A820F230F2003BDCBE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E696A720F230F2003BDCBE /* ViewController.swift */; };
 		95E696AB20F230F2003BDCBE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95E696A920F230F2003BDCBE /* Main.storyboard */; };
@@ -55,7 +55,6 @@
 		95A1DD852107F69D0092E04D /* AlbumTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewController.swift; sourceTree = "<group>"; };
 		95A1DD872107F7240092E04D /* ImageEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditorViewController.swift; sourceTree = "<group>"; };
 		95A1DD8921080D350092E04D /* PhotoNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoNavigationController.swift; sourceTree = "<group>"; };
-		95A1DD8B21088F130092E04D /* CameraNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraNavigationController.swift; sourceTree = "<group>"; };
 		95A6C72221E715EC00009240 /* backIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backIcon.png; sourceTree = "<group>"; };
 		95A6C72421E7166200009240 /* editIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editIcon.png; sourceTree = "<group>"; };
 		95A6C72621E7177500009240 /* saveIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = saveIcon.png; sourceTree = "<group>"; };
@@ -66,6 +65,7 @@
 		95D8DCD821F03FDE00A656E2 /* cameraIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cameraIcon.png; sourceTree = "<group>"; };
 		95D8DCDA21F042EA00A656E2 /* flashOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flashOff.png; sourceTree = "<group>"; };
 		95D8DCDB21F042EA00A656E2 /* flashOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flashOn.png; sourceTree = "<group>"; };
+		95D8DCE121F14E1600A656E2 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		95E696A220F230F2003BDCBE /* PhotoSolutionDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoSolutionDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95E696A520F230F2003BDCBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95E696A720F230F2003BDCBE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +97,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		95D8DCDE21F14CBA00A656E2 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				95D7C6A421CB627A0086D533 /* switchIcon.png */,
+				95A6C72421E7166200009240 /* editIcon.png */,
+				95D8DCDA21F042EA00A656E2 /* flashOff.png */,
+				95D8DCDB21F042EA00A656E2 /* flashOn.png */,
+				95D8DCD821F03FDE00A656E2 /* cameraIcon.png */,
+				95D7C69E21CB60090086D533 /* cancelIcon.png */,
+				95A6C72621E7177500009240 /* saveIcon.png */,
+				95A6C72221E715EC00009240 /* backIcon.png */,
+				95E696CE20F23591003BDCBE /* arrowIcon.png */,
+				959B7AF620F37B66008CBDB3 /* tickIcon.png */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
+		95D8DCDF21F14CE800A656E2 /* PhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				95A1DD7B21073E060092E04D /* PhotoStoryboard.storyboard */,
+				95A1DD8921080D350092E04D /* PhotoNavigationController.swift */,
+				95A1DD832107F66F0092E04D /* PhotoCollectionViewController.swift */,
+				95A1DD852107F69D0092E04D /* AlbumTableViewController.swift */,
+				95A1DD872107F7240092E04D /* ImageEditorViewController.swift */,
+				95E696BE20F2357E003BDCBE /* Photo.swift */,
+				95E696BF20F2357E003BDCBE /* Album.swift */,
+				95E696C220F23589003BDCBE /* PhotoCell.swift */,
+				95E696C320F23589003BDCBE /* PhotoCell.xib */,
+				95E696C420F23589003BDCBE /* AlbumCell.swift */,
+				95E696C520F23589003BDCBE /* AlbumCell.xib */,
+				95E696C620F23589003BDCBE /* ImageViewCell.swift */,
+				95E696C720F23589003BDCBE /* ImageViewCell.xib */,
+			);
+			path = PhotoBrowser;
+			sourceTree = "<group>";
+		};
+		95D8DCE021F14D2400A656E2 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				955E0C8321C1EB1E009FF57B /* CameraViewController.swift */,
+				955E0C8421C1EB1E009FF57B /* CameraViewController.xib */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
 		95E6969920F230F2003BDCBE = {
 			isa = PBXGroup;
 			children = (
@@ -133,34 +179,12 @@
 			isa = PBXGroup;
 			children = (
 				95A1DD812107EA530092E04D /* PhotoSolution.swift */,
-				95A1DD7B21073E060092E04D /* PhotoStoryboard.storyboard */,
-				95A1DD8921080D350092E04D /* PhotoNavigationController.swift */,
-				95A1DD832107F66F0092E04D /* PhotoCollectionViewController.swift */,
-				95A1DD852107F69D0092E04D /* AlbumTableViewController.swift */,
-				95A1DD872107F7240092E04D /* ImageEditorViewController.swift */,
-				95A1DD8B21088F130092E04D /* CameraNavigationController.swift */,
-				955E0C8321C1EB1E009FF57B /* CameraViewController.swift */,
-				955E0C8421C1EB1E009FF57B /* CameraViewController.xib */,
+				95D8DCE121F14E1600A656E2 /* UIImage+Extension.swift */,
 				95D7C68F21CB20D40086D533 /* ImageEditView.swift */,
 				95D7C69621CB3AA70086D533 /* ImageEditView.xib */,
-				95E696BE20F2357E003BDCBE /* Photo.swift */,
-				95E696BF20F2357E003BDCBE /* Album.swift */,
-				95E696C220F23589003BDCBE /* PhotoCell.swift */,
-				95E696C320F23589003BDCBE /* PhotoCell.xib */,
-				95E696C420F23589003BDCBE /* AlbumCell.swift */,
-				95E696C520F23589003BDCBE /* AlbumCell.xib */,
-				95E696C620F23589003BDCBE /* ImageViewCell.swift */,
-				95E696C720F23589003BDCBE /* ImageViewCell.xib */,
-				95D7C6A421CB627A0086D533 /* switchIcon.png */,
-				95A6C72421E7166200009240 /* editIcon.png */,
-				95D8DCDA21F042EA00A656E2 /* flashOff.png */,
-				95D8DCDB21F042EA00A656E2 /* flashOn.png */,
-				95D8DCD821F03FDE00A656E2 /* cameraIcon.png */,
-				95D7C69E21CB60090086D533 /* cancelIcon.png */,
-				95A6C72621E7177500009240 /* saveIcon.png */,
-				95A6C72221E715EC00009240 /* backIcon.png */,
-				95E696CE20F23591003BDCBE /* arrowIcon.png */,
-				959B7AF620F37B66008CBDB3 /* tickIcon.png */,
+				95D8DCE021F14D2400A656E2 /* Camera */,
+				95D8DCDF21F14CE800A656E2 /* PhotoBrowser */,
+				95D8DCDE21F14CBA00A656E2 /* Icons */,
 			);
 			path = PhotoSolution;
 			sourceTree = "<group>";
@@ -255,7 +279,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				95A1DD882107F7240092E04D /* ImageEditorViewController.swift in Sources */,
-				95A1DD8C21088F130092E04D /* CameraNavigationController.swift in Sources */,
 				95E696C020F2357F003BDCBE /* Photo.swift in Sources */,
 				95A1DD842107F66F0092E04D /* PhotoCollectionViewController.swift in Sources */,
 				95E696A820F230F2003BDCBE /* ViewController.swift in Sources */,
@@ -266,6 +289,7 @@
 				95D7C69021CB20D40086D533 /* ImageEditView.swift in Sources */,
 				95E696C120F2357F003BDCBE /* Album.swift in Sources */,
 				95E696D220F2397A003BDCBE /* PickerCell.swift in Sources */,
+				95D8DCE221F14E1600A656E2 /* UIImage+Extension.swift in Sources */,
 				955E0C8521C1EB1E009FF57B /* CameraViewController.swift in Sources */,
 				95E696CC20F23589003BDCBE /* ImageViewCell.swift in Sources */,
 				95E696CA20F23589003BDCBE /* AlbumCell.swift in Sources */,
