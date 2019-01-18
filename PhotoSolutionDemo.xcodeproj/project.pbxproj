@@ -97,52 +97,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		95D8DCDE21F14CBA00A656E2 /* Icons */ = {
-			isa = PBXGroup;
-			children = (
-				95D7C6A421CB627A0086D533 /* switchIcon.png */,
-				95A6C72421E7166200009240 /* editIcon.png */,
-				95D8DCDA21F042EA00A656E2 /* flashOff.png */,
-				95D8DCDB21F042EA00A656E2 /* flashOn.png */,
-				95D8DCD821F03FDE00A656E2 /* cameraIcon.png */,
-				95D7C69E21CB60090086D533 /* cancelIcon.png */,
-				95A6C72621E7177500009240 /* saveIcon.png */,
-				95A6C72221E715EC00009240 /* backIcon.png */,
-				95E696CE20F23591003BDCBE /* arrowIcon.png */,
-				959B7AF620F37B66008CBDB3 /* tickIcon.png */,
-			);
-			path = Icons;
-			sourceTree = "<group>";
-		};
-		95D8DCDF21F14CE800A656E2 /* PhotoBrowser */ = {
-			isa = PBXGroup;
-			children = (
-				95A1DD7B21073E060092E04D /* PhotoStoryboard.storyboard */,
-				95A1DD8921080D350092E04D /* PhotoNavigationController.swift */,
-				95A1DD832107F66F0092E04D /* PhotoCollectionViewController.swift */,
-				95A1DD852107F69D0092E04D /* AlbumTableViewController.swift */,
-				95A1DD872107F7240092E04D /* ImageEditorViewController.swift */,
-				95E696BE20F2357E003BDCBE /* Photo.swift */,
-				95E696BF20F2357E003BDCBE /* Album.swift */,
-				95E696C220F23589003BDCBE /* PhotoCell.swift */,
-				95E696C320F23589003BDCBE /* PhotoCell.xib */,
-				95E696C420F23589003BDCBE /* AlbumCell.swift */,
-				95E696C520F23589003BDCBE /* AlbumCell.xib */,
-				95E696C620F23589003BDCBE /* ImageViewCell.swift */,
-				95E696C720F23589003BDCBE /* ImageViewCell.xib */,
-			);
-			path = PhotoBrowser;
-			sourceTree = "<group>";
-		};
-		95D8DCE021F14D2400A656E2 /* Camera */ = {
-			isa = PBXGroup;
-			children = (
-				955E0C8321C1EB1E009FF57B /* CameraViewController.swift */,
-				955E0C8421C1EB1E009FF57B /* CameraViewController.xib */,
-			);
-			path = Camera;
-			sourceTree = "<group>";
-		};
 		95E6969920F230F2003BDCBE = {
 			isa = PBXGroup;
 			children = (
@@ -182,9 +136,31 @@
 				95D8DCE121F14E1600A656E2 /* UIImage+Extension.swift */,
 				95D7C68F21CB20D40086D533 /* ImageEditView.swift */,
 				95D7C69621CB3AA70086D533 /* ImageEditView.xib */,
-				95D8DCE021F14D2400A656E2 /* Camera */,
-				95D8DCDF21F14CE800A656E2 /* PhotoBrowser */,
-				95D8DCDE21F14CBA00A656E2 /* Icons */,
+				955E0C8321C1EB1E009FF57B /* CameraViewController.swift */,
+				955E0C8421C1EB1E009FF57B /* CameraViewController.xib */,
+				95A1DD7B21073E060092E04D /* PhotoStoryboard.storyboard */,
+				95A1DD8921080D350092E04D /* PhotoNavigationController.swift */,
+				95A1DD832107F66F0092E04D /* PhotoCollectionViewController.swift */,
+				95A1DD852107F69D0092E04D /* AlbumTableViewController.swift */,
+				95A1DD872107F7240092E04D /* ImageEditorViewController.swift */,
+				95E696BE20F2357E003BDCBE /* Photo.swift */,
+				95E696BF20F2357E003BDCBE /* Album.swift */,
+				95E696C220F23589003BDCBE /* PhotoCell.swift */,
+				95E696C320F23589003BDCBE /* PhotoCell.xib */,
+				95E696C420F23589003BDCBE /* AlbumCell.swift */,
+				95E696C520F23589003BDCBE /* AlbumCell.xib */,
+				95E696C620F23589003BDCBE /* ImageViewCell.swift */,
+				95E696C720F23589003BDCBE /* ImageViewCell.xib */,
+				95D7C6A421CB627A0086D533 /* switchIcon.png */,
+				95A6C72421E7166200009240 /* editIcon.png */,
+				95D8DCDA21F042EA00A656E2 /* flashOff.png */,
+				95D8DCDB21F042EA00A656E2 /* flashOn.png */,
+				95D8DCD821F03FDE00A656E2 /* cameraIcon.png */,
+				95D7C69E21CB60090086D533 /* cancelIcon.png */,
+				95A6C72621E7177500009240 /* saveIcon.png */,
+				95A6C72221E715EC00009240 /* backIcon.png */,
+				95E696CE20F23591003BDCBE /* arrowIcon.png */,
+				959B7AF620F37B66008CBDB3 /* tickIcon.png */,
 			);
 			path = PhotoSolution;
 			sourceTree = "<group>";
