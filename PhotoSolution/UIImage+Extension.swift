@@ -33,5 +33,31 @@ extension UIImage {
         return newImage
     }
 
+    func rescaleImage(toPX: CGFloat) -> UIImage? {
+        var size: CGSize = self.size
+        if size.width <= toPX && size.height <= toPX {
+            return self
+        }
+        let scale: CGFloat = size.width / size.height
+        if size.width > size.height {
+            size.width = toPX
+            size.height = size.width / scale
+        } else {
+            size.height = toPX
+            size.width = size.height * scale
+        }
+        return rescaleImage(to: size)
+    }
+    
+    func rescaleImage(to size: CGSize) -> UIImage? {
+        let rect: CGRect? = CGRect(origin: CGPoint.zero, size: size)
+        UIGraphicsBeginImageContext((rect?.size)!)
+        draw(in: rect ?? CGRect.zero)
+        let resImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return resImage
+    }
+
+
   
 }

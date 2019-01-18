@@ -216,15 +216,9 @@ class CameraViewController: UIViewController {
             }else{
                 let originalImageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer!)
                 let originalImage = UIImage(data: originalImageData!)
-                
-//
-                //originalImage = originalImage!.imageRotated(byRadians: CGFloat(-Double.pi / 2.0))
-                
-                //
-//                let compressedImageData = originalImage!.jpegData(compressionQuality: 0.01)
-//                let compressedImage = UIImage(data: compressedImageData!)
-                //
-                var image = originalImage
+
+                //compress or not
+                var image = originalImage?.rescaleImage(toPX: 1000)
                 
                 if UIDevice.current.orientation == .landscapeLeft{
                     image = image!.rotate(radians: -.pi/2)
@@ -232,7 +226,6 @@ class CameraViewController: UIViewController {
                     image = image!.rotate(radians: .pi/2)
                 }
                 
-                //
                 self.imageEditView.frame = self.cameraArea.frame
                 self.imageEditView.setupImage(edittingImage: image!, fromCamera: true)
                 self.imageEditView.delegate = self
