@@ -34,13 +34,13 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var durationSlider: UISlider!
     @IBOutlet weak var isoSlider: UISlider!
     
-    
     var captureSession: AVCaptureSession!
     var currentCaptureDevice: AVCaptureDevice!
     var frontCamera: AVCaptureDevice!
     var backCamera: AVCaptureDevice!
     var stillImageOutput: AVCaptureStillImageOutput!
     var previewLayer: AVCaptureVideoPreviewLayer!
+    var timer: Timer!
     
     let focusView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
     
@@ -87,12 +87,20 @@ class CameraViewController: UIViewController {
         if (captureSession.isRunning == false) {
             captureSession.startRunning()
         }
+        timer = Timer.scheduledTimer(timeInterval: Double(0.7), target: self, selector: #selector(getLatestCameraStatus), userInfo: nil, repeats: true)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         if (captureSession.isRunning == true) {
             captureSession.stopRunning()
+        }
+        timer.invalidate()
+    }
+    
+    @objc private func getLatestCameraStatus(timer: Timer) -> Void{
+        if !settingsView.isHidden && autoSwitch.isOn{
+            initSlidersValue()
         }
     }
     
@@ -266,7 +274,7 @@ class CameraViewController: UIViewController {
             try self.captureSession.addInput(AVCaptureDeviceInput(device: self.currentCaptureDevice))
             self.captureSession.commitConfiguration()
             DispatchQueue.main.async{
-                if self.currentCaptureDevice.isFlashModeSupported(.on){
+                if self.currentCaptureDevice.isFlashModeSupported(.auto){
                     self.flashLightButton.isHidden = false
                     self.setupFlashMode(isOn: false)
                 }else{
@@ -311,6 +319,10 @@ class CameraViewController: UIViewController {
         settingButton.isUserInteractionEnabled = true
         settingButton.addGestureRecognizer(tapSettingButtonRecognizer)
         
+        let tapSettingsViewRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapSettingsViewTapped(tapGestureRecognizer:)))
+        settingsView.isUserInteractionEnabled = true
+        settingsView.addGestureRecognizer(tapSettingsViewRecognizer)
+        
         let frameworkBundle = Bundle(for: PhotoSolution.self)
         let url = frameworkBundle.resourceURL!.appendingPathComponent("PhotoSolution.bundle")
         podBundle = Bundle(url: url)
@@ -339,6 +351,11 @@ class CameraViewController: UIViewController {
     @objc func cancelCameraButtonTapped(tapGestureRecognizer: UITapGestureRecognizer){
         self.solutionDelegate?.pickerCancel()
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func tapSettingsViewTapped(tapGestureRecognizer: UITapGestureRecognizer){
+        let point: CGPoint = tapGestureRecognizer.location(in: cameraArea)
+        focus(at: point)
     }
     
     func imageRotatedByDegrees(oldImage: UIImage, deg degrees: CGFloat) -> UIImage {
@@ -396,7 +413,7 @@ class CameraViewController: UIViewController {
         do {
             try currentCaptureDevice.lockForConfiguration()
             if isOn{
-                currentCaptureDevice.flashMode = .on
+                currentCaptureDevice.flashMode = .auto
             }else{
                 currentCaptureDevice.flashMode = .off
             }
@@ -459,9 +476,9 @@ class CameraViewController: UIViewController {
         }
     }
     
-    @objc func focusGesture(_ gesture: UITapGestureRecognizer?) {
-        let point: CGPoint? = gesture?.location(in: gesture?.view)
-        focus(at: point!)
+    @objc func focusGesture(_ gesture: UITapGestureRecognizer) {
+        let point: CGPoint = gesture.location(in: cameraArea)
+        focus(at: point)
     }
     
     func focus(at point: CGPoint) {
