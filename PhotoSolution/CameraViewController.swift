@@ -16,7 +16,6 @@ class CameraViewController: UIViewController {
     var customization: PhotoSolutionCustomization!
     var podBundle: Bundle!
     var inCameraView: Bool!
-    var settingsMode: Bool!
     var imageEditView: ImageEditView!
     
     var cameraArea: UIView!
@@ -28,9 +27,13 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var flashLightButton: UIImageView!
     @IBOutlet weak var settingButton: UIImageView!
     
+    @IBOutlet weak var redSlider: UISlider!
+    @IBOutlet weak var greenSlider: UISlider!
+    @IBOutlet weak var blueSlider: UISlider!
     @IBOutlet weak var autoSwitch: UISwitch!
     @IBOutlet weak var durationSlider: UISlider!
     @IBOutlet weak var isoSlider: UISlider!
+    
     
     var captureSession: AVCaptureSession!
     var currentCaptureDevice: AVCaptureDevice!
@@ -53,7 +56,6 @@ class CameraViewController: UIViewController {
         super.viewDidLoad()
         inCameraView = true
         settingsView.isHidden = true
-        settingsMode = false
         setupUI()
         setupSettingsRange()
         setupFrontAndBackCamera()
@@ -98,13 +100,38 @@ class CameraViewController: UIViewController {
         autoSwitch.setOn(true, animated: true)
         isoSlider.isEnabled = false
         durationSlider.isEnabled = false
+        redSlider.isEnabled = false
+        greenSlider.isEnabled = false
+        blueSlider.isEnabled = false
         do{
             try currentCaptureDevice.lockForConfiguration()
             currentCaptureDevice.exposureMode = .continuousAutoExposure
+            if currentCaptureDevice.isWhiteBalanceModeSupported(.continuousAutoWhiteBalance){
+                currentCaptureDevice.whiteBalanceMode = .continuousAutoWhiteBalance
+            }
+            if currentCaptureDevice.isFocusModeSupported(.continuousAutoFocus){
+                currentCaptureDevice.focusMode = .continuousAutoFocus
+            }
             currentCaptureDevice.unlockForConfiguration()
+            initSlidersValue()
         }catch {
             print("Error in auto exposure")
         }
+    }
+    
+    func initSlidersValue(){
+        let currentISO = currentCaptureDevice.iso
+        let currentDuration = currentCaptureDevice.exposureDuration.seconds
+        let minISO = currentCaptureDevice.activeFormat.minISO
+        let maxISO = currentCaptureDevice.activeFormat.maxISO
+        isoSlider.value = (currentISO - minISO)/(maxISO - minISO)
+        durationSlider.value = Float(currentDuration)
+        
+        let minWhiteBalanceGain = Float(1.0)
+        let maxWhiteBalanceGain = currentCaptureDevice.maxWhiteBalanceGain
+        redSlider.value = (currentCaptureDevice.deviceWhiteBalanceGains.redGain - minWhiteBalanceGain)/(maxWhiteBalanceGain - minWhiteBalanceGain)
+        greenSlider.value = (currentCaptureDevice.deviceWhiteBalanceGains.greenGain - minWhiteBalanceGain)/(maxWhiteBalanceGain - minWhiteBalanceGain)
+        blueSlider.value = (currentCaptureDevice.deviceWhiteBalanceGains.blueGain - minWhiteBalanceGain)/(maxWhiteBalanceGain - minWhiteBalanceGain)
     }
     
     @IBAction func autoSwitch(_ sender: UISwitch) {
@@ -113,12 +140,9 @@ class CameraViewController: UIViewController {
         }else{
             isoSlider.isEnabled = true
             durationSlider.isEnabled = true
-            let currentISO = currentCaptureDevice.iso
-            let currentDuration = currentCaptureDevice.exposureDuration.seconds
-            let minISO = currentCaptureDevice.activeFormat.minISO
-            let maxISO = currentCaptureDevice.activeFormat.maxISO
-            isoSlider.value = (currentISO - minISO)/(maxISO - minISO)
-            durationSlider.value = Float(currentDuration)
+            redSlider.isEnabled = true
+            greenSlider.isEnabled = true
+            blueSlider.isEnabled = true
         }
     }
     
@@ -145,12 +169,42 @@ class CameraViewController: UIViewController {
         }
     }
     
+    func customWhiteBalance(){
+        do{
+            try currentCaptureDevice.lockForConfiguration()
+            let minWhiteBalanceGain = Float(1.0)
+            let maxWhiteBalanceGain = currentCaptureDevice.maxWhiteBalanceGain
+            let redValue = redSlider.value * (maxWhiteBalanceGain - minWhiteBalanceGain) + minWhiteBalanceGain
+            let greenValue = greenSlider.value * (maxWhiteBalanceGain - minWhiteBalanceGain) + minWhiteBalanceGain
+            let blueValue = blueSlider.value * (maxWhiteBalanceGain - minWhiteBalanceGain) + minWhiteBalanceGain
+            let whiteBalanceGains = AVCaptureDevice.WhiteBalanceGains(redGain: redValue, greenGain: greenValue, blueGain: blueValue)
+            currentCaptureDevice.setWhiteBalanceModeLocked(with: whiteBalanceGains) { (CMTime) in
+                //Todo
+            }
+            currentCaptureDevice.unlockForConfiguration()
+        }catch {
+            print("Error in whiteBalance")
+        }
+    }
+    
     @IBAction func durationSlide(_ sender: UISlider) {
         customExposure()
     }
     
     @IBAction func ISOSlide(_ sender: UISlider) {
         customExposure()
+    }
+    
+    @IBAction func redSlide(_ sender: UISlider) {
+        customWhiteBalance()
+    }
+    
+    @IBAction func greenSlide(_ sender: UISlider) {
+        customWhiteBalance()
+    }
+    
+    @IBAction func blueSlide(_ sender: UISlider) {
+        customWhiteBalance()
     }
     
     
@@ -232,6 +286,11 @@ class CameraViewController: UIViewController {
         flashLightButton.image = UIImage(named: "flashOff")
         settingButton.image = UIImage(named: "settingsToOpen")
         
+        settingsView.layer.masksToBounds = true
+        settingsView.layer.cornerRadius = 15
+        settingsView.layer.borderWidth = 2
+        settingsView.layer.borderColor = UIColor.white.cgColor
+        
         let tapRotateCameraButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(rotateCameraButtonTapped(tapGestureRecognizer:)))
         rotateCameraButton.isUserInteractionEnabled = true
         rotateCameraButton.addGestureRecognizer(tapRotateCameraButtonRecognizer)
@@ -259,14 +318,14 @@ class CameraViewController: UIViewController {
     }
     
     @objc func tapSettingButtonTapped(tapGestureRecognizer: UITapGestureRecognizer){
-        if settingsMode{
+        if !settingsView.isHidden{
             settingsView.isHidden = true
             settingButton.image = UIImage(named: "settingsToOpen")
         }else{
             settingsView.isHidden = false
             settingButton.image = UIImage(named: "settingsToClose")
+            initSlidersValue()
         }
-        settingsMode = !settingsMode
     }
     
     @objc func rotateCameraButtonTapped(tapGestureRecognizer: UITapGestureRecognizer){
