@@ -141,7 +141,14 @@ class CameraViewController: UIViewController {
             }
             try self.captureSession.addInput(AVCaptureDeviceInput(device: self.currentCaptureDevice))
             self.captureSession.commitConfiguration()
-            self.setupFlashMode(isOn: false)
+            DispatchQueue.main.async{
+                if self.currentCaptureDevice.isFlashModeSupported(.on){
+                    self.flashLightButton.isHidden = false
+                    self.setupFlashMode(isOn: false)
+                }else{
+                    self.flashLightButton.isHidden = true
+                }
+            }
         } catch {
             print("Error")
         }

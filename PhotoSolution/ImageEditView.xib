@@ -20,25 +20,25 @@
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="editIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="VgF-EH-h3b" userLabel="EditButton">
-                    <rect key="frame" x="152.5" y="517" width="70" height="70"/>
+                    <rect key="frame" x="155" y="522" width="65" height="65"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="70" id="IAx-mP-Cul"/>
-                        <constraint firstAttribute="width" constant="70" id="rce-Vy-mie"/>
+                        <constraint firstAttribute="height" constant="65" id="IAx-mP-Cul"/>
+                        <constraint firstAttribute="width" constant="65" id="rce-Vy-mie"/>
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="GCB-Qv-DOx" userLabel="CancelButton">
-                    <rect key="frame" x="37.5" y="517" width="70" height="70"/>
+                    <rect key="frame" x="55" y="522" width="65" height="65"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="saveIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="tFD-KT-2ep" userLabel="SaveButton">
-                    <rect key="frame" x="267.5" y="517" width="70" height="70"/>
+                    <rect key="frame" x="255" y="522" width="65" height="65"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.66666666669999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="tFD-KT-2ep" firstAttribute="centerY" secondItem="VgF-EH-h3b" secondAttribute="centerY" id="5ML-Ua-Gs0"/>
-                <constraint firstItem="VgF-EH-h3b" firstAttribute="leading" secondItem="GCB-Qv-DOx" secondAttribute="trailing" constant="45" id="DVD-B2-4IE"/>
+                <constraint firstItem="VgF-EH-h3b" firstAttribute="leading" secondItem="GCB-Qv-DOx" secondAttribute="trailing" constant="35" id="DVD-B2-4IE"/>
                 <constraint firstItem="tFD-KT-2ep" firstAttribute="width" secondItem="VgF-EH-h3b" secondAttribute="width" id="FEI-Mr-ZcQ"/>
-                <constraint firstItem="tFD-KT-2ep" firstAttribute="leading" secondItem="VgF-EH-h3b" secondAttribute="trailing" constant="45" id="JgK-QJ-bEK"/>
+                <constraint firstItem="tFD-KT-2ep" firstAttribute="leading" secondItem="VgF-EH-h3b" secondAttribute="trailing" constant="35" id="JgK-QJ-bEK"/>
                 <constraint firstItem="GCB-Qv-DOx" firstAttribute="centerY" secondItem="VgF-EH-h3b" secondAttribute="centerY" id="Kx0-p3-wVh"/>
                 <constraint firstAttribute="trailing" secondItem="gqJ-Zz-ja0" secondAttribute="trailing" id="RRy-cm-M2T"/>
                 <constraint firstItem="gqJ-Zz-ja0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VwF-X8-mLA"/>
