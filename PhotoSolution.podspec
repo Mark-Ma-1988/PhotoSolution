@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = "PhotoSolution"
-  spec.version          = "1.5.0"
+  spec.version          = "1.5.1"
   spec.summary          = "PhotoSolution is an all-in-one photo solution for your iOS app, the UI is similar to WeChat"
   build_tag             = spec.version
   spec.homepage         = "https://github.com/Mark-Ma-1988/PhotoSolution"
