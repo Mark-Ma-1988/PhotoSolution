@@ -19,6 +19,8 @@
 		95A6C72321E715EC00009240 /* backIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A6C72221E715EC00009240 /* backIcon.png */; };
 		95A6C72521E7166200009240 /* editIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A6C72421E7166200009240 /* editIcon.png */; };
 		95A6C72721E7177500009240 /* saveIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A6C72621E7177500009240 /* saveIcon.png */; };
+		95CA3FEB2203C73200C90652 /* settingsToOpen.png in Resources */ = {isa = PBXBuildFile; fileRef = 95CA3FE92203C73200C90652 /* settingsToOpen.png */; };
+		95CA3FEC2203C73200C90652 /* settingsToClose.png in Resources */ = {isa = PBXBuildFile; fileRef = 95CA3FEA2203C73200C90652 /* settingsToClose.png */; };
 		95D7C69021CB20D40086D533 /* ImageEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D7C68F21CB20D40086D533 /* ImageEditView.swift */; };
 		95D7C69721CB3AA70086D533 /* ImageEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D7C69621CB3AA70086D533 /* ImageEditView.xib */; };
 		95D7C69F21CB60090086D533 /* cancelIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D7C69E21CB60090086D533 /* cancelIcon.png */; };
@@ -58,6 +60,8 @@
 		95A6C72221E715EC00009240 /* backIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backIcon.png; sourceTree = "<group>"; };
 		95A6C72421E7166200009240 /* editIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editIcon.png; sourceTree = "<group>"; };
 		95A6C72621E7177500009240 /* saveIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = saveIcon.png; sourceTree = "<group>"; };
+		95CA3FE92203C73200C90652 /* settingsToOpen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingsToOpen.png; sourceTree = "<group>"; };
+		95CA3FEA2203C73200C90652 /* settingsToClose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingsToClose.png; sourceTree = "<group>"; };
 		95D7C68F21CB20D40086D533 /* ImageEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditView.swift; sourceTree = "<group>"; };
 		95D7C69621CB3AA70086D533 /* ImageEditView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageEditView.xib; sourceTree = "<group>"; };
 		95D7C69E21CB60090086D533 /* cancelIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancelIcon.png; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 		95D8DCE821F18D2500A656E2 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				95CA3FEA2203C73200C90652 /* settingsToClose.png */,
+				95CA3FE92203C73200C90652 /* settingsToOpen.png */,
 				95D7C6A421CB627A0086D533 /* switchIcon.png */,
 				95A6C72421E7166200009240 /* editIcon.png */,
 				95D8DCDA21F042EA00A656E2 /* flashOff.png */,
@@ -243,6 +249,8 @@
 				959B7AF720F37B67008CBDB3 /* tickIcon.png in Resources */,
 				955E0C8621C1EB1E009FF57B /* CameraViewController.xib in Resources */,
 				95E696CD20F23589003BDCBE /* ImageViewCell.xib in Resources */,
+				95CA3FEC2203C73200C90652 /* settingsToClose.png in Resources */,
+				95CA3FEB2203C73200C90652 /* settingsToOpen.png in Resources */,
 				95D8DCD921F03FDF00A656E2 /* cameraIcon.png in Resources */,
 				95A6C72321E715EC00009240 /* backIcon.png in Resources */,
 				95A1DD7C21073E060092E04D /* PhotoStoryboard.storyboard in Resources */,

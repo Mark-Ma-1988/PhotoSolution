@@ -16,6 +16,7 @@ class CameraViewController: UIViewController {
     var customization: PhotoSolutionCustomization!
     var podBundle: Bundle!
     var inCameraView: Bool!
+    var settingsMode: Bool!
     var imageEditView: ImageEditView!
     
     var cameraArea: UIView!
@@ -24,6 +25,7 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var cancelCameraButton: UIImageView!
     @IBOutlet weak var takePhotoButton: UIImageView!
     @IBOutlet weak var flashLightButton: UIImageView!
+    @IBOutlet weak var settingButton: UIImageView!
     
     var captureSession: AVCaptureSession!
     var currentCaptureDevice: AVCaptureDevice!
@@ -45,6 +47,7 @@ class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         inCameraView = true
+        settingsMode = false
         setupUI()
         setupFrontAndBackCamera()
         setupSessionAndOutput()
@@ -159,6 +162,7 @@ class CameraViewController: UIViewController {
         takePhotoButton.image = UIImage(named: "cameraIcon")
         cancelCameraButton.image = UIImage(named: "cancelIcon")
         flashLightButton.image = UIImage(named: "flashOff")
+        settingButton.image = UIImage(named: "settingsToOpen")
         
         let tapRotateCameraButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(rotateCameraButtonTapped(tapGestureRecognizer:)))
         rotateCameraButton.isUserInteractionEnabled = true
@@ -176,12 +180,25 @@ class CameraViewController: UIViewController {
         flashLightButton.isUserInteractionEnabled = true
         flashLightButton.addGestureRecognizer(tapFlashLightButtonRecognizer)
         
+        let tapSettingButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapSettingButtonTapped(tapGestureRecognizer:)))
+        settingButton.isUserInteractionEnabled = true
+        settingButton.addGestureRecognizer(tapSettingButtonRecognizer)
+        
         let frameworkBundle = Bundle(for: PhotoSolution.self)
         let url = frameworkBundle.resourceURL!.appendingPathComponent("PhotoSolution.bundle")
         podBundle = Bundle(url: url)
         imageEditView = UINib(nibName: "ImageEditView", bundle: self.podBundle).instantiate(withOwner: nil, options: nil)[0] as? ImageEditView
     }
     
+    @objc func tapSettingButtonTapped(tapGestureRecognizer: UITapGestureRecognizer){
+        if settingsMode{
+            settingButton.image = UIImage(named: "settingsToOpen")
+        }else{
+            settingButton.image = UIImage(named: "settingsToClose")
+        }
+        settingsMode = !settingsMode
+    }
+
     @objc func rotateCameraButtonTapped(tapGestureRecognizer: UITapGestureRecognizer){
         if(currentCaptureDevice == frontCamera){
             setupInput(isBackCamera: true)
