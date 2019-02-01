@@ -21,11 +21,16 @@ class CameraViewController: UIViewController {
     
     var cameraArea: UIView!
     
+    @IBOutlet weak var settingsView: UIView!
     @IBOutlet weak var rotateCameraButton: UIImageView!
     @IBOutlet weak var cancelCameraButton: UIImageView!
     @IBOutlet weak var takePhotoButton: UIImageView!
     @IBOutlet weak var flashLightButton: UIImageView!
     @IBOutlet weak var settingButton: UIImageView!
+    
+    @IBOutlet weak var autoSwitch: UISwitch!
+    @IBOutlet weak var durationSlider: UISlider!
+    @IBOutlet weak var isoSlider: UISlider!
     
     var captureSession: AVCaptureSession!
     var currentCaptureDevice: AVCaptureDevice!
@@ -47,8 +52,10 @@ class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         inCameraView = true
+        settingsView.isHidden = true
         settingsMode = false
         setupUI()
+        setupSettingsRange()
         setupFrontAndBackCamera()
         setupSessionAndOutput()
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
@@ -86,6 +93,66 @@ class CameraViewController: UIViewController {
             captureSession.stopRunning()
         }
     }
+    
+    func restoreCurrentCamera(){
+        autoSwitch.setOn(true, animated: true)
+        isoSlider.isEnabled = false
+        durationSlider.isEnabled = false
+        do{
+            try currentCaptureDevice.lockForConfiguration()
+            currentCaptureDevice.exposureMode = .continuousAutoExposure
+            currentCaptureDevice.unlockForConfiguration()
+        }catch {
+            print("Error in auto exposure")
+        }
+    }
+    
+    @IBAction func autoSwitch(_ sender: UISwitch) {
+        if autoSwitch.isOn{
+            restoreCurrentCamera()
+        }else{
+            isoSlider.isEnabled = true
+            durationSlider.isEnabled = true
+            let currentISO = currentCaptureDevice.iso
+            let currentDuration = currentCaptureDevice.exposureDuration.seconds
+            let minISO = currentCaptureDevice.activeFormat.minISO
+            let maxISO = currentCaptureDevice.activeFormat.maxISO
+            isoSlider.value = (currentISO - minISO)/(maxISO - minISO)
+            durationSlider.value = Float(currentDuration)
+        }
+    }
+    
+    func setupSettingsRange(){
+        isoSlider.minimumValue = 0.01
+        isoSlider.maximumValue = 0.99
+        durationSlider.minimumValue = 0.0001
+        durationSlider.maximumValue = 0.1999
+    }
+    
+    func customExposure(){
+        do{
+            try currentCaptureDevice.lockForConfiguration()
+            let minISO = currentCaptureDevice.activeFormat.minISO
+            let maxISO = currentCaptureDevice.activeFormat.maxISO
+            let clampedISO = isoSlider.value * (maxISO - minISO) + minISO
+            let sTime = CMTime(seconds: Double(durationSlider.value), preferredTimescale: 1000000)
+            currentCaptureDevice.setExposureModeCustom(duration: sTime, iso: clampedISO, completionHandler: { (time) -> Void in
+                //Todo
+            })
+            currentCaptureDevice.unlockForConfiguration()
+        }catch {
+            print("Error in customExposure")
+        }
+    }
+    
+    @IBAction func durationSlide(_ sender: UISlider) {
+        customExposure()
+    }
+    
+    @IBAction func ISOSlide(_ sender: UISlider) {
+        customExposure()
+    }
+    
     
     func setupFrontAndBackCamera(){
         if let devices = AVCaptureDevice.devices(for: AVMediaType.video) as [AVCaptureDevice]? {
@@ -151,6 +218,7 @@ class CameraViewController: UIViewController {
                 }else{
                     self.flashLightButton.isHidden = true
                 }
+                self.restoreCurrentCamera()
             }
         } catch {
             print("Error")
@@ -192,13 +260,15 @@ class CameraViewController: UIViewController {
     
     @objc func tapSettingButtonTapped(tapGestureRecognizer: UITapGestureRecognizer){
         if settingsMode{
+            settingsView.isHidden = true
             settingButton.image = UIImage(named: "settingsToOpen")
         }else{
+            settingsView.isHidden = false
             settingButton.image = UIImage(named: "settingsToClose")
         }
         settingsMode = !settingsMode
     }
-
+    
     @objc func rotateCameraButtonTapped(tapGestureRecognizer: UITapGestureRecognizer){
         if(currentCaptureDevice == frontCamera){
             setupInput(isBackCamera: true)
@@ -240,7 +310,7 @@ class CameraViewController: UIViewController {
             }else{
                 let originalImageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer!)
                 let originalImage = UIImage(data: originalImageData!)
-
+                
                 //compress or not
                 var image = originalImage?.rescaleImage(toPX: 1000)
                 
@@ -390,7 +460,7 @@ class CameraViewController: UIViewController {
         }))
         self.present(alert, animated: true, completion: nil)
     }
-
+    
     @objc func didChangeOrientation() {
         UIView.animate(withDuration: 0.3, animations: {
             if UIDevice.current.orientation == .landscapeLeft{
