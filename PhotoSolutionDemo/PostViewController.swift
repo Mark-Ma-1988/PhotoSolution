@@ -8,8 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class PostViewController: UIViewController {
     
+    
+    @IBOutlet weak var editTextView: UITextView!
     @IBOutlet weak var pickedPhotoCollectionView: UICollectionView!
     var cellSize: CGFloat!
     let pickerCellReuseIdentifier = "PickerCell"
@@ -24,7 +26,6 @@ class ViewController: UIViewController {
         pickedPhotoCollectionView.register(dataCellNib, forCellWithReuseIdentifier: pickerCellReuseIdentifier)
         pickedPhotoCollectionView.isScrollEnabled = true
         pickedPhotoCollectionView.bounces = false
-        pickedPhotoCollectionView.backgroundColor = UIColor.white
         pickedPhotoCollectionView.reloadData()
     }
     
@@ -39,10 +40,57 @@ class ViewController: UIViewController {
         }
         print("image = \(dataLength) \(typeArray[index]) ")
     }
+    
+    func getPhotos() {
+        let photoSolution = PhotoSolution()
+        photoSolution.delegate = self
+        photoSolution.customization.markerColor = UIColor.blue
+        photoSolution.customization.navigationBarBackgroundColor = UIColor.darkGray
+        photoSolution.customization.navigationBarTextColor = UIColor.white
+        photoSolution.customization.titleForAlbum = "Album"
+        photoSolution.customization.alertTextForPhotoAccess = "Your App Would Like to Access Your Photos"
+        photoSolution.customization.settingButtonTextForPhotoAccess = "Setting"
+        photoSolution.customization.cancelButtonTextForPhotoAccess = "Cancel"
+        photoSolution.customization.alertTextForCameraAccess = "Your App Would Like to Access Your Photos"
+        photoSolution.customization.settingButtonTextForCameraAccess = "Setting"
+        photoSolution.customization.cancelButtonTextForCameraAccess = "Cancel"
+        photoSolution.customization.returnImageSize = .compressed
+        photoSolution.customization.statusBarColor = .white
+        
+        var alertController: UIAlertController
+        if UIDevice.current.userInterfaceIdiom == .phone{
+            alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        }else{
+            alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        }
+        let takeAction = UIAlertAction(title: "Take a photo", style: .default, handler: { action in
+            self.present(photoSolution.getCamera(), animated: true, completion: nil)
+        })
+        let findAction = UIAlertAction(title: "From my album", style: .default, handler: { action in
+            let remainPhotos = self.maxPhotos - self.currentImages.count
+            self.present(photoSolution.getPhotoPicker(maxPhotos: remainPhotos), animated: true, completion: nil)
+        })
+        let cancleAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+        })
+        alertController.addAction(takeAction)
+        alertController.addAction(findAction)
+        alertController.addAction(cancleAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelClick(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func sendClick(_ sender: UIBarButtonItem) {
+        
+    }
+    
+    
 }
 
 
-extension ViewController: UICollectionViewDataSource{
+extension PostViewController: UICollectionViewDataSource{
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -75,7 +123,7 @@ extension ViewController: UICollectionViewDataSource{
     }
 }
 
-extension ViewController: UICollectionViewDelegateFlowLayout{
+extension PostViewController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -93,46 +141,19 @@ extension ViewController: UICollectionViewDelegateFlowLayout{
     
 }
 
-extension ViewController: UICollectionViewDelegate{
+extension PostViewController: UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath){
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         if indexPath.row == currentImages.count{
-            let photoSolution = PhotoSolution()
-            photoSolution.delegate = self
-            photoSolution.customization.markerColor = UIColor.blue
-            photoSolution.customization.navigationBarBackgroundColor = UIColor.darkGray
-            photoSolution.customization.navigationBarTextColor = UIColor.white
-            photoSolution.customization.titleForAlbum = "Album"
-            photoSolution.customization.alertTextForPhotoAccess = "Your App Would Like to Access Your Photos"
-            photoSolution.customization.settingButtonTextForPhotoAccess = "Setting"
-            photoSolution.customization.cancelButtonTextForPhotoAccess = "Cancel"
-            photoSolution.customization.alertTextForCameraAccess = "Your App Would Like to Access Your Photos"
-            photoSolution.customization.settingButtonTextForCameraAccess = "Setting"
-            photoSolution.customization.cancelButtonTextForCameraAccess = "Cancel"
-            photoSolution.customization.returnImageSize = .compressed
-            photoSolution.customization.statusBarColor = .white
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-            let takeAction = UIAlertAction(title: "Take a photo", style: .default, handler: { action in
-                self.present(photoSolution.getCamera(), animated: true, completion: nil)
-            })
-            let findAction = UIAlertAction(title: "From my album", style: .default, handler: { action in
-                let remainPhotos = self.maxPhotos - self.currentImages.count
-                self.present(photoSolution.getPhotoPicker(maxPhotos: remainPhotos), animated: true, completion: nil)
-            })
-            let cancleAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-            })
-            alertController.addAction(takeAction)
-            alertController.addAction(findAction)
-            alertController.addAction(cancleAction)
-            self.present(alertController, animated: true, completion: nil)
+            getPhotos()
         }
     }
 }
 
-extension ViewController: PickerCellDelegate{
+extension PostViewController: PickerCellDelegate{
     
     func deleteClick(_ cell: UICollectionViewCell) {
         currentImages.remove(at: cell.tag)
@@ -141,7 +162,7 @@ extension ViewController: PickerCellDelegate{
     
 }
 
-extension ViewController: PhotoSolutionDelegate{
+extension PostViewController: PhotoSolutionDelegate{
 
     func returnImages(_ images: [UIImage]) {
         for image in images {
