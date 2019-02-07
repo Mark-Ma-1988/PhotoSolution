@@ -10,7 +10,6 @@ import UIKit
 
 class PostViewController: UIViewController {
     
-    
     @IBOutlet weak var editTextView: UITextView!
     @IBOutlet weak var pickedPhotoCollectionView: UICollectionView!
     var cellSize: CGFloat!
@@ -18,15 +17,36 @@ class PostViewController: UIViewController {
     let space = CGFloat(8)
     var currentImages: [UIImage] = [UIImage]()
     let maxPhotos = 9
+    let defaultWords = "Description about your photos..."
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cellSize = (pickedPhotoCollectionView.frame.width-4*space)/3
+        cellSize = (pickedPhotoCollectionView.frame.width - 4 * space) / 3
         let dataCellNib = UINib(nibName: pickerCellReuseIdentifier, bundle: nil)
         pickedPhotoCollectionView.register(dataCellNib, forCellWithReuseIdentifier: pickerCellReuseIdentifier)
         pickedPhotoCollectionView.isScrollEnabled = true
         pickedPhotoCollectionView.bounces = false
         pickedPhotoCollectionView.reloadData()
+        editTextView.delegate = self
+        initTextView()
+    }
+    
+    func initTextView(){
+        editTextView.text = defaultWords
+        editTextView.textColor = UIColor.lightGray
+//        let range = NSRange(location: 0, length: 0)
+//        editTextView.selectedRange = range
+    }
+    
+    func startEditTextView(){
+        editTextView.text = ""
+        editTextView.textColor = UIColor.black
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if currentImages.count == 0{
+            getPhotos()
+        }
     }
     
     func calulateImageFileSize(_ image: UIImage?) {
@@ -170,7 +190,7 @@ extension PostViewController: PhotoSolutionDelegate{
                 currentImages.append(image)
             }
         }
-        calulateImageFileSize(images.first)
+        //calulateImageFileSize(images.first)
         pickedPhotoCollectionView.reloadData()
     }
     
@@ -178,4 +198,20 @@ extension PostViewController: PhotoSolutionDelegate{
         print("User close it!")
     }
     
+}
+
+extension PostViewController: UITextViewDelegate{
+    
+    func textViewDidBeginEditing(_ textView: UITextView){
+        startEditTextView()
+    }
+    
+    
+    func textViewDidChange(_ textView: UITextView){
+        if editTextView.text.count == 0{
+            initTextView()
+            editTextView.endEditing(true)
+        }
+    }
+
 }

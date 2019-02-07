@@ -26,7 +26,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="pFL-z3-PAw" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="BAs-I4-5s3"/>
                             <constraint firstItem="pFL-z3-PAw" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="bdw-cm-GBY"/>
