@@ -12,6 +12,8 @@
 		951C3FA2220BDFB800B77D9F /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 951C3FA0220BDFB800B77D9F /* PostCell.xib */; };
 		955E0C8521C1EB1E009FF57B /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955E0C8321C1EB1E009FF57B /* CameraViewController.swift */; };
 		955E0C8621C1EB1E009FF57B /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 955E0C8421C1EB1E009FF57B /* CameraViewController.xib */; };
+		95740074221512D000B08851 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95740073221512D000B08851 /* WebService.swift */; };
+		95740076221512E000B08851 /* HttpLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95740075221512E000B08851 /* HttpLayer.swift */; };
 		959B7AF720F37B67008CBDB3 /* tickIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 959B7AF620F37B66008CBDB3 /* tickIcon.png */; };
 		95A1DD7C21073E060092E04D /* PhotoStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A1DD7B21073E060092E04D /* PhotoStoryboard.storyboard */; };
 		95A1DD822107EA530092E04D /* PhotoSolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A1DD812107EA530092E04D /* PhotoSolution.swift */; };
@@ -59,6 +61,8 @@
 		951C3FA0220BDFB800B77D9F /* PostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
 		955E0C8321C1EB1E009FF57B /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		955E0C8421C1EB1E009FF57B /* CameraViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
+		95740073221512D000B08851 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		95740075221512E000B08851 /* HttpLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpLayer.swift; sourceTree = "<group>"; };
 		959B7AF620F37B66008CBDB3 /* tickIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tickIcon.png; sourceTree = "<group>"; };
 		95A1DD7B21073E060092E04D /* PhotoStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PhotoStoryboard.storyboard; sourceTree = "<group>"; };
 		95A1DD812107EA530092E04D /* PhotoSolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSolution.swift; sourceTree = "<group>"; };
@@ -118,7 +122,6 @@
 				C30D58960CDD843F8A1DA7FB /* Pods-PhotoSolutionDemo.debug.xcconfig */,
 				31B36D4A9E3E1EE6BF8A96E9 /* Pods-PhotoSolutionDemo.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -172,6 +175,8 @@
 			isa = PBXGroup;
 			children = (
 				95E696A520F230F2003BDCBE /* AppDelegate.swift */,
+				95740073221512D000B08851 /* WebService.swift */,
+				95740075221512E000B08851 /* HttpLayer.swift */,
 				95E696A720F230F2003BDCBE /* PostViewController.swift */,
 				951C3F9D220BDBD700B77D9F /* BrowserViewController.swift */,
 				95E696A920F230F2003BDCBE /* Main.storyboard */,
@@ -359,6 +364,7 @@
 				95A1DD882107F7240092E04D /* ImageEditorViewController.swift in Sources */,
 				95E696C020F2357F003BDCBE /* Photo.swift in Sources */,
 				951C3F9E220BDBD700B77D9F /* BrowserViewController.swift in Sources */,
+				95740076221512E000B08851 /* HttpLayer.swift in Sources */,
 				95A1DD842107F66F0092E04D /* PhotoCollectionViewController.swift in Sources */,
 				95E696A820F230F2003BDCBE /* PostViewController.swift in Sources */,
 				951C3FA1220BDFB800B77D9F /* PostCell.swift in Sources */,
@@ -367,6 +373,7 @@
 				95A1DD8A21080D350092E04D /* PhotoNavigationController.swift in Sources */,
 				95E696A620F230F2003BDCBE /* AppDelegate.swift in Sources */,
 				95D7C69021CB20D40086D533 /* ImageEditView.swift in Sources */,
+				95740074221512D000B08851 /* WebService.swift in Sources */,
 				95E696C120F2357F003BDCBE /* Album.swift in Sources */,
 				95E696D220F2397A003BDCBE /* PickerCell.swift in Sources */,
 				95D8DCE221F14E1600A656E2 /* UIImage+Extension.swift in Sources */,

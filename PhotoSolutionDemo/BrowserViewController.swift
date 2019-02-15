@@ -11,22 +11,32 @@ import UIKit
 class BrowserViewController: UIViewController {
 
     
+    @IBOutlet weak var indicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var postTableView: UITableView!
+    
+    @IBAction func postClick(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "toPostPage", sender: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        indicatorView.isHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(getLatestPosts), name: NSNotification.Name(rawValue:"refreshData"), object: nil)
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func getLatestPosts(notification : Notification){
+        let str = notification.userInfo!["post"]
+        print(String(describing: str!) + "this notifi")
     }
-    */
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toPostPage" {
+            if let postViewController = segue.destination as? PostViewController {
+                
+            }
+        }
+    }
+ 
 
 }

@@ -12,12 +12,15 @@ class PostViewController: UIViewController {
     
     @IBOutlet weak var editTextView: UITextView!
     @IBOutlet weak var pickedPhotoCollectionView: UICollectionView!
-    var cellSize: CGFloat!
-    let pickerCellReuseIdentifier = "PickerCell"
-    let space = CGFloat(8)
-    var currentImages: [UIImage] = [UIImage]()
-    let maxPhotos = 9
-    let defaultWords = "Description about your photos..."
+    private var cellSize: CGFloat!
+    private let pickerCellReuseIdentifier = "PickerCell"
+    private let space = CGFloat(8)
+    private var currentImages: [UIImage] = [UIImage]()
+    private let maxPhotos = 9
+    private let defaultWords = "Description about your photos..."
+    private var hasDescription: Bool!
+    @IBOutlet weak var progressView: UIProgressView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +32,25 @@ class PostViewController: UIViewController {
         pickedPhotoCollectionView.reloadData()
         editTextView.delegate = self
         initTextView()
+        
+//        let resignKeyboardGesture=UITapGestureRecognizer(target: self, action: #selector(resignKeyboard(_:)))
+//        resignKeyboardGesture.numberOfTapsRequired = 1
+//        self.view.isUserInteractionEnabled = true
+//        self.view.addGestureRecognizer(resignKeyboardGesture)
+//        editTextView.isUserInteractionEnabled = true
+//        editTextView.addGestureRecognizer(resignKeyboardGesture)
+//        pickedPhotoCollectionView.isUserInteractionEnabled = true
+//        pickedPhotoCollectionView.addGestureRecognizer(resignKeyboardGesture)
     }
+    
+//    @objc private func resignKeyboard(_ gesture: UITapGestureRecognizer) {
+//        editTextView.resignFirstResponder()
+//    }
     
     func initTextView(){
         editTextView.text = defaultWords
         editTextView.textColor = UIColor.lightGray
+        hasDescription = false
 //        let range = NSRange(location: 0, length: 0)
 //        editTextView.selectedRange = range
     }
@@ -41,6 +58,7 @@ class PostViewController: UIViewController {
     func startEditTextView(){
         editTextView.text = ""
         editTextView.textColor = UIColor.black
+        hasDescription = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -103,9 +121,37 @@ class PostViewController: UIViewController {
     }
     
     @IBAction func sendClick(_ sender: UIBarButtonItem) {
-        
+        editTextView.resignFirstResponder()
+        if currentImages.count == 0{
+            self.sendAlert(alertMessage: "Please add some photos")
+        }else{
+            var descriptionText = editTextView.text
+            if !hasDescription || editTextView.text.count == 0{
+                descriptionText = ""
+            }
+            progressView.isHidden = false
+            self.progressView.progress = 0
+            WebService.shared.uploadPost(description: descriptionText!, photos: currentImages, successHandler: {
+//                self.progressView.isHidden = true
+                NotificationCenter.default.post(name: NSNotification.Name("refreshData"), object: self, userInfo: ["post":"NewTest"])
+                self.dismiss(animated: true, completion: nil)
+            }, progressHandler: {progress in
+                self.progressView.setProgress(progress, animated: true)
+            }, failureHandler: { message in
+                self.progressView.isHidden = true
+                self.sendAlert(alertMessage: message)
+            })
+            
+        }
     }
     
+    func sendAlert(alertMessage: String){
+        let alert = UIAlertController(title: nil, message: alertMessage, preferredStyle: .alert)
+        alert.addAction( UIAlertAction(title: "OK", style: .cancel, handler: { action in
+            UIApplication.shared.openURL(NSURL(string:UIApplication.openSettingsURLString)! as URL)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
     
 }
 
@@ -205,7 +251,6 @@ extension PostViewController: UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView){
         startEditTextView()
     }
-    
     
     func textViewDidChange(_ textView: UITextView){
         if editTextView.text.count == 0{

@@ -15,8 +15,8 @@ class Photo{
     var selected = false
     var selectedOrder: Int = 0
     var index: Int!
-    private let compressedSize = 800
-    private let thumbnailSize = 160
+    private let compressedSize = 1000
+    private let thumbnailSize = 220
     
     init(asset: PHAsset,index: Int) {
         self.asset = asset

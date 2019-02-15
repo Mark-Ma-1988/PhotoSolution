@@ -22,12 +22,21 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Dsu-oz-jOs">
+                                <rect key="frame" x="167.5" y="345.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="AVG-zr-eB1"/>
+                                    <constraint firstAttribute="height" constant="40" id="Tg3-pf-AZv"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Dsu-oz-jOs" firstAttribute="centerY" secondItem="4be-Rh-aQG" secondAttribute="centerY" id="0bM-Ld-2L5"/>
                             <constraint firstItem="YyR-aw-3rC" firstAttribute="leading" secondItem="4be-Rh-aQG" secondAttribute="leading" id="8Jc-cj-6oH"/>
                             <constraint firstItem="YyR-aw-3rC" firstAttribute="top" secondItem="4be-Rh-aQG" secondAttribute="top" id="I2d-jn-GEQ"/>
                             <constraint firstItem="YyR-aw-3rC" firstAttribute="bottom" secondItem="4be-Rh-aQG" secondAttribute="bottom" id="Rvr-rN-TP7"/>
+                            <constraint firstItem="Dsu-oz-jOs" firstAttribute="centerX" secondItem="4be-Rh-aQG" secondAttribute="centerX" id="aNg-sJ-NEu"/>
                             <constraint firstItem="YyR-aw-3rC" firstAttribute="trailing" secondItem="4be-Rh-aQG" secondAttribute="trailing" id="b5d-O0-uDL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4be-Rh-aQG"/>
@@ -35,10 +44,15 @@
                     <navigationItem key="navigationItem" title="Photo Solution" id="EjQ-Vf-If2">
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="dxC-0b-Yoz">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="presentation" id="jA3-IU-6Os"/>
+                                <action selector="postClick:" destination="hYv-ZY-Ndh" id="8Jb-e6-YVS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="indicatorView" destination="Dsu-oz-jOs" id="o7W-bD-ng1"/>
+                        <outlet property="postTableView" destination="YyR-aw-3rC" id="jnl-Yt-xhH"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="toPostPage" id="o7W-NC-Tb0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bdi-7x-aIa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -113,12 +127,25 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <progressView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FTo-vr-SkC">
+                                <rect key="frame" x="91" y="214" width="193" height="31"/>
+                                <color key="backgroundColor" red="0.66666666669999997" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="N3n-Vo-OEJ"/>
+                                </constraints>
+                                <color key="progressTintColor" red="0.23863389760000001" green="1" blue="0.23868815099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="trackTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="xpN-tU-IGV" firstAttribute="top" secondItem="FTo-vr-SkC" secondAttribute="bottom" constant="50" id="0Ew-io-k2h"/>
+                            <constraint firstItem="FTo-vr-SkC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="75" id="4LT-gF-qmo"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xpN-tU-IGV" secondAttribute="trailing" constant="20" id="9ga-Ar-nMk"/>
+                            <constraint firstItem="FTo-vr-SkC" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="CC5-qH-y2C"/>
                             <constraint firstItem="xpN-tU-IGV" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="FCu-Ku-w5F"/>
                             <constraint firstItem="xpN-tU-IGV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Hei-LW-LLy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FTo-vr-SkC" secondAttribute="trailing" constant="75" id="Leu-DK-ImB"/>
                             <constraint firstItem="xpN-tU-IGV" firstAttribute="top" secondItem="7MY-hy-NWy" secondAttribute="bottom" constant="30" id="Nql-M0-AIX"/>
                             <constraint firstItem="mUR-kC-Fgm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="drE-nk-bXK"/>
                             <constraint firstItem="mUR-kC-Fgm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="g9q-q2-6rP"/>
@@ -133,6 +160,7 @@
                     <connections>
                         <outlet property="editTextView" destination="7MY-hy-NWy" id="g3G-VZ-6WC"/>
                         <outlet property="pickedPhotoCollectionView" destination="xpN-tU-IGV" id="Mdl-am-f26"/>
+                        <outlet property="progressView" destination="FTo-vr-SkC" id="F1t-Hn-f0S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
