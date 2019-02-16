@@ -388,7 +388,7 @@ class CameraViewController: UIViewController {
                 let originalImage = UIImage(data: originalImageData!)
                 
                 //compress or not
-                var image = originalImage?.rescaleImage(toPX: 1000)
+                var image = originalImage?.rescaleImage(toPX: 1500)
                 
                 if UIDevice.current.orientation == .landscapeLeft{
                     image = image!.rotate(radians: -.pi/2)
@@ -557,8 +557,9 @@ class CameraViewController: UIViewController {
 extension CameraViewController: ImageEditViewDelegate{
     
     func imageCompleted(_ editedImage: UIImage) {
-        self.solutionDelegate?.returnImages([editedImage])
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: false) {
+            self.solutionDelegate?.returnImages([editedImage])
+        }
     }
     
 }

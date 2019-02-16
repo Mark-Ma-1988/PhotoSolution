@@ -142,8 +142,10 @@ class PhotoCollectionViewController: UIViewController {
                 }
             }
         }
-        photoNavigationController.solutionDelegate?.returnImages(resultImages)
-        photoNavigationController.dismiss(animated: true, completion: nil)
+        
+        photoNavigationController.dismiss(animated: false) {
+            self.photoNavigationController.solutionDelegate?.returnImages(resultImages)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

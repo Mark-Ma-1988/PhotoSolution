@@ -15,12 +15,12 @@ class PostViewController: UIViewController {
     private var cellSize: CGFloat!
     private let pickerCellReuseIdentifier = "PickerCell"
     private let space = CGFloat(8)
-    private var currentImages: [UIImage] = [UIImage]()
+    var currentImages: [UIImage] = [UIImage]()
     private let maxPhotos = 9
     private let defaultWords = "Description about your photos..."
     private var hasDescription: Bool!
     @IBOutlet weak var progressView: UIProgressView!
-    
+    var photoSolution: PhotoSolution!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +32,12 @@ class PostViewController: UIViewController {
         pickedPhotoCollectionView.reloadData()
         editTextView.delegate = self
         initTextView()
+        
+        photoSolution.delegate = self
+        if currentImages.count>0{
+            pickedPhotoCollectionView.reloadData()
+        }
+        
         
 //        let resignKeyboardGesture=UITapGestureRecognizer(target: self, action: #selector(resignKeyboard(_:)))
 //        resignKeyboardGesture.numberOfTapsRequired = 1
@@ -62,9 +68,7 @@ class PostViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if currentImages.count == 0{
-            getPhotos()
-        }
+        
     }
     
     func calulateImageFileSize(_ image: UIImage?) {
@@ -80,20 +84,6 @@ class PostViewController: UIViewController {
     }
     
     func getPhotos() {
-        let photoSolution = PhotoSolution()
-        photoSolution.delegate = self
-        photoSolution.customization.markerColor = UIColor.blue
-        photoSolution.customization.navigationBarBackgroundColor = UIColor.darkGray
-        photoSolution.customization.navigationBarTextColor = UIColor.white
-        photoSolution.customization.titleForAlbum = "Album"
-        photoSolution.customization.alertTextForPhotoAccess = "Your App Would Like to Access Your Photos"
-        photoSolution.customization.settingButtonTextForPhotoAccess = "Setting"
-        photoSolution.customization.cancelButtonTextForPhotoAccess = "Cancel"
-        photoSolution.customization.alertTextForCameraAccess = "Your App Would Like to Access Your Photos"
-        photoSolution.customization.settingButtonTextForCameraAccess = "Setting"
-        photoSolution.customization.cancelButtonTextForCameraAccess = "Cancel"
-        photoSolution.customization.returnImageSize = .compressed
-        photoSolution.customization.statusBarColor = .white
         
         var alertController: UIAlertController
         if UIDevice.current.userInterfaceIdiom == .phone{
@@ -102,11 +92,11 @@ class PostViewController: UIViewController {
             alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         }
         let takeAction = UIAlertAction(title: "Take a photo", style: .default, handler: { action in
-            self.present(photoSolution.getCamera(), animated: true, completion: nil)
+            self.present(self.photoSolution.getCamera(), animated: true, completion: nil)
         })
         let findAction = UIAlertAction(title: "From my album", style: .default, handler: { action in
             let remainPhotos = self.maxPhotos - self.currentImages.count
-            self.present(photoSolution.getPhotoPicker(maxPhotos: remainPhotos), animated: true, completion: nil)
+            self.present(self.photoSolution.getPhotoPicker(maxPhotos: remainPhotos), animated: true, completion: nil)
         })
         let cancleAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
         })
