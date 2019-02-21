@@ -10,7 +10,7 @@ import Foundation
 
 class Post: Decodable{
     
-    struct Photo: Decodable{
+    struct PhotoUnit: Decodable{
         var compressed: String
         var original: String
     }
@@ -19,6 +19,6 @@ class Post: Decodable{
     var postID: Int
     var time: String
     var description: String
-    var photos: [Photo]
+    var photos: [PhotoUnit]
     
 }

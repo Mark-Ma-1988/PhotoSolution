@@ -34,9 +34,6 @@ class PostViewController: UIViewController {
         initTextView()
         
         photoSolution.delegate = self
-        if currentImages.count>0{
-            pickedPhotoCollectionView.reloadData()
-        }
         
         
 //        let resignKeyboardGesture=UITapGestureRecognizer(target: self, action: #selector(resignKeyboard(_:)))

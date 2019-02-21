@@ -96,7 +96,7 @@ class BrowserViewController: UIViewController {
                 }
                 self.postArray.append(contentsOf: postArray)
                 self.postTableView.beginUpdates()
-                self.postTableView.insertRows(at: indexPaths, with: UITableView.RowAnimation.automatic)
+                self.postTableView.insertRows(at: indexPaths, with: UITableView.RowAnimation.none)
                 self.postTableView.endUpdates()
             }
         }) { error in
@@ -174,12 +174,16 @@ extension BrowserViewController: UITableViewDataSource{
         let cell=tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! PostCell
         let post = postArray[indexPath.row]
         cell.configViewWithData(post: post)
-        
-        if indexPath.row == (postArray.count - 1) && hasMoreData{
-            getPostData(fromPostID: post.postID)
-        }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == (postArray.count - 1) && hasMoreData{
+            let post = postArray[indexPath.row]
+            getPostData(fromPostID: post.postID)
+        }
+    }
+
     
 }
 
