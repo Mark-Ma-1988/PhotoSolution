@@ -21,6 +21,10 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YyR-aw-3rC">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="hYv-ZY-Ndh" id="oTS-VT-YbV"/>
+                                    <outlet property="delegate" destination="hYv-ZY-Ndh" id="AA9-xK-bHw"/>
+                                </connections>
                             </tableView>
                             <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Dsu-oz-jOs">
                                 <rect key="frame" x="167.5" y="345.5" width="40" height="40"/>
@@ -35,7 +39,7 @@
                             <constraint firstItem="Dsu-oz-jOs" firstAttribute="centerY" secondItem="4be-Rh-aQG" secondAttribute="centerY" id="0bM-Ld-2L5"/>
                             <constraint firstItem="YyR-aw-3rC" firstAttribute="leading" secondItem="4be-Rh-aQG" secondAttribute="leading" id="8Jc-cj-6oH"/>
                             <constraint firstItem="YyR-aw-3rC" firstAttribute="top" secondItem="4be-Rh-aQG" secondAttribute="top" id="I2d-jn-GEQ"/>
-                            <constraint firstItem="YyR-aw-3rC" firstAttribute="bottom" secondItem="4be-Rh-aQG" secondAttribute="bottom" id="Rvr-rN-TP7"/>
+                            <constraint firstItem="YyR-aw-3rC" firstAttribute="bottom" secondItem="wU1-dd-orW" secondAttribute="bottom" id="Rvr-rN-TP7"/>
                             <constraint firstItem="Dsu-oz-jOs" firstAttribute="centerX" secondItem="4be-Rh-aQG" secondAttribute="centerX" id="aNg-sJ-NEu"/>
                             <constraint firstItem="YyR-aw-3rC" firstAttribute="trailing" secondItem="4be-Rh-aQG" secondAttribute="trailing" id="b5d-O0-uDL"/>
                         </constraints>

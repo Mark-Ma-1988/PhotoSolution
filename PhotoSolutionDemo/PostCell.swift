@@ -10,6 +10,7 @@ import UIKit
 
 class PostCell: UITableViewCell {
 
+    @IBOutlet weak var label: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,4 +22,7 @@ class PostCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func configViewWithData(post: Post){
+        self.label.text = post.description
+    }
 }
