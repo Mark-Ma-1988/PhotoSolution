@@ -57,6 +57,7 @@ class BrowserViewController: UIViewController {
         postTableView.register(postCellNib, forCellReuseIdentifier: reuseIdentifier)
         postTableView.tableFooterView = UIView()
         postTableView.separatorColor = UIColor.lightGray
+        postTableView.allowsSelection = false
         if UIDevice.current.userInterfaceIdiom == .pad{
             postTableView.estimatedRowHeight = 250
         }else{
@@ -87,17 +88,22 @@ class BrowserViewController: UIViewController {
             if fromPostID == 0{
                 self.postArray = postArray
                 self.postTableView.reloadData()
+//                self.postTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false)
+                self.postTableView.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
             }else{
-                var indexPaths=[IndexPath]()
-                for i in (self.postArray.count) ..< (self.postArray.count + postArray.count)
-                {
-                    let indexPath = IndexPath(row: i, section: 0)
-                    indexPaths.append(indexPath)
-                }
                 self.postArray.append(contentsOf: postArray)
-                self.postTableView.beginUpdates()
-                self.postTableView.insertRows(at: indexPaths, with: UITableView.RowAnimation.none)
-                self.postTableView.endUpdates()
+                self.postTableView.reloadData()
+                
+//                var indexPaths=[IndexPath]()
+//                for i in (self.postArray.count) ..< (self.postArray.count + postArray.count)
+//                {
+//                    let indexPath = IndexPath(row: i, section: 0)
+//                    indexPaths.append(indexPath)
+//                }
+//                self.postArray.append(contentsOf: postArray)
+//                self.postTableView.beginUpdates()
+//                self.postTableView.insertRows(at: indexPaths, with: UITableView.RowAnimation.none)
+//                self.postTableView.endUpdates()
             }
         }) { error in
             self.indicatorView.isHidden = true

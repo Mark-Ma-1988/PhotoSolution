@@ -20,17 +20,23 @@ class PostCell: UITableViewCell {
     private var post: Post!
     private var cellSize: CGFloat!
     private let space = CGFloat(6)
+    private let screenWidth = UIScreen.main.bounds.size.width
+    
+    @IBOutlet weak var photosHorizonSpace: NSLayoutConstraint!
+    @IBOutlet weak var photosHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var photosWidthConstaint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        //cellSize = (photosCollectionView.frame.width - 4 * space) / 3
-        cellSize = 100
+        
         let dataCellNib = UINib(nibName: pickerCellReuseIdentifier, bundle: nil)
         photosCollectionView.register(dataCellNib, forCellWithReuseIdentifier: pickerCellReuseIdentifier)
         photosCollectionView.isScrollEnabled = false
         photosCollectionView.bounces = false
         photosCollectionView.delegate = self
         photosCollectionView.dataSource = self
+        photosCollectionView.translatesAutoresizingMaskIntoConstraints = false;
+        self.translatesAutoresizingMaskIntoConstraints = false;
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -43,6 +49,48 @@ class PostCell: UITableViewCell {
         self.post = post
         descriptionLabel.text = post.description
         timeLabel.text = post.time
+        cellSize = (screenWidth - 2 * photosHorizonSpace.constant - 4 * space) / 3
+        let photoAmount = post.photos.count
+        if photoAmount == 1{
+            cellSize = cellSize * 2
+            photosHeightConstraint.constant = 1 * cellSize + 2 * space
+            photosWidthConstaint.constant = 1 * cellSize + 2 * space
+        }else if photoAmount == 2 || photoAmount == 3{
+            photosHeightConstraint.constant = 1 * cellSize + 2 * space
+            photosWidthConstaint.constant = 3 * cellSize + 4 * space
+        }else if photoAmount == 4{
+            photosHeightConstraint.constant = 2 * cellSize + 3 * space
+            photosWidthConstaint.constant = 2 * cellSize + 3 * space
+        }else if photoAmount == 5 || photoAmount == 6{
+            photosHeightConstraint.constant = 2 * cellSize + 3 * space
+            photosWidthConstaint.constant = 3 * cellSize + 4 * space
+        }else{
+            photosHeightConstraint.constant = 3 * cellSize + 4 * space
+            photosWidthConstaint.constant = 3 * cellSize + 4 * space
+        }
+        
+        
+        
+        
+//        photosCollectionView.removeConstraints(photosCollectionView.constraints)
+//        let c1 = NSLayoutConstraint(item: photosCollectionView, attribute: .width, relatedBy:. equal, toItem: nil , attribute: .notAnAttribute, multiplier: 1, constant: (3 * cellSize + 4 * space))
+//        let c2 = NSLayoutConstraint(item: photosCollectionView, attribute:.height, relatedBy:.equal, toItem: nil , attribute: .notAnAttribute, multiplier: 1, constant: (3 * cellSize + 4 * space))
+        
+//        photosCollectionView.removeConstraint(photosHeightConstraint)
+//        photosCollectionView.removeConstraint(photosWidthConstaint)
+//        photosCollectionView.layoutIfNeeded()
+//
+        
+//
+//        photosCollectionView.addConstraint(photosHeightConstraint)
+//        photosCollectionView.addConstraint(photosWidthConstaint)
+//        photosCollectionView.layoutIfNeeded()
+        //photosCollectionView.addConstraints([c1,c2])
+//        photosCollectionView.layoutIfNeeded()
+//        self.layoutIfNeeded()
+        
+        
+        
         photosCollectionView.reloadData()
     }
 }
