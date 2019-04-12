@@ -70,6 +70,8 @@ class CameraViewController: UIViewController {
                         self.goToPhotoAccessSetting()
                     case .notDetermined:
                         self.goToPhotoAccessSetting()
+                    @unknown default:
+                        fatalError()
                     }
                 }
             } else {

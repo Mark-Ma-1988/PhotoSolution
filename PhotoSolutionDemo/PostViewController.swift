@@ -59,11 +59,7 @@ class PostViewController: UIViewController {
     
     func getPhotos() {
         var alertController: UIAlertController
-        if UIDevice.current.userInterfaceIdiom == .phone{
-            alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        }else{
-            alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        }
+        alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         let takeAction = UIAlertAction(title: "Take a photo", style: .default, handler: { action in
             self.present(self.photoSolution.getCamera(), animated: true, completion: nil)
         })
