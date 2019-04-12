@@ -290,10 +290,7 @@ class CameraViewController: UIViewController {
     }
     
     func setupUI(){
-        var bundlePath = Bundle.main.path(forResource: "PhotoSolution", ofType: "bundle")
-        var bundle = Bundle(path: bundlePath ?? "")
-        
-        rotateCameraButton.image = UIImage(named: "switchIcon", in: bundle, compatibleWith: nil)
+        rotateCameraButton.image = UIImage(named: "switchIcon", in: self.podBundle, compatibleWith: nil)
         takePhotoButton.image = UIImage(named: "cameraIcon", in: self.podBundle, compatibleWith: nil)
         cancelCameraButton.image = UIImage(named: "cancelIcon", in: self.podBundle, compatibleWith: nil)
         flashLightButton.image = UIImage(named: "flashOff", in: self.podBundle, compatibleWith: nil)
