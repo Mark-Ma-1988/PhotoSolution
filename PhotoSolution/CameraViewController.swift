@@ -288,11 +288,11 @@ class CameraViewController: UIViewController {
     }
     
     func setupUI(){
-        rotateCameraButton.image = UIImage(named: "switchIcon")
-        takePhotoButton.image = UIImage(named: "cameraIcon")
-        cancelCameraButton.image = UIImage(named: "cancelIcon")
-        flashLightButton.image = UIImage(named: "flashOff")
-        settingButton.image = UIImage(named: "settingsToOpen")
+        rotateCameraButton.image = UIImage(named: "switchIcon", in: self.podBundle, compatibleWith: nil)
+        takePhotoButton.image = UIImage(named: "cameraIcon", in: self.podBundle, compatibleWith: nil)
+        cancelCameraButton.image = UIImage(named: "cancelIcon", in: self.podBundle, compatibleWith: nil)
+        flashLightButton.image = UIImage(named: "flashOff", in: self.podBundle, compatibleWith: nil)
+        settingButton.image = UIImage(named: "settingsToOpen", in: self.podBundle, compatibleWith: nil)
         
         settingsView.layer.masksToBounds = true
         settingsView.layer.cornerRadius = 15
@@ -332,10 +332,10 @@ class CameraViewController: UIViewController {
     @objc func tapSettingButtonTapped(tapGestureRecognizer: UITapGestureRecognizer){
         if !settingsView.isHidden{
             settingsView.isHidden = true
-            settingButton.image = UIImage(named: "settingsToOpen")
+            settingButton.image = UIImage(named: "settingsToOpen", in: self.podBundle, compatibleWith: nil)
         }else{
             settingsView.isHidden = false
-            settingButton.image = UIImage(named: "settingsToClose")
+            settingButton.image = UIImage(named: "settingsToClose", in: self.podBundle, compatibleWith: nil)
             initSlidersValue()
         }
     }
@@ -420,9 +420,10 @@ class CameraViewController: UIViewController {
             currentCaptureDevice.unlockForConfiguration()
             DispatchQueue.main.async{
                 if isOn{
-                    self.flashLightButton.image = UIImage(named: "flashOn")
+                    self.flashLightButton.image = UIImage(named: "flashOn", in: self.podBundle, compatibleWith: nil)
                 }else{
-                    self.flashLightButton.image = UIImage(named: "flashOff")
+                    self.flashLightButton.image = UIImage(named: "flashOff", in: self.podBundle, compatibleWith: nil)
+                    
                 }
             }
         } catch {
