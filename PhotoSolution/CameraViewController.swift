@@ -290,11 +290,14 @@ class CameraViewController: UIViewController {
     }
     
     func setupUI(){
-        rotateCameraButton.image = UIImage(named: "Icons/switchIcon", in: self.podBundle, compatibleWith: nil)
-        takePhotoButton.image = UIImage(named: "Icons/cameraIcon", in: self.podBundle, compatibleWith: nil)
-        cancelCameraButton.image = UIImage(named: "Icons/cancelIcon", in: self.podBundle, compatibleWith: nil)
-        flashLightButton.image = UIImage(named: "Icons/flashOff", in: self.podBundle, compatibleWith: nil)
-        settingButton.image = UIImage(named: "Icons/settingsToOpen", in: self.podBundle, compatibleWith: nil)
+        var bundlePath = Bundle.main.path(forResource: "PhotoSolution", ofType: "bundle")
+        var bundle = Bundle(path: bundlePath ?? "")
+        
+        rotateCameraButton.image = UIImage(named: "switchIcon", in: bundle, compatibleWith: nil)
+        takePhotoButton.image = UIImage(named: "cameraIcon", in: self.podBundle, compatibleWith: nil)
+        cancelCameraButton.image = UIImage(named: "cancelIcon", in: self.podBundle, compatibleWith: nil)
+        flashLightButton.image = UIImage(named: "flashOff", in: self.podBundle, compatibleWith: nil)
+        settingButton.image = UIImage(named: "settingsToOpen", in: self.podBundle, compatibleWith: nil)
         
         settingsView.layer.masksToBounds = true
         settingsView.layer.cornerRadius = 15
@@ -324,16 +327,17 @@ class CameraViewController: UIViewController {
         let tapSettingsViewRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapSettingsViewTapped(tapGestureRecognizer:)))
         settingsView.isUserInteractionEnabled = true
         settingsView.addGestureRecognizer(tapSettingsViewRecognizer)
+        
         imageEditView = UINib(nibName: "ImageEditView", bundle: self.podBundle).instantiate(withOwner: nil, options: nil)[0] as? ImageEditView
     }
     
     @objc func tapSettingButtonTapped(tapGestureRecognizer: UITapGestureRecognizer){
         if !settingsView.isHidden{
             settingsView.isHidden = true
-            settingButton.image = UIImage(named: "Icons/settingsToOpen", in: self.podBundle, compatibleWith: nil)
+            settingButton.image = UIImage(named: "settingsToOpen", in: self.podBundle, compatibleWith: nil)
         }else{
             settingsView.isHidden = false
-            settingButton.image = UIImage(named: "Icons/settingsToClose", in: self.podBundle, compatibleWith: nil)
+            settingButton.image = UIImage(named: "settingsToClose", in: self.podBundle, compatibleWith: nil)
             initSlidersValue()
         }
     }
@@ -418,9 +422,9 @@ class CameraViewController: UIViewController {
             currentCaptureDevice.unlockForConfiguration()
             DispatchQueue.main.async{
                 if isOn{
-                    self.flashLightButton.image = UIImage(named: "Icons/flashOn", in: self.podBundle, compatibleWith: nil)
+                    self.flashLightButton.image = UIImage(named: "flashOn", in: self.podBundle, compatibleWith: nil)
                 }else{
-                    self.flashLightButton.image = UIImage(named: "Icons/flashOff", in: self.podBundle, compatibleWith: nil)
+                    self.flashLightButton.image = UIImage(named: "flashOff", in: self.podBundle, compatibleWith: nil)
                     
                 }
             }
