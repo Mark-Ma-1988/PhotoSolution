@@ -74,7 +74,6 @@ public class PhotoSolution: NSObject{
         let cameraViewController = CameraViewController(nibName: "CameraViewController", bundle: podBundle)
         cameraViewController.customization = self.customization
         cameraViewController.solutionDelegate = self.delegate
-        cameraViewController.podBundle = podBundle
         return cameraViewController
     }
     
