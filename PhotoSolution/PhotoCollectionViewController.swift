@@ -137,16 +137,22 @@ class PhotoCollectionViewController: UIViewController {
             if photoNavigationController.customization.returnImageSize == .compressed{
                 photo.getCompressedImage { image in
                     resultImages.append(image)
+                    if resultImages.count == self.currentSelectedPhotoList.count{
+                        self.photoNavigationController.dismiss(animated: false) {
+                            self.photoNavigationController.solutionDelegate?.returnImages(resultImages)
+                        }
+                    }
                 }
             }else{
                 photo.getOriginalImage { image in
                     resultImages.append(image)
+                    if resultImages.count == self.currentSelectedPhotoList.count{
+                        self.photoNavigationController.dismiss(animated: false) {
+                            self.photoNavigationController.solutionDelegate?.returnImages(resultImages)
+                        }
+                    }
                 }
             }
-        }
-        
-        photoNavigationController.dismiss(animated: false) {
-            self.photoNavigationController.solutionDelegate?.returnImages(resultImages)
         }
     }
     
