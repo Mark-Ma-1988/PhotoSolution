@@ -17,7 +17,7 @@ class CameraViewController: UIViewController {
     var podBundle: Bundle!
     var inCameraView: Bool!
     var imageEditView: ImageEditView!
-    
+    var lastFaceFocusPoint: CGPoint!
     var cameraArea: UIView!
     
     @IBOutlet weak var settingsView: UIView!
@@ -42,7 +42,7 @@ class CameraViewController: UIViewController {
     var previewLayer: AVCaptureVideoPreviewLayer!
     var timer: Timer!
     
-    let focusView = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+    let focusView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -66,6 +66,7 @@ class CameraViewController: UIViewController {
                     switch status {
                     case .authorized:
                         self.setupInput(isBackCamera: true)
+                        self.setFaceDetection()
                     case .denied, .restricted:
                         self.goToPhotoAccessSetting()
                     case .notDetermined:
@@ -98,6 +99,16 @@ class CameraViewController: UIViewController {
             captureSession.stopRunning()
         }
         timer.invalidate()
+    }
+    
+    private func setFaceDetection(){
+        let metadataOutput = AVCaptureMetadataOutput()
+        metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        
+        if captureSession.canAddOutput(metadataOutput) {
+            captureSession.addOutput(metadataOutput)
+        }
+        metadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.face]
     }
     
     @objc private func getLatestCameraStatus(timer: Timer) -> Void{
@@ -499,7 +510,7 @@ class CameraViewController: UIViewController {
                 self.focusView.center = point
                 self.focusView.isHidden = false
                 UIView.animate(withDuration: 0.3, animations: {
-                    self.focusView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                    self.focusView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
                 }) { finished in
                     UIView.animate(withDuration: 0.3, animations: {
                         self.focusView.transform = CGAffineTransform.identity
@@ -552,6 +563,10 @@ class CameraViewController: UIViewController {
         })
     }
     
+    func distanceBetween(_ p1: CGPoint, and p2: CGPoint) -> CGFloat {
+        return sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2))
+    }
+
 }
 
 extension CameraViewController: ImageEditViewDelegate{
@@ -559,6 +574,23 @@ extension CameraViewController: ImageEditViewDelegate{
     func imageCompleted(_ editedImage: UIImage) {
         self.dismiss(animated: false) {
             self.solutionDelegate?.returnImages([editedImage])
+        }
+    }
+    
+}
+
+extension CameraViewController: AVCaptureMetadataOutputObjectsDelegate{
+    
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection){
+        for metadataObject in metadataObjects {
+            if metadataObject.type == AVMetadataObject.ObjectType.face {
+                let transformedMetadataObject = previewLayer.transformedMetadataObject(for: metadataObject)
+                let currentFacePoint = CGPoint(x: (transformedMetadataObject?.bounds.midX)!, y: (transformedMetadataObject?.bounds.midY)!)
+                if lastFaceFocusPoint == nil || distanceBetween(currentFacePoint,and: lastFaceFocusPoint) > 100{
+                    focus(at: currentFacePoint)
+                    lastFaceFocusPoint = currentFacePoint
+                }
+            }
         }
     }
     
